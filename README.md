@@ -4,8 +4,6 @@
 
 The repository consist a use case regarding the imputation of the number of foreign tourists in relation to their country of origin. 5 countries with the highest number of foreign tourists were chosen.
 
-![](images/clipboard-60326414.png){width="131"}
-
 ***Pilot study for imputation - accommodation establishments EDA***
 
 **Accommodation establishments**
