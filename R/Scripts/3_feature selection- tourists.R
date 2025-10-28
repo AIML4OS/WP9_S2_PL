@@ -164,11 +164,3 @@ model_metrics_df <- bind_rows(all_model_metrics_list)
 # Preview results
 print("Model Fit Metrics Data Frame:")
 print(head(model_metrics_df))
-# 
-# The results represent linear regression models estimated separately for individual countries (identified by their KKR codes), with explanatory variables selected using the LASSO method. Each model aims to explain the variability of the dependent variable based on a set of predictors automatically chosen as the most relevant.
-# 
-# For country 276, the model explains about 28% of the variability of the dependent variable (R² = 0.278). While this is the highest value among all models, it still indicates a rather modest explanatory power, as an R² below 0.30 generally suggests that a large share of variation remains unexplained. Nonetheless, the model is statistically significant (p < 0.001), meaning that the included variables jointly contribute to explaining the dependent variable.
-# 
-# For the remaining countries (643, 804, 826, and 840), the R² values are considerably lower, ranging from 0.04 to 0.11, which reflects very weak model performance. Although the F-statistics and p-values confirm statistical significance, the practical explanatory value of these models is limited. This suggests that, despite the presence of some statistically significant relationships, the predictors identified by LASSO capture only a small portion of the underlying variability.
-# 
-# Overall, while all models are statistically significant, their predictive strength is weak to moderate. The explanatory variables appear to have different levels of influence across countries, and in most cases, additional or alternative predictors—or potentially nonlinear modeling approaches—may be required to achieve a more satisfactory fit.
