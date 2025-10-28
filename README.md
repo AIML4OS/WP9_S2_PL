@@ -1,10 +1,10 @@
 # WP9_S2_PL
 
-***Pilot study for imputation - accommodation establishments***
+
 
 The repository consist a use case regarding the imputation of the number of foreign tourists in relation to their country of origin. 5 countries with the highest number of foreign tourists were chosen.
 
-***Pilot study for imputation - accommodation establishments EDA***
+***Pilot study for imputation - accommodation establishments***
 
 **Accommodation establishments**
 
@@ -69,7 +69,7 @@ During the summer months, the average number of tourists per accommodation facil
 **Total numer of tourists for top 5 most visiting coutries**
 
 ![](images/Picture3.png)
-The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.
+The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.
 
 
 **Total number of foreign tourists by voivodeships**
@@ -87,7 +87,8 @@ The majority of foreign tourists visiting Poland come from Germany, Russia, Ukra
 *2020*
 
 ![](images/Picture6.png)
-When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
+
+When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
 
 
 **Overnight stays of foreign tourists**
