@@ -1,0 +1,124 @@
+---
+title: "Feature Engineering Tourist"
+output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+In this project, feature engineering was applied to enhance the analysis
+of tourist flows at multiple administrative levels. The goal was to
+create aggregated and temporal features that capture patterns in the
+number of tourists (D8R1) for different units (municipalities, counties,
+and voivodeships) over time.
+
+**Steps performed:**
+
+1.  Time variable extraction: The original period variable (OKRES) was
+    split into separate year and month components, and a proper date
+    column (date) was created representing the first day of each month.
+    Additionally, a quarter variable was generated to enable quarterly
+    aggregations.
+
+2.  Hierarchical aggregation: Monthly averages of tourist numbers were
+    calculated for each administrative level:
+
+3.  Municipality (D8R1_mean_gmn)
+
+4.  County (D8R1_mean_pow)
+
+5.  Voivodeship (D8R1_mean_won) These features allow analysis at
+    different geographic scales while preserving local patterns.
+
+6.  Rolling (moving) averages: To capture temporal trends and smooth
+    short-term fluctuations, rolling averages of the last 3, 6, 9, and
+    12 months were computed for each municipality. These features help
+    identify seasonal effects and medium- to long-term trends in tourist
+    arrivals.
+
+7.  Lagged features: Lagged values of D8R1 were created for each unit
+    (REGON) and region of origin (KKR) to account for temporal
+    dependencies. This enables models to leverage past values in
+    predicting current tourist flows.
+
+8.  Quarterly averages: For broader temporal analysis, average tourist
+    numbers per quarter (D8R1_quarter_mean) were calculated. This allows
+    comparison across different periods and supports trend analysis at a
+    higher temporal aggregation.
+
+```{r}
+library(readr)
+
+#number of turist by KKR
+data <- read_csv("synthetic data/tourists.csv")
+
+data$...1<-NULL
+data$D8R2<-NULL
+```
+
+```{r}
+
+# creating lags for feature D8R1 number of torists
+
+# column OKRES consist year and month
+
+library(dplyr)
+library(lubridate)
+library(zoo) # for rolling means
+
+# --- Create date and time variables ---
+data <- data %>%
+  mutate(
+    year = as.integer(substr(OKRES, 1, 4)),
+    month = as.integer(substr(OKRES, 5, 6)),
+    date = make_date(year = year, month = month, day = 1),
+    quarter = quarter(date, with_year = TRUE)
+  )
+
+# --- Monthly averages for each level ---
+# Municipality (GMN)
+gmina_avg <- data %>%
+  group_by(GMN, date) %>%
+  summarise(D8R1_mean_gmn = mean(D8R1, na.rm = TRUE), .groups = "drop")
+
+# County (POW)
+powiat_avg <- data %>%
+  group_by(POW, date) %>%
+  summarise(D8R1_mean_pow = mean(D8R1, na.rm = TRUE), .groups = "drop")
+
+# Voivodeship (WON)
+woj_avg <- data %>%
+  group_by(WON, date) %>%
+  summarise(D8R1_mean_won = mean(D8R1, na.rm = TRUE), .groups = "drop")
+
+# --- Quarterly average ---
+quarter_avg <- data %>%
+  group_by(quarter) %>%
+  summarise(D8R1_quarter_mean = mean(D8R1, na.rm = TRUE), .groups = "drop")
+
+# --- Rolling (moving) averages for the last 3, 6, 9, and 12 months ---
+rolling_avg <- data %>%
+  arrange(GMN, date) %>%
+  group_by(GMN) %>%
+  mutate(
+    mean_3m  = rollmean(D8R1, k = 3, align = "right", fill = NA),
+    mean_6m  = rollmean(D8R1, k = 6, align = "right", fill = NA),
+    mean_9m  = rollmean(D8R1, k = 9, align = "right", fill = NA),
+    mean_12m = rollmean(D8R1, k = 12, align = "right", fill = NA)
+  ) %>%
+  ungroup()
+
+# --- Combine everything into one dataset ---
+data_final <- data %>%
+  left_join(gmina_avg, by = c("GMN", "date")) %>%
+  left_join(powiat_avg, by = c("POW", "date")) %>%
+  left_join(woj_avg, by = c("WON", "date")) %>%
+  left_join(quarter_avg, by = "quarter") %>%
+  left_join(
+    rolling_avg %>%
+      select(REGON, date, mean_3m, mean_6m, mean_9m, mean_12m),
+    by = c("REGON", "date")
+  )
+
+
+```
