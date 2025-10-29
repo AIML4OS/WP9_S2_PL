@@ -70,4 +70,23 @@ data_final <- data %>%
   left_join(rolling_avg_unique, by = c("REGON", "date"))
 
 
+data_final <- data_final %>%
+  arrange(REGON,KKR ,date) %>%  # 
+  group_by(REGON,KKR) %>%        
+  mutate(
+    lag_1  = lag(D8R2, n = 1),
+    lag_2  = lag(D8R2, n = 2),
+    lag_3  = lag(D8R2, n = 3),
+    lag_4  = lag(D8R2, n = 4),
+    lag_5  = lag(D8R2, n = 5),
+    lag_6  = lag(D8R2, n = 6),
+    lag_7  = lag(D8R2, n = 7),
+    lag_8  = lag(D8R2, n = 8),
+    lag_9  = lag(D8R2, n = 9),
+    lag_10 = lag(D8R2, n = 10),
+    lag_11 = lag(D8R2, n = 11),
+    lag_12 = lag(D8R2, n = 12)
+  ) %>%
+  ungroup()
+
 write.csv(data_final,'synthetic data/nights_features.csv')
