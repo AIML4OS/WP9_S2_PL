@@ -6,12 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Public Statistician 1">
-<meta name="author" content="Public Statistician 2">
-<meta name="dcterms.date" content="2025-05-16">
-<meta name="description" content="This template is a fast starting pack for AIML4OS projects that use Python. For R projects, see this Github repository.">
+<meta name="author" content="Agnieszka Giemza">
+<meta name="dcterms.date" content="2026-08-20">
+<meta name="description" content="The repository concerns a use case regarding the imputation of the number of foreign tourists in relation to their country of origin.">
 
-<title>Template for Python training material – Template for training resources in Python</title>
+<title>Post collection imputation - Foreign Tourist In Poland – Template for training resources in Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -56,8 +55,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-e3adbaa939bcd423dddc8c8a834270b4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-e3adbaa939bcd423dddc8c8a834270b4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-e3adbaa939bcd423dddc8c8a834270b4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -147,8 +144,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-this-template" id="toc-what-is-this-template" class="nav-link active" data-scroll-target="#what-is-this-template">What is this template?</a></li>
-  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it?</a></li>
+  <li><a href="#type-of-accomodation-establisments" id="toc-type-of-accomodation-establisments" class="nav-link active" data-scroll-target="#type-of-accomodation-establisments">Type of accomodation establisments</a></li>
+  <li><a href="#about-survey" id="toc-about-survey" class="nav-link" data-scroll-target="#about-survey">About survey</a></li>
+  <li><a href="#about-data" id="toc-about-data" class="nav-link" data-scroll-target="#about-data">About Data</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -158,12 +156,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Template for Python training material</h1>
+<h1 class="title">Post collection imputation - Foreign Tourist In Poland</h1>
 </div>
 
 <div>
   <div class="description">
-    <p>This template is a fast starting pack for AIML4OS projects that use <code>Python</code>. For <code>R</code> projects, see <a href="https://github.com/InseeFrLab/AIML4OS-template-quarto-r">this <code>Github</code> repository</a>.</p>
+    <p>The repository concerns a use case regarding the imputation of the number of foreign tourists in relation to their country of origin.</p>
   </div>
 </div>
 
@@ -171,29 +169,20 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p><a href="https://github.com/publicstatistician1">Public Statistician 1</a> <a href="mailto:Public.Statistician1@statistics.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-             <p><a href="https://github.com/publicstatistician2">Public Statistician 2</a> <a href="mailto:Public.Statistician2@statistics.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+             <p><a href="https://github.com/agnieszkagiemza">Agnieszka Giemza</a> <a href="mailto:a.giemza@stat.gov.pl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 16, 2025</p>
+      <p class="date">August 20, 2026</p>
     </div>
   </div>
   
     
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1000/182">10.1000/182</a>
-      </p>
-    </div>
-  </div>
   </div>
   
 
@@ -201,18 +190,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-this-template" class="level1">
-<h1>What is this template?</h1>
-<p>This template is a Quarto Website customized for the AIML4OS project, designed to be used with <i class="fa-brands fa-python" aria-label="python"></i>.</p>
+<p><strong><em>Pilot study for imputation - accommodation establishments</em></strong></p>
+<section id="type-of-accomodation-establisments" class="level2">
+<h2 class="anchored" data-anchor-id="type-of-accomodation-establisments">Type of accomodation establisments</h2>
+<p>Tourist accommodation establishments regardless of the type, owner, and location, as well as establishments with other purposes (not related to tourism) that are temporarily used by tourists (e.g., student dormitories, sports and recreation centers).</p>
+<p>Tourist accommodation establishments classified into the following activity groups according to NACE Rev.&nbsp;2 classification:</p>
+<ul>
+<li><p>55.1 – hotels and similar accommodation,</p></li>
+<li><p>55.2 – holiday and other short-stay accommodation,</p></li>
+<li><p>55.3 – camping grounds, recreational vehicle parks and trailer parks. The study covers 20 types of tourist accommodation establishments.</p></li>
+</ul>
 </section>
-<section id="how-to-use-it" class="level1">
-<h1>How to use it?</h1>
-<p>See <a href="https://aiml4os.github.io/training-material-starting-pack/">this tutorial</a>.</p>
+<section id="about-survey" class="level2">
+<h2 class="anchored" data-anchor-id="about-survey">About survey</h2>
+<p>KT-1: Report on the occupancy of tourist accommodation establishments:</p>
+<ul>
+<li><p>Mandatory monthly survey of accommodation establishments with 10 or more bed-places.</p></li>
+<li><p>Census survey of 14,859 establishments.</p></li>
+<li><p>The deadline for submitting reports is the 10th day after the reporting month. In practice, establishments report throughout the entire month.</p></li>
+<li><p>Unit response rate is approximately 80% and varies due to seasonality.</p></li>
+<li><p>Item non-response pertains mostly to foreign tourist data.</p></li>
+</ul>
+</section>
+<section id="about-data" class="level2">
+<h2 class="anchored" data-anchor-id="about-data">About Data</h2>
+<p>Range of collected data</p>
+<ul>
+<li><p>Establishment name, type, address and category of establishment</p></li>
+<li><p>Months of operation</p></li>
+<li><p>Rooms and bed places</p></li>
+<li><p>Occupancy (tourists and nights spent) during the surveyed month</p></li>
+<li><p>Occupancy (tourists and nights spent) by foreign tourists with respect to country of residence</p></li>
+<li><p>Categorical and count data</p></li>
+</ul>
+<p><strong><em>Notice </em></strong></p>
+<p>This repository had been created from AIML4OS template. If you want to use it see <a href="https://aiml4os.github.io/training-material-starting-pack/">this tutorial</a>.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY 4.0</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

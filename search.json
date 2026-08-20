@@ -2,9 +2,39 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Template for Python training material",
+    "title": "Post collection imputation - Foreign Tourist In Poland",
     "section": "",
-    "text": "What is this template?\nThis template is a Quarto Website customized for the AIML4OS project, designed to be used with .\n\n\nHow to use it?\nSee this tutorial.\n\n\n\n\nReuseCC-BY 4.0",
+    "text": "Pilot study for imputation - accommodation establishments",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#type-of-accomodation-establisments",
+    "href": "index.html#type-of-accomodation-establisments",
+    "title": "Post collection imputation - Foreign Tourist In Poland",
+    "section": "Type of accomodation establisments",
+    "text": "Type of accomodation establisments\nTourist accommodation establishments regardless of the type, owner, and location, as well as establishments with other purposes (not related to tourism) that are temporarily used by tourists (e.g., student dormitories, sports and recreation centers).\nTourist accommodation establishments classified into the following activity groups according to NACE Rev. 2 classification:\n\n55.1 – hotels and similar accommodation,\n55.2 – holiday and other short-stay accommodation,\n55.3 – camping grounds, recreational vehicle parks and trailer parks. The study covers 20 types of tourist accommodation establishments.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#about-survey",
+    "href": "index.html#about-survey",
+    "title": "Post collection imputation - Foreign Tourist In Poland",
+    "section": "About survey",
+    "text": "About survey\nKT-1: Report on the occupancy of tourist accommodation establishments:\n\nMandatory monthly survey of accommodation establishments with 10 or more bed-places.\nCensus survey of 14,859 establishments.\nThe deadline for submitting reports is the 10th day after the reporting month. In practice, establishments report throughout the entire month.\nUnit response rate is approximately 80% and varies due to seasonality.\nItem non-response pertains mostly to foreign tourist data.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#about-data",
+    "href": "index.html#about-data",
+    "title": "Post collection imputation - Foreign Tourist In Poland",
+    "section": "About Data",
+    "text": "About Data\nRange of collected data\n\nEstablishment name, type, address and category of establishment\nMonths of operation\nRooms and bed places\nOccupancy (tourists and nights spent) during the surveyed month\nOccupancy (tourists and nights spent) by foreign tourists with respect to country of residence\nCategorical and count data\n\nNotice \nThis repository had been created from AIML4OS template. If you want to use it see this tutorial.",
     "crumbs": [
       "Introduction"
     ]
