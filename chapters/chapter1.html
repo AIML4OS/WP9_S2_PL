@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter1.html">A complete example</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter1.html">Explanatory Data Analysis</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/chapter1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">A complete example</span></a>
+ <span class="menu-text">Explanatory Data Analysis</span></a>
   </div>
 </li>
     </ul>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>Open the associated notebook</strong>: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a></p>
 <p>The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. # Reading a data The synthetic data were generated using the <em>synthetizer</em> package available in R. Therefore, the <em>pyreadr</em> library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:</p>
-<div id="2ec8ecc3" class="cell" data-execution_count="1">
+<div id="e59f3e82" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyreadr</span>
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>D8R1</strong> – number of foreign tourists.</p></li>
 </ul>
 <p>Due to the large size of the dataset, further analyses will be limited to the <strong>five countries with the highest number of foreign tourists</strong>. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.</p>
-<div id="55adea4f" class="cell" data-execution_count="2">
+<div id="fc8f17e5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itables <span class="im">import</span> show, init_notebook_mode</span>
@@ -352,7 +352,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_1d1d975c_b336_4e12_88a7_a2f18616c9d5" hidden="hidden">
+<table id="itables_474f3cc4_720e_4d0e_9e89_ca18722b048a" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -418,7 +418,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
     </tr>
   </tbody>
 </table>
-<div id="itables_1d1d975c_b336_4e12_88a7_a2f18616c9d5_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_474f3cc4_720e_4d0e_9e89_ca18722b048a_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup>REGON</th>
       <th style="border:1px solid #ddd;padding:8px">RO</th>
       <th style="border:1px solid #ddd;padding:8px">WON</th>
@@ -436,13 +436,13 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <tr><td style="border:1px solid #ddd;padding:8px">23da7c60</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">8.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">9b1064ee</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">02</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">0.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">1da9ce1d</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">1.000000</td><td style="border:1px solid #ddd;padding:8px">202009.0</td></tr>
-</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,647 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_1d1d975c_b336_4e12_88a7_a2f18616c9d5")?.removeAttribute("hidden");document.getElementById("itables_1d1d975c_b336_4e12_88a7_a2f18616c9d5_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,647 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_474f3cc4_720e_4d0e_9e89_ca18722b048a")?.removeAttribute("hidden");document.getElementById("itables_474f3cc4_720e_4d0e_9e89_ca18722b048a_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_1d1d975c_b336_4e12_88a7_a2f18616c9d5:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_474f3cc4_720e_4d0e_9e89_ca18722b048a:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
