@@ -1,18 +1,17 @@
 ---
-title: "Template for Python training material" # See below for multilingual resource
+title: "Post collection imputation - Foreign Tourist In Poland" # See below for multilingual resource
 format: html # This qmd file will be compiled as HTML only (no notebook)
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%"><br>
 author:
-  - name: Public Statistician 1
-    url: https://github.com/publicstatistician1
-    email: Public.Statistician1@statistics.org
-  - name: Public Statistician 2
-    url: https://github.com/publicstatistician2
-    email: Public.Statistician2@statistics.org
-date: "2025-05-16"
-doi: "10.1000/182"  # Optional
-license: "CC-BY 4.0"  # Optional
+  - name: Agnieszka Giemza
+    url: https://github.com/agnieszkagiemza
+    email: a.giemza@stat.gov.pl
+
+
+date: "2026-08-20"
+#doi: "10.1000/182"  # Optional
+#license: "CC-BY 4.0"  # Optional
 
 # If resources is multilingual, adopt that structure
 # (need to have both title and title-* fields)
@@ -21,7 +20,8 @@ license: "CC-BY 4.0"  # Optional
 # title-fr: "Bonjour SSPCloud"
 
 description: |
-    This template is a fast starting pack for AIML4OS projects that use `Python`. For `R` projects, see [this `Github` repository](https://github.com/InseeFrLab/AIML4OS-template-quarto-r).
+
+    The repository concerns a use case regarding the imputation of the number of foreign tourists in relation to their country of origin.
 
 # If resources is multilingual, adopt that structure
 # (need to have both description and description-* fields)
@@ -56,7 +56,7 @@ skills:
   - Using SSPCloud
 
 courseMaterial:
-  - R Scripts
+  - Python Scripts
   # - Videos
   # - Jupyter Notebooks
 
@@ -66,8 +66,8 @@ publicLevel:
   # - Expert
 
 resourceLanguage:
-  - R
-  # - Python
+  - Python
+
 
 suggestedBefore:
   - https://quarto.org/
@@ -91,15 +91,51 @@ gsbpm: "5.1" # See complete taxonomy: https://www.unescap.org/sites/default/d8fi
 ---
 
 
-# What is this template?
+***Pilot study for imputation - accommodation establishments***
 
-This template is a Quarto Website customized for the AIML4OS project, designed to be used with {{< fa brands python >}}.
+## Type of accomodation establisments
 
-# How to use it?
+Tourist accommodation establishments regardless of the type, owner, and location, as well as establishments with other purposes (not related to tourism) that are temporarily used by tourists (e.g., student dormitories, sports and recreation centers).
 
-See [this tutorial](https://aiml4os.github.io/training-material-starting-pack/).
+Tourist accommodation establishments classified into the following activity groups according to NACE Rev. 2 classification:
 
+-   55.1 -- hotels and similar accommodation,
 
+-   55.2 -- holiday and other short-stay accommodation,
 
+-   55.3 -- camping grounds, recreational vehicle parks and trailer parks. The study covers 20 types of tourist accommodation establishments.
 
+## About survey
 
+KT-1: Report on the occupancy of tourist accommodation establishments:
+
+-   Mandatory monthly survey of accommodation establishments with 10 or more bed-places.
+
+-   Census survey of 14,859 establishments.
+
+-   The deadline for submitting reports is the 10th day after the reporting month. In practice, establishments report throughout the entire month.
+
+-   Unit response rate is approximately 80% and varies due to seasonality.
+
+-   Item non-response pertains mostly to foreign tourist data.
+
+## About Data
+
+Range of collected data
+
+-   Establishment name, type, address and category of establishment
+
+-   Months of operation
+
+-   Rooms and bed places
+
+-   Occupancy (tourists and nights spent) during the surveyed month
+
+-   Occupancy (tourists and nights spent) by foreign tourists with respect to country of residence
+
+-   Categorical and count data
+
+***Notice ***
+
+This repository had been created from  AIML4OS template. If you want to use it
+see [this tutorial](https://aiml4os.github.io/training-material-starting-pack/).
