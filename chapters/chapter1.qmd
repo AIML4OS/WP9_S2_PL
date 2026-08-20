@@ -1,14 +1,12 @@
 ---
-title: "Step 1"
-subtitle: "EDA"
+title: "Explanatory Data Analysis"
+subtitle: "First Look at the Data"
 format: html # This qmd file will be compiled as an HTML web page
 ---
 
-__Open the associated notebook__: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
+**Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
 
-# Reading a data
-
-Reading a tourism data:
+The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. \# Reading a data The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
 
 ```{python}
 import pyreadr
@@ -16,9 +14,25 @@ df = pyreadr.read_r('synthetic data/WP9_S2_Tourism_synt.rds').popitem()[1]
 
 ```
 
-## A beautiful dataframe
+## Structure of tourism data:
 
-This section  rows of our data frame
+### Dataset description
+
+The dataset contains information about **tourism establishments and tourist activity in Poland**. Each row represents an establishment, identified by its **REGON** number. The dataset includes information about the type and location of the establishment, as well as data on domestic and foreign tourists.
+
+The main variables include:
+
+-  **REGON** – unique identifier of the establishment.
+
+-  **RO** – type of tourism establishment.
+
+-  **WON** – voivodeship (województwo ) where the establishment is located.
+
+-  **KKR** – country of origin of tourists.
+
+-  **D8R1** – number of foreign tourists.
+
+  Due to the large size of the dataset, further analyses will be limited to the **five countries with the highest number of foreign tourists**. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.
 
 ```{python}
 from itables import show, init_notebook_mode
