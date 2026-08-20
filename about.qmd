@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-About this site
+The repository concerns a use case regarding the imputation of the number of foreign tourists in relation to their country of origin.
