@@ -23,6 +23,9 @@ website:
         text: Introduction
       - href: chapters/chapter1.qmd
         text: Explanatory Data Analysis
+      - href: chapters/chapter2.qmd
+        text: Feature Engineering
+
 
 format:
   html:

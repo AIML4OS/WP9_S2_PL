@@ -13,5 +13,6 @@ dependencies = [
     "pyreadr",
     "itables",
     "geopandas",
-    "seaborn"
+    "seaborn",
+    "numpy"
 ]

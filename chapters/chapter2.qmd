@@ -1,0 +1,208 @@
+---
+title: "Feature Engineering"
+subtitle: "Creating new features"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+---
+
+**Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
+
+# Introduction
+
+Feature engineering is the process of transforming raw data into meaningful input variables (features) that improve the performance and accuracy of predictive models. In the context of forecasting the number of foreign tourists visiting five selected countries, feature engineering helps reveal important patterns, seasonality, trends, and external factors that influence tourism flows.
+
+# Key Aspects of Feature Engineering for Tourism Forecasting
+
+## 1. Creating Time-Based Features
+
+Tourism data is strongly seasonal. Time features help models learn recurring patterns. Examples include:
+
+-   Month, Quarter, Year
+
+-   Day of the week (useful for high-frequency data)
+
+-   Season indicators (e.g., summer/winter tourism peaks)
+
+-   Holiday periods, such as Christmas or national holidays
+
+## 2. Lag Features
+
+These capture how the number of tourists in previous periods influences future values. Examples:
+
+-   Tourists lagged by 1 month
+
+-   Lag 3, lag 6, lag 12 (to capture annual seasonality)
+
+## 3. Rolling Window Statistics
+
+Rolling features smooth fluctuations and describe recent trends. Examples:
+
+-   3-month moving average
+
+-   12-month rolling sum (useful for year-over-year analysis)
+
+-   Rolling standard deviation (volatility of tourism flows)
+
+## 4. Pandemic / Shock Indicators
+
+Tourism is highly sensitive to global shocks. Examples:
+
+-   COVID-19 lockdown periods
+
+-   Political instability indicators
+
+-   Natural disaster events
+
+## 5. Interaction Features
+
+Interactions help models understand combined effects, such as: “Summer season” × “Low exchange rate”.
+
+# Why do we design features?
+
+Well-designed features help:
+
+-   identify seasonal tourism peaks,
+
+-   capture long-term trends,
+
+-   incorporate economic and social factors that influence travel decisions,
+
+-   improve the accuracy of predictive models.
+
+Ultimately, feature engineering enables the model to better understand what drives the number of foreign tourists in each of the five selected countries and to produce more reliable forecasts.
+
+# Performed steps
+
+## Step 1
+
+Import necessary libraries and load the dataset.
+
+```{python}
+import pyreadr
+df = pyreadr.read_r('synthetic data/WP9_S2_Tourism_synt.rds').popitem()[1]
+
+
+```
+
+## Step 2
+
+Import libraries for feature engineering and create new features based on the original dataset.
+
+```{python}
+
+
+import pandas as pd
+import numpy as np
+
+
+```
+
+## Step 3
+
+Download the dataset and create a dictionary of dataframes, one for each KKR (country). Then, define a function to add features such as rolling means, lags, and group statistics (mean, standard deviation, coefficient of variation) based on different grouping variables (WON, POW, GMN, RO). Finally, apply this function to each dataframe in the dictionary.
+
+```{python}
+
+
+import numpy as np
+import pandas as pd
+
+def add_features_to_df(df, tourist_col="D8R1"):
+    
+    # kopiowanie opcjonalne (bezpieczne)
+    df = df.copy()
+
+    # --- data ---
+    df["data"] = pd.to_datetime(
+        df["OKRES"].astype(str).str[:4] + "-" +
+        df["OKRES"].astype(str).str[4:6] + "-01"
+    )
+
+    # --- sort ---
+    df = df.sort_values(["KKR", "data"])
+
+    # =========================
+    # ROLLING (NA GRUPIE KKR)
+    # =========================
+    df["mean_last_3"] = df.groupby("KKR")[tourist_col].transform(lambda x: x.rolling(3).mean())
+    df["mean_last_6"] = df.groupby("KKR")[tourist_col].transform(lambda x: x.rolling(6).mean())
+    df["mean_last_9"] = df.groupby("KKR")[tourist_col].transform(lambda x: x.rolling(9).mean())
+    df["mean_last_12"] = df.groupby("KKR")[tourist_col].transform(lambda x: x.rolling(12).mean())
+
+
+    # =========================
+    # LAGI (NA GRUPIE KKR)
+    # =========================
+    for i in range(1, 13):
+        df[f"lag_{i}"] = df.groupby("KKR")[tourist_col].shift(i)
+
+    # =========================
+    # STATYSTYKI GRUPOWE
+    # =========================
+    def add_group_stats(df, group_col, prefix):
+        grouped = df.groupby(group_col)[tourist_col]
+
+        mean = grouped.transform("mean")
+        std = grouped.transform("std")
+
+        df[f"{prefix}_mean"] = mean
+        df[f"{prefix}_sd"] = std
+        df[f"{prefix}_cv"] = np.where(mean == 0, np.nan, std / mean)
+
+        return df
+
+    df = add_group_stats(df, "WON", "WON")
+    df = add_group_stats(df, "POW", "POW")
+    df = add_group_stats(df, "GMN", "GMN")
+    df = add_group_stats(df, "RO", "RO")
+
+    return df
+```
+
+## Step 3
+
+Dataset is too large to deal with it in a notebook, so we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project. Thats the reason why we choose only 10 couttries weith the highest number of tourists in the original dataset.. Dataset for each coutry will separate file with name "tourist_kkr\_{KKR}.csv" in the "enriched_data" folder.
+
+```{python}
+
+# --- Select top 5 countries ---
+top_kkr = (
+    data.groupby("KKR")["D8R1"]
+    .sum()
+    .sort_values(ascending=False)
+    .head(5)
+    .index
+)
+```
+
+And at final we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project.
+
+# Save each country separately 
+
+```{python}
+import os
+
+# --- Correct relative path ---
+output_dir = os.path.join("..", "synthetic data")
+
+# --- Ensure directory exists ---
+os.makedirs(output_dir, exist_ok=True)
+
+print("Saving to:", os.path.abspath(output_dir))
+
+
+for kkr in top_kkr:
+    df_kkr = data[data["KKR"] == kkr].copy()
+    
+    df_kkr = add_features_to_df(df_kkr, tourist_col="D8R1")
+    
+    safe_kkr = str(kkr).replace(" ", "_")
+    file_path = os.path.join(output_dir, f"tourist_{safe_kkr}_features.xlsx")
+    
+    df_kkr.to_excel(file_path, index=False)
+
+print("Files saved to correct folder!")
+```
