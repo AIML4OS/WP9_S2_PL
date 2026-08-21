@@ -183,6 +183,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
   <li><a href="#basic-information-about-the-dataset" id="toc-basic-information-about-the-dataset" class="nav-link" data-scroll-target="#basic-information-about-the-dataset">Basic Information About the Dataset</a></li>
+  <li><a href="#most-popular-tourist-destinations-in-poland" id="toc-most-popular-tourist-destinations-in-poland" class="nav-link" data-scroll-target="#most-popular-tourist-destinations-in-poland">Most Popular Tourist Destinations in Poland</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/edit/main/chapters/chapter1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/blob/main/chapters/chapter1.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -212,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>Open the associated notebook</strong>: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a></p>
 <p>The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. # Reading a data The synthetic data were generated using the <em>synthetizer</em> package available in R. Therefore, the <em>pyreadr</em> library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:</p>
-<div id="7ede97ce" class="cell" data-execution_count="1">
+<div id="d683e9bc" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyreadr</span>
@@ -220,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Libraries used in the analysis - pandas – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset. - geopandas – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps. - matplotlib.pyplot – used to create visualizations, such as bar charts, line charts, histograms, and other plots. - itables – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality. - itables.options – used to configure the behavior of itables, for example by controlling warnings about undocumented options. - seaborn – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.</p>
-<div id="c12dd4a5" class="cell" data-execution_count="2">
+<div id="2410e0a2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -246,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>D8R1</strong> – number of foreign tourists.</p></li>
 </ul>
 <p>Due to the large size of the dataset, further analyses will be limited to the <strong>five countries with the highest number of foreign tourists</strong>. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.</p>
-<div id="4949e266" class="cell" data-execution_count="3">
+<div id="f716368d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OKRES consist year and month</span></span>
@@ -361,7 +363,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_c3b2287f_e0b6_401c_ad52_cc52fd72a5a8" hidden="hidden">
+<table id="itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -427,7 +429,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
     </tr>
   </tbody>
 </table>
-<div id="itables_c3b2287f_e0b6_401c_ad52_cc52fd72a5a8_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup>REGON</th>
       <th style="border:1px solid #ddd;padding:8px">RO</th>
       <th style="border:1px solid #ddd;padding:8px">WON</th>
@@ -445,13 +447,13 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <tr><td style="border:1px solid #ddd;padding:8px">23da7c60</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">8.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">9b1064ee</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">02</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">0.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">1da9ce1d</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">1.000000</td><td style="border:1px solid #ddd;padding:8px">202009.0</td></tr>
-</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_c3b2287f_e0b6_401c_ad52_cc52fd72a5a8")?.removeAttribute("hidden");document.getElementById("itables_c3b2287f_e0b6_401c_ad52_cc52fd72a5a8_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979")?.removeAttribute("hidden");document.getElementById("itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_c3b2287f_e0b6_401c_ad52_cc52fd72a5a8:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -489,7 +491,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </section>
 <section id="basic-information-about-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="basic-information-about-the-dataset">Basic Information About the Dataset</h3>
-<div id="35ef860d" class="cell" data-execution_count="4">
+<div id="e1031018" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -511,7 +513,7 @@ memory usage: 52.6+ MB</code></pre>
 </div>
 </div>
 <p>The dataset contains 1,149,620 observations and 6 variables. Most variables are stored as strings, while D8R1 and OKRES are numerical variables. The dataset occupies approximately 52.6 MB of memory.</p>
-<div id="d912f5ae" class="cell" data-execution_count="5">
+<div id="c6f85db5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"OKRES"</span>] <span class="op">=</span> df[<span class="st">"OKRES"</span>].astype(<span class="bu">str</span>)</span>
@@ -530,14 +532,14 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 <p>The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.</p>
-<div id="319a35a5" class="cell" data-execution_count="6">
+<div id="720acdc7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.KKR.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_f1c40ccb_23e3_42a8_9c58_89d42cc760ae" hidden="hidden">
+<table id="itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -603,7 +605,7 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_f1c40ccb_23e3_42a8_9c58_89d42cc760ae_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
       <th style="border:1px solid #ddd;padding:8px">count</th>
     </tr>
@@ -621,13 +623,13 @@ max    8.605078e+03</code></pre>
 <tr><td style="border:1px solid #ddd;padding:8px">528</td><td style="border:1px solid #ddd;padding:8px">38090</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">440</td><td style="border:1px solid #ddd;padding:8px">36672</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">840</td><td style="border:1px solid #ddd;padding:8px">34986</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(201 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_f1c40ccb_23e3_42a8_9c58_89d42cc760ae")?.removeAttribute("hidden");document.getElementById("itables_f1c40ccb_23e3_42a8_9c58_89d42cc760ae_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(201 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1")?.removeAttribute("hidden");document.getElementById("itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_f1c40ccb_23e3_42a8_9c58_89d42cc760ae:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -655,7 +657,7 @@ max    8.605078e+03</code></pre>
 </script>
 </div>
 </div>
-<div id="9cdb7910" class="cell" data-execution_count="7">
+<div id="1de285fc" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'okres_date'</span>] <span class="op">=</span> pd.to_datetime(</span>
@@ -664,7 +666,7 @@ max    8.605078e+03</code></pre>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="ec71bf35" class="cell" data-execution_count="8">
+<div id="cb6e63ee" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'okres_date'</span>)[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
@@ -685,7 +687,8 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
-<div id="ce311ec3" class="cell" data-execution_count="9">
+<p>The analyzed period covers January 1, 2018, to December 31, 2020. As shown in the chart, there is a noticeable increase in the number of foreign tourists during the summer months, with the highest values recorded in July and August in both 2018 and 2019. In March 2020, a sharp decline in tourist numbers can be observed due to the outbreak of the COVID-19 pandemic. The lockdown measures led to a near-total halt in foreign tourism. Although the numbers began to rise again in the summer months, they reached only about 25% of the values from the summer of 2019. Towards the end of the year, as COVID-19 infections surged, additional accommodation facilities were shut down, which contributed to a further significant drop in the number of foreign tourists.</p>
+<div id="30131ba8" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries with the highest number of foreign tourists</span></span>
@@ -756,7 +759,10 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
-<div id="17009ec3" class="cell" data-execution_count="10">
+<p>The analysis shows clear differences in the number of foreign tourists across countries and years. Germany stands out as the most important source market, with the highest total number of tourists in 2018 and a substantial decrease in 2019 and 2020. Ukraine also represents an important tourist market, with relatively high numbers of observations and a comparatively stable total number of tourists between 2018 and 2019.</p>
+<p>A noticeable decline can be observed in 2020 for all analysed countries. This is particularly visible for Germany, France, Italy, Spain, the United Kingdom and the United States. The decrease is also reflected in the lower mean and median values for most countries, indicating a substantial reduction in tourist activity.</p>
+<p>The distributions are strongly right-skewed. For most countries, the median number of tourists per observation is between 2 and 6, while the mean is considerably higher. This indicates that most establishments recorded relatively small numbers of foreign tourists, while a smaller number of establishments received substantially more tourists</p>
+<div id="8cd4e64a" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby([<span class="st">'okres_date'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
@@ -785,7 +791,8 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
-<div id="6a39045c" class="cell" data-execution_count="11">
+<p>The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.</p>
+<div id="dfaf8c4f" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describtive statistics  of nummber of foreign tourits by country and year </span></span>
@@ -867,7 +874,7 @@ max    8.605078e+03</code></pre>
 29  0.0  1025.862074  </code></pre>
 </div>
 </div>
-<div id="ccbbf650" class="cell" data-execution_count="12">
+<div id="b639d89b" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>teryt_woj <span class="op">=</span> {</span>
@@ -893,7 +900,7 @@ max    8.605078e+03</code></pre>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_407cfb6a_b9a8_4327_a150_eb051ae2ed57" hidden="hidden">
+<table id="itables_5598d763_1204_4a57_a564_92a27a66f4fa" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -959,7 +966,7 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_407cfb6a_b9a8_4327_a150_eb051ae2ed57_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_5598d763_1204_4a57_a564_92a27a66f4fa_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
       <th style="border:1px solid #ddd;padding:8px">count</th>
     </tr>
@@ -977,13 +984,13 @@ max    8.605078e+03</code></pre>
 <tr><td style="border:1px solid #ddd;padding:8px">podkarpackie</td><td style="border:1px solid #ddd;padding:8px">18734</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">warmińsko-mazurskie</td><td style="border:1px solid #ddd;padding:8px">13474</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">podlaskie</td><td style="border:1px solid #ddd;padding:8px">11640</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_407cfb6a_b9a8_4327_a150_eb051ae2ed57")?.removeAttribute("hidden");document.getElementById("itables_407cfb6a_b9a8_4327_a150_eb051ae2ed57_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_5598d763_1204_4a57_a564_92a27a66f4fa")?.removeAttribute("hidden");document.getElementById("itables_5598d763_1204_4a57_a564_92a27a66f4fa_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_407cfb6a_b9a8_4327_a150_eb051ae2ed57:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_5598d763_1204_4a57_a564_92a27a66f4fa:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -1011,7 +1018,8 @@ max    8.605078e+03</code></pre>
 </script>
 </div>
 </div>
-<div id="97c7b557" class="cell" data-execution_count="13">
+<p>The regional analysis also shows considerable differences between Polish voivodeships. Małopolskie and Mazowieckie have the largest numbers of observations in the analysed data, followed by Pomorskie, Śląskie and Wielkopolskie. This suggests that foreign tourist activity is particularly concentrated in regions with major tourist destinations and large urban centres.</p>
+<div id="adfe3329" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Grouping data =====</span></span>
@@ -1108,7 +1116,7 @@ max    8.605078e+03</code></pre>
 <span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2485/2040714278.py:90: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>/tmp/ipykernel_2546/2040714278.py:90: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -1119,6 +1127,14 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="most-popular-tourist-destinations-in-poland" class="level3">
+<h3 class="anchored" data-anchor-id="most-popular-tourist-destinations-in-poland">Most Popular Tourist Destinations in Poland</h3>
+<p>When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.</p>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>The results indicate that foreign tourism in Poland was geographically concentrated and strongly affected by the changes observed in 2020. Germany was the dominant foreign market among the selected countries, while the regional analysis highlights Małopolskie and Mazowieckie as particularly important areas for foreign tourism.</p>
 
 
 </section>
