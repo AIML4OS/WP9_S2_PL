@@ -11,5 +11,7 @@ dependencies = [
     "pandas>=2.3.0",
     "polars>=1.30.0",
     "pyreadr",
-    "itables"
+    "itables",
+    "geopandas",
+    "seaborn"
 ]

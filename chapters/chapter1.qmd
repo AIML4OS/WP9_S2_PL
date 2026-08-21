@@ -11,6 +11,23 @@ The goal of Exploratory Data Analysis (EDA) is to understand the main characteri
 ```{python}
 import pyreadr
 df = pyreadr.read_r('synthetic data/WP9_S2_Tourism_synt.rds').popitem()[1]
+```
+
+Libraries used in the analysis
+- pandas – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset.
+- geopandas – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps.
+- matplotlib.pyplot – used to create visualizations, such as bar charts, line charts, histograms, and other plots.
+- itables – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality.
+- itables.options – used to configure the behavior of itables, for example by controlling warnings about undocumented options.
+- seaborn – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.
+```{python}
+import pandas as pd
+import geopandas as gpd
+import matplotlib.pyplot as plt
+from itables import show, init_notebook_mode
+from itables import options
+options.warn_on_undocumented_option = False
+import seaborn as sns
 
 ```
 
@@ -35,10 +52,6 @@ The main variables include:
   Due to the large size of the dataset, further analyses will be limited to the **five countries with the highest number of foreign tourists**. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.
 
 ```{python}
-from itables import show, init_notebook_mode
-import pandas as pd
-from itables import options
-options.warn_on_undocumented_option = False
 
 # OKRES consist year and month
 df["OKRES"] = df["OKRES"].astype(str)
@@ -52,4 +65,225 @@ show(
     column_filters=True,  # filters in headings
     page_length=25        # how many rows on page
 )
+```
+### Basic Information About the Dataset
+```{python}
+df.info()
+```
+
+The dataset contains 1,149,620 observations and 6 variables. Most variables are stored as strings, while D8R1 and OKRES are numerical variables. The dataset occupies approximately 52.6 MB of memory.
+```{python}
+
+df["OKRES"] = df["OKRES"].astype(str)
+print(df[["D8R1"]].describe())
+```
+
+The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.
+```{python}
+df.KKR.value_counts()
+
+```
+```{python}
+
+df['okres_date'] = pd.to_datetime(
+    df['OKRES'].astype(str).str.replace('.0', '', regex=False),
+    format='%Y%m'
+)
+```
+
+
+```{python}
+
+monthly = df.groupby('okres_date')['D8R1'].sum().reset_index()
+
+plt.figure(figsize=(12,6))
+sns.lineplot(data=monthly, x='okres_date', y='D8R1')
+plt.title('Number of Tourists Over Time')
+plt.xlabel('Date')
+plt.ylabel('Number of Tourists')
+plt.grid(True)
+plt.show()
+
+
+```
+
+```{python}
+
+# Countries with the highest number of foreign tourists
+kkr_selected = ['250', '276', '376', '380', '643', '724', '752', '804', '826', '840']
+
+# Dictionary of selected countiries
+kkr_to_country_en = {
+    '250': 'France',
+    '276': 'Germany',
+    '376': 'Israel',
+    '380': 'Italy',
+    '643': 'Russia',
+    '724': 'Spain',
+    '752': 'Sweden',
+    '804': 'Ukraine',
+    '826': 'United Kingdom',
+    '840': 'United States'
+}
+
+# Data preprocesing
+df['KKR'] = df['KKR'].astype(str).str.zfill(3)
+df = df[df['KKR'].isin(kkr_selected)]
+df['country_en'] = df['KKR'].map(kkr_to_country_en)
+df['rok'] = df['OKRES'].astype(str).str[:4].astype(int)
+
+# Creating boxplots
+for rok in sorted(df['rok'].unique()):
+    df_rok = df[df['rok'] == rok]
+
+    # Sortowanie krajów wg mediany d8r1
+    mediany = df_rok.groupby('country_en')['D8R1'].median().sort_values()
+    kraj_sorted = mediany.index.tolist()
+    
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(
+        data=df_rok,
+        x='country_en',
+        y='D8R1',
+        order=kraj_sorted,
+        showfliers=False
+    )
+    plt.title(f"Distribution of number of tourists by Country – Year {rok}")
+    plt.xlabel("Country")
+    plt.ylabel("d8r1")
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
+
+```
+
+```{python}
+
+monthly = df.groupby(['okres_date', 'country_en'])['D8R1'].sum().reset_index()
+
+plt.figure(figsize=(12,6))
+
+sns.lineplot(
+    data=monthly,
+    x='okres_date',
+    y='D8R1',
+    hue='country_en'
+)
+
+plt.title('Number of Tourists Over Time by Country')
+plt.xlabel('Date')
+plt.ylabel('Number of Tourists')
+plt.grid(True)
+
+plt.show()
+
+```
+
+```{python}
+# Describtive statistics  of nummber of foreign tourits by country and year 
+stats_df = df.groupby(['rok', 'country_en'])['D8R1'].agg(
+    count='count',
+    sum='sum',
+    mean='mean',
+    median='median',
+    std='std',
+    min='min',
+    max='max'
+).reset_index()
+
+print(stats_df)
+
+
+```
+```{python}
+teryt_woj = {
+    "2": "dolnośląskie",
+    "4": "kujawsko-pomorskie",
+    "6": "lubelskie",
+    "8": "lubuskie",
+    "10": "łódzkie",
+    "12": "małopolskie",
+    "14": "mazowieckie",
+    "16": "opolskie",
+    "18": "podkarpackie",
+    "20": "podlaskie",
+    "22": "pomorskie",
+    "24": "śląskie",
+    "26": "świętokrzyskie",
+    "28": "warmińsko-mazurskie",
+    "30": "wielkopolskie",
+    "32": "zachodniopomorskie"
+}
+df['województwo'] = df['WON'].astype(str).map(teryt_woj)
+df.województwo.value_counts()
+
+```
+
+```{python}
+
+# ===== Grouping data =====
+
+turyści=df.groupby(['rok','WON'])['D8R1'].sum().reset_index()
+# New names
+turyści.columns = ['rok', 'kod', 'turyści']
+
+# ===== Reading a map shapefile =====
+
+woj = gpd.read_file("wojewodztwa\wojewodztwa.shp")
+woj["JPT_KOD_JE"] = woj["JPT_KOD_JE"].astype(int)
+turyści["kod"] = turyści["kod"].astype(int)
+
+mapa = woj.merge(turyści, left_on="JPT_KOD_JE", right_on="kod", how="left")
+
+
+# ===== Drawing =====
+# Set range of color
+vmin = 0
+vmax = mapa['turyści'].max()
+
+# Unikalne lata
+lata = sorted(mapa['rok'].dropna().unique())
+
+# Make subplots (facet_wrap )
+fig, axes = plt.subplots(1, len(lata), figsize=(5* len(lata), 6))
+
+if len(lata) == 1:
+    axes = [axes]
+
+for ax, rok in zip(axes, lata):
+    dane = mapa[mapa['rok'] == rok]
+
+    dane.plot(
+        column='turyści',
+        cmap='Blues',
+        linewidth=0.2,
+        edgecolor='grey',
+        vmin=vmin,
+        vmax=vmax,
+        ax=ax
+    )
+
+    # Add labels
+    for idx, row in dane.iterrows():
+        if row['geometry'] is not None and pd.notnull(row['turyści']):
+            x, y = row['geometry'].centroid.coords[0]
+            ax.text(
+                x, y,
+                f"{int(row['turyści']):,}".replace(",", " "),
+                ha='center',
+                fontsize=8
+            )
+
+    ax.set_title(f"Year {rok}", fontsize=14, fontweight='bold')
+    ax.axis('off')
+
+# Colors
+sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
+sm._A = []
+cbar = fig.colorbar(sm, ax=axes, fraction=0.02, pad=0.02)
+cbar.set_label("Number of tourists")
+plt.subplots_adjust(wspace=0.05)
+plt.tight_layout(rect=[0, 0, 0.90, 1])
+cbar.ax.ticklabel_format(style='plain')
+plt.show()
 ```
