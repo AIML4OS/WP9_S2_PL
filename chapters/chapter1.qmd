@@ -11,7 +11,7 @@ jupyter: python3
 
 The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling.
 
-## Reading a data 
+## Reading a data
 
 The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
 
@@ -340,7 +340,9 @@ plt.show()
 
 ### Most Popular Tourist Destinations in Poland
 
-When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
+When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.
+
+In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
 
 ### Summary
 
