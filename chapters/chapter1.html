@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>Open the associated notebook</strong>: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a></p>
 <p>The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. # Reading a data The synthetic data were generated using the <em>synthetizer</em> package available in R. Therefore, the <em>pyreadr</em> library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:</p>
-<div id="5464ea2b" class="cell" data-execution_count="1">
+<div id="c395f4b4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyreadr</span>
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Libraries used in the analysis - pandas – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset. - geopandas – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps. - matplotlib.pyplot – used to create visualizations, such as bar charts, line charts, histograms, and other plots. - itables – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality. - itables.options – used to configure the behavior of itables, for example by controlling warnings about undocumented options. - seaborn – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.</p>
-<div id="466fae15" class="cell" data-execution_count="2">
+<div id="7f2866f2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>D8R1</strong> – number of foreign tourists.</p></li>
 </ul>
 <p>Due to the large size of the dataset, further analyses will be limited to the <strong>five countries with the highest number of foreign tourists</strong>. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.</p>
-<div id="6a335c2c" class="cell" data-execution_count="3">
+<div id="d9c48ab9" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OKRES consist year and month</span></span>
@@ -361,7 +361,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_8c1cdde5_f4d4_4a46_b74f_3bc0adaecade" hidden="hidden">
+<table id="itables_d89d5dfe_b717_400e_9899_441ab3da3a73" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -427,7 +427,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
     </tr>
   </tbody>
 </table>
-<div id="itables_8c1cdde5_f4d4_4a46_b74f_3bc0adaecade_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_d89d5dfe_b717_400e_9899_441ab3da3a73_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup>REGON</th>
       <th style="border:1px solid #ddd;padding:8px">RO</th>
       <th style="border:1px solid #ddd;padding:8px">WON</th>
@@ -445,13 +445,13 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <tr><td style="border:1px solid #ddd;padding:8px">23da7c60</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">8.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">9b1064ee</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">02</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">0.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">1da9ce1d</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">1.000000</td><td style="border:1px solid #ddd;padding:8px">202009.0</td></tr>
-</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_8c1cdde5_f4d4_4a46_b74f_3bc0adaecade")?.removeAttribute("hidden");document.getElementById("itables_8c1cdde5_f4d4_4a46_b74f_3bc0adaecade_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_d89d5dfe_b717_400e_9899_441ab3da3a73")?.removeAttribute("hidden");document.getElementById("itables_d89d5dfe_b717_400e_9899_441ab3da3a73_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_8c1cdde5_f4d4_4a46_b74f_3bc0adaecade:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_d89d5dfe_b717_400e_9899_441ab3da3a73:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -489,7 +489,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </section>
 <section id="basic-information-about-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="basic-information-about-the-dataset">Basic Information About the Dataset</h3>
-<div id="28617e8b" class="cell" data-execution_count="4">
+<div id="01351b02" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -511,7 +511,7 @@ memory usage: 52.6+ MB</code></pre>
 </div>
 </div>
 <p>The dataset contains 1,149,620 observations and 6 variables. Most variables are stored as strings, while D8R1 and OKRES are numerical variables. The dataset occupies approximately 52.6 MB of memory.</p>
-<div id="befc8008" class="cell" data-execution_count="5">
+<div id="b0cdc0af" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"OKRES"</span>] <span class="op">=</span> df[<span class="st">"OKRES"</span>].astype(<span class="bu">str</span>)</span>
@@ -530,14 +530,14 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 <p>The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.</p>
-<div id="67afacbc" class="cell" data-execution_count="6">
+<div id="976537c6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.KKR.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_9fb2ac58_983c_4831_8edf_b97e6bef811e" hidden="hidden">
+<table id="itables_295a1fb7_2451_4a1f_ba70_b3fdf1b90140" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -603,7 +603,7 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_9fb2ac58_983c_4831_8edf_b97e6bef811e_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_295a1fb7_2451_4a1f_ba70_b3fdf1b90140_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
       <th style="border:1px solid #ddd;padding:8px">count</th>
     </tr>
@@ -621,13 +621,13 @@ max    8.605078e+03</code></pre>
 <tr><td style="border:1px solid #ddd;padding:8px">528</td><td style="border:1px solid #ddd;padding:8px">38090</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">440</td><td style="border:1px solid #ddd;padding:8px">36672</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">840</td><td style="border:1px solid #ddd;padding:8px">34986</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(201 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_9fb2ac58_983c_4831_8edf_b97e6bef811e")?.removeAttribute("hidden");document.getElementById("itables_9fb2ac58_983c_4831_8edf_b97e6bef811e_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(201 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_295a1fb7_2451_4a1f_ba70_b3fdf1b90140")?.removeAttribute("hidden");document.getElementById("itables_295a1fb7_2451_4a1f_ba70_b3fdf1b90140_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_9fb2ac58_983c_4831_8edf_b97e6bef811e:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_295a1fb7_2451_4a1f_ba70_b3fdf1b90140:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -655,7 +655,7 @@ max    8.605078e+03</code></pre>
 </script>
 </div>
 </div>
-<div id="4a9cd648" class="cell" data-execution_count="7">
+<div id="b72c4df0" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'okres_date'</span>] <span class="op">=</span> pd.to_datetime(</span>
@@ -664,12 +664,12 @@ max    8.605078e+03</code></pre>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="247c38d4" class="cell" data-execution_count="8">
+<div id="0bbcb0cc" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'okres_date'</span>)[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>,<span class="fl">4.5</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>monthly, x<span class="op">=</span><span class="st">'okres_date'</span>, y<span class="op">=</span><span class="st">'D8R1'</span>)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of Tourists Over Time'</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
@@ -680,12 +680,12 @@ max    8.605078e+03</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-9-output-1.png" width="782" height="413" class="figure-img"></p>
+<p><img src="chapter1_files/figure-html/cell-9-output-1.png" width="563" height="302" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="81c539d7" class="cell" data-execution_count="9">
+<div id="51d47de5" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries with the highest number of foreign tourists</span></span>
@@ -756,7 +756,7 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
-<div id="9fc9d9bf" class="cell" data-execution_count="10">
+<div id="89b352dc" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby([<span class="st">'okres_date'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
@@ -785,7 +785,7 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 </div>
-<div id="d881550f" class="cell" data-execution_count="11">
+<div id="c4605b43" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describtive statistics  of nummber of foreign tourits by country and year </span></span>
@@ -867,7 +867,7 @@ max    8.605078e+03</code></pre>
 29  0.0  1025.862074  </code></pre>
 </div>
 </div>
-<div id="2aef5374" class="cell" data-execution_count="12">
+<div id="4e9d4c82" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>teryt_woj <span class="op">=</span> {</span>
@@ -893,7 +893,7 @@ max    8.605078e+03</code></pre>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_7ff449d1_3fde_48a7_a9e5_3de51fc5d3dd" hidden="hidden">
+<table id="itables_0cc79d3f_1404_4fa4_af0c_d1a311c4643d" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -959,7 +959,7 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_7ff449d1_3fde_48a7_a9e5_3de51fc5d3dd_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_0cc79d3f_1404_4fa4_af0c_d1a311c4643d_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
       <th style="border:1px solid #ddd;padding:8px">count</th>
     </tr>
@@ -977,13 +977,13 @@ max    8.605078e+03</code></pre>
 <tr><td style="border:1px solid #ddd;padding:8px">podkarpackie</td><td style="border:1px solid #ddd;padding:8px">18734</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">warmińsko-mazurskie</td><td style="border:1px solid #ddd;padding:8px">13474</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">podlaskie</td><td style="border:1px solid #ddd;padding:8px">11640</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_7ff449d1_3fde_48a7_a9e5_3de51fc5d3dd")?.removeAttribute("hidden");document.getElementById("itables_7ff449d1_3fde_48a7_a9e5_3de51fc5d3dd_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_0cc79d3f_1404_4fa4_af0c_d1a311c4643d")?.removeAttribute("hidden");document.getElementById("itables_0cc79d3f_1404_4fa4_af0c_d1a311c4643d_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_7ff449d1_3fde_48a7_a9e5_3de51fc5d3dd:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_0cc79d3f_1404_4fa4_af0c_d1a311c4643d:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -1011,7 +1011,7 @@ max    8.605078e+03</code></pre>
 </script>
 </div>
 </div>
-<div id="8a6c02bd" class="cell" data-execution_count="13">
+<div id="a1ee1515" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Grouping data =====</span></span>
@@ -1081,7 +1081,7 @@ max    8.605078e+03</code></pre>
 <span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2613/2237391632.py:63: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>/tmp/ipykernel_2492/2237391632.py:63: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout(rect=[0, 0, 0.90, 1])</code></pre>
 </div>
 <div class="cell-output cell-output-display">
