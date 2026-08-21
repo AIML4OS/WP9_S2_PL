@@ -270,7 +270,7 @@ for k, v in selected_features_per_country.items():
 
 ```{python}
 
-results_df = pd.DataFrame(\[ {'country_en': country, 'feature': feature} for country, features_list in selected_features_per_country.items() for feature in features_list\])
+results_df = pd.DataFrame([ {'country_en': country, 'feature': feature} for country, features_list in selected_features_per_country.items() for feature in features_list])
 
 results_df.to_csv('synthetic_selected_features.csv', index=False)
 ```
