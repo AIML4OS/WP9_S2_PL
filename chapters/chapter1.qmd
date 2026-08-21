@@ -110,6 +110,13 @@ plt.show()
 
 ```
 
+The analyzed period covers January 1, 2018, to December 31, 2020.
+ As shown in the chart, there is a noticeable increase in the number of foreign tourists during the summer months, with the highest values recorded in July and August in both 2018 and 2019. 
+In March 2020, a sharp decline in tourist numbers can be observed due to the outbreak of the COVID-19 pandemic. 
+The lockdown measures led to a near-total halt in foreign tourism. Although the numbers began to rise again in the summer months, 
+they reached only about 25% of the values from the summer of 2019. Towards the end of the year, as COVID-19 infections surged,
+ additional accommodation facilities were shut down, which contributed to a further significant drop in the number of foreign tourists.
+
 ```{python}
 #| fig-align: center
 # Countries with the highest number of foreign tourists
@@ -160,6 +167,11 @@ for rok in sorted(df['rok'].unique()):
 
 ```
 
+The analysis shows clear differences in the number of foreign tourists across countries and years. Germany stands out as the most important source market, with the highest total number of tourists in 2018 and a substantial decrease in 2019 and 2020. Ukraine also represents an important tourist market, with relatively high numbers of observations and a comparatively stable total number of tourists between 2018 and 2019.
+
+A noticeable decline can be observed in 2020 for all analysed countries. This is particularly visible for Germany, France, Italy, Spain, the United Kingdom and the United States. The decrease is also reflected in the lower mean and median values for most countries, indicating a substantial reduction in tourist activity.
+
+The distributions are strongly right-skewed. For most countries, the median number of tourists per observation is between 2 and 6, while the mean is considerably higher. This indicates that most establishments recorded relatively small numbers of foreign tourists, while a smaller number of establishments received substantially more tourists
 ```{python}
 #| fig-align: center
 
@@ -182,6 +194,10 @@ plt.grid(True)
 plt.show()
 
 ```
+
+
+The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.
+
 
 ```{python}
 # Describtive statistics  of nummber of foreign tourits by country and year 
@@ -223,6 +239,7 @@ df.województwo.value_counts()
 
 ```
 
+The regional analysis also shows considerable differences between Polish voivodeships. Małopolskie and Mazowieckie have the largest numbers of observations in the analysed data, followed by Pomorskie, Śląskie and Wielkopolskie. This suggests that foreign tourist activity is particularly concentrated in regions with major tourist destinations and large urban centres.
 ```{python}
 #| fig-align: center
 # ===== Grouping data =====
@@ -318,3 +335,9 @@ plt.tight_layout()
 
 plt.show()
 ```
+
+### Most Popular Tourist Destinations in Poland
+When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
+
+### Summary
+The results indicate that foreign tourism in Poland was geographically concentrated and strongly affected by the changes observed in 2020. Germany was the dominant foreign market among the selected countries, while the regional analysis highlights Małopolskie and Mazowieckie as particularly important areas for foreign tourism.
