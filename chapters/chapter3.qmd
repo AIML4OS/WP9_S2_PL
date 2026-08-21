@@ -105,7 +105,7 @@ for country in countries:
 all_corrs = all_corrs.T
 
 # Rysujemy heatmapę
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(8, 4))
 sns.heatmap(all_corrs.T, annot=True, cmap='viridis', cbar=True, linewidths=0.5)
 plt.title('Correlation of number of tourists with created features by Country', fontsize=14)
 plt.xlabel('Country')
