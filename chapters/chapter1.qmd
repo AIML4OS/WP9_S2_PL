@@ -9,20 +9,26 @@ jupyter: python3
 
 **Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
 
-The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. \# Reading a data The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
+The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling.
+
+## Reading a data 
+
+The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
 
 ```{python}
 import pyreadr
 df = pyreadr.read_r('synthetic data/WP9_S2_Tourism_synt.rds').popitem()[1]
 ```
 
-Libraries used in the analysis
-- pandas – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset.
-- geopandas – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps.
-- matplotlib.pyplot – used to create visualizations, such as bar charts, line charts, histograms, and other plots.
-- itables – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality.
-- itables.options – used to configure the behavior of itables, for example by controlling warnings about undocumented options.
-- seaborn – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.
+## Libraries used in the analysis
+
+- *pandas* – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset.
+- *geopandas* – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps.
+- *matplotlib.pyplot* – used to create visualizations, such as bar charts, line charts, histograms, and other plots.
+- *itables* – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality.
+- *itables.options* – used to configure the behavior of itables, for example by controlling warnings about undocumented options.
+- *seaborn* – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.
+
 ```{python}
 import pandas as pd
 import geopandas as gpd
@@ -34,7 +40,7 @@ import seaborn as sns
 
 ```
 
-## Structure of tourism data:
+## Structure of tourism data
 
 ### Dataset description
 
@@ -42,17 +48,17 @@ The dataset contains information about **tourism establishments and tourist acti
 
 The main variables include:
 
--  **REGON** – unique identifier of the establishment.
+- **REGON** – unique identifier of the establishment.
 
--  **RO** – type of tourism establishment.
+- **RO** – type of tourism establishment.
 
--  **WON** – voivodeship (województwo ) where the establishment is located.
+- **WON** – voivodeship (województwo ) where the establishment is located.
 
--  **KKR** – country of origin of tourists.
+- **KKR** – country of origin of tourists.
 
--  **D8R1** – number of foreign tourists.
+- **D8R1** – number of foreign tourists.
 
-  Due to the large size of the dataset, further analyses will be limited to the **five countries with the highest number of foreign tourists**. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.
+Due to the large size of the dataset, further analyses will be limited to the **five countries with the highest number of foreign tourists**. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.
 
 ```{python}
 
@@ -69,53 +75,48 @@ show(
     page_length=25        # how many rows on page
 )
 ```
+
 ### Basic Information About the Dataset
+
 ```{python}
 df.info()
 ```
 
 The dataset contains 1,149,620 observations and 6 variables. Most variables are stored as strings, while D8R1 and OKRES are numerical variables. The dataset occupies approximately 52.6 MB of memory.
-```{python}
 
+```{python}
+pd.set_option('display.float_format', '{:.2f}'.format) #displaing numbers in right format
 df["OKRES"] = df["OKRES"].astype(str)
-print(df[["D8R1"]].describe())
+df[["D8R1"]].describe()
 ```
 
 The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.
-```{python}
-df.KKR.value_counts()
 
-```
 ```{python}
 
 df['okres_date'] = pd.to_datetime(
     df['OKRES'].astype(str).str.replace('.0', '', regex=False),
     format='%Y%m'
 )
-```
 
+```
 
 ```{python}
 #| fig-align: center
 monthly = df.groupby('okres_date')['D8R1'].sum().reset_index()
 
-plt.figure(figsize=(6,3))
+plt.figure(figsize=(8,4))
 sns.lineplot(data=monthly, x='okres_date', y='D8R1')
-plt.title('Number of Tourists Over Time')
-plt.xlabel('Date')
-plt.ylabel('Number of Tourists')
+plt.title('Number of Foreing Tourists Over Time')
+plt.xlabel(' ')
+plt.ylabel('Total number')
 plt.grid(True)
 plt.show()
 
 
 ```
 
-The analyzed period covers January 1, 2018, to December 31, 2020.
- As shown in the chart, there is a noticeable increase in the number of foreign tourists during the summer months, with the highest values recorded in July and August in both 2018 and 2019. 
-In March 2020, a sharp decline in tourist numbers can be observed due to the outbreak of the COVID-19 pandemic. 
-The lockdown measures led to a near-total halt in foreign tourism. Although the numbers began to rise again in the summer months, 
-they reached only about 25% of the values from the summer of 2019. Towards the end of the year, as COVID-19 infections surged,
- additional accommodation facilities were shut down, which contributed to a further significant drop in the number of foreign tourists.
+The analyzed period covers January 1, 2018, to December 31, 2020. As shown in the chart, there is a noticeable increase in the number of foreign tourists during the summer months, with the highest values recorded in July and August in both 2018 and 2019. In March 2020, a sharp decline in tourist numbers can be observed due to the outbreak of the COVID-19 pandemic. The lockdown measures led to a near-total halt in foreign tourism. Although the numbers began to rise again in the summer months, they reached only about 25% of the values from the summer of 2019. Towards the end of the year, as COVID-19 infections surged, additional accommodation facilities were shut down, which contributed to a further significant drop in the number of foreign tourists.
 
 ```{python}
 #| fig-align: center
@@ -150,7 +151,7 @@ for rok in sorted(df['rok'].unique()):
     mediany = df_rok.groupby('country_en')['D8R1'].median().sort_values()
     kraj_sorted = mediany.index.tolist()
     
-    plt.figure(figsize=(6, 3))
+    plt.figure(figsize=(8, 4))
     sns.boxplot(
         data=df_rok,
         x='country_en',
@@ -158,9 +159,9 @@ for rok in sorted(df['rok'].unique()):
         order=kraj_sorted,
         showfliers=False
     )
-    plt.title(f"Distribution of number of tourists by Country – Year {rok}")
-    plt.xlabel("Country")
-    plt.ylabel("d8r1")
+    plt.title(f"Distribution of number of tourists by Country –  {rok}")
+    plt.xlabel(" ")
+    plt.ylabel("Number of foreign tourists")
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
@@ -172,12 +173,13 @@ The analysis shows clear differences in the number of foreign tourists across co
 A noticeable decline can be observed in 2020 for all analysed countries. This is particularly visible for Germany, France, Italy, Spain, the United Kingdom and the United States. The decrease is also reflected in the lower mean and median values for most countries, indicating a substantial reduction in tourist activity.
 
 The distributions are strongly right-skewed. For most countries, the median number of tourists per observation is between 2 and 6, while the mean is considerably higher. This indicates that most establishments recorded relatively small numbers of foreign tourists, while a smaller number of establishments received substantially more tourists
+
 ```{python}
 #| fig-align: center
 
 monthly = df.groupby(['okres_date', 'country_en'])['D8R1'].sum().reset_index()
 
-plt.figure(figsize=(6,3))
+plt.figure(figsize=(8,4))
 
 sns.lineplot(
     data=monthly,
@@ -187,7 +189,7 @@ sns.lineplot(
 )
 
 plt.title('Number of Tourists Over Time by Country')
-plt.xlabel('Date')
+plt.xlabel(' ')
 plt.ylabel('Number of Tourists')
 plt.grid(True)
 
@@ -195,9 +197,7 @@ plt.show()
 
 ```
 
-
 The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.
-
 
 ```{python}
 # Describtive statistics  of nummber of foreign tourits by country and year 
@@ -211,10 +211,11 @@ stats_df = df.groupby(['rok', 'country_en'])['D8R1'].agg(
     max='max'
 ).reset_index()
 
-print(stats_df)
+
 
 
 ```
+
 ```{python}
 teryt_woj = {
     "2": "dolnośląskie",
@@ -240,6 +241,7 @@ df.województwo.value_counts()
 ```
 
 The regional analysis also shows considerable differences between Polish voivodeships. Małopolskie and Mazowieckie have the largest numbers of observations in the analysed data, followed by Pomorskie, Śląskie and Wielkopolskie. This suggests that foreign tourist activity is particularly concentrated in regions with major tourist destinations and large urban centres.
+
 ```{python}
 #| fig-align: center
 # ===== Grouping data =====
@@ -337,7 +339,9 @@ plt.show()
 ```
 
 ### Most Popular Tourist Destinations in Poland
+
 When it comes to the most frequently visited places, Warsaw in the Mazowieckie Voivodeship and Kraków in the Małopolskie Voivodeship stand out as the top destinations (highlighted in dark blue).Together, these two cities attracted over 3 million tourists annually in both 2018 and 2019.In 2020, a significant decline in tourist numbers was observed in these two regions due to the pandemic.That year, the most visited places were seaside cities and Wrocław , likely due to its proximity to the German border.
 
 ### Summary
+
 The results indicate that foreign tourism in Poland was geographically concentrated and strongly affected by the changes observed in 2020. Germany was the dominant foreign market among the selected countries, while the regional analysis highlights Małopolskie and Mazowieckie as particularly important areas for foreign tourism.
