@@ -1,0 +1,268 @@
+---
+title: "Feature Selection"
+format: html # This qmd file will be compiled as an HTML web page
+---
+
+**Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
+
+No extensive data preprocessing was performed prior to model development. The dataset originates from an official statistical survey and is already provided in a structured and standardised format, which reduces the need for additional transformations.
+
+Only basic preprocessing steps were applied, including verification of data types and conversion of variables representing dates into a proper datetime format. This step was necessary to enable the creation of additional time-dependent variables.
+
+No standardisation or scaling was applied during initial data preparation; however, explanatory variables were standardized later within the modeling pipeline for regularized regression models.
+
+More advanced preprocessing techniques, such as outlier removal, smoothing, or data transformation, were intentionally avoided in order to preserve the original characteristics of the dataset, including seasonality, regional variation, and effects of external events.
+
+Since the objective of the project is to evaluate imputation methods under realistic conditions, maintaining the original data structure was considered more appropriate than applying extensive preprocessing.
+
+
+#Checking correlation between features and target variable
+
+```{python}
+import pandas as pd
+import glob
+import os
+# ścieżka do folderu
+folder_path = r"synthetic data/synthetic_countries_features"
+
+# lista plików excel
+all_files = glob.glob(os.path.join(folder_path, "*.xlsx"))
+
+# wczytanie i połączenie
+df_list = [pd.read_excel(file) for file in all_files]
+df = pd.concat(df_list, ignore_index=True)
+
+print(df.shape)
+df.head()
+
+```
+
+## Add country names
+
+Mapping country names from KKR codes into English. For this purpose, a dictionary is created and then used to map the values in the KKR column of the DataFrame to a new country_en column.
+```{python}
+# Słownik nazw krajów
+kkr_to_country_en = {
+    276: 'Germany',
+    380: 'Italy',
+    643: 'Russia',
+    804: 'Ukraine',
+    826: 'United Kingdom',
+    840: 'United States'
+}
+df['country_en'] = df['KKR'].map(kkr_to_country_en)
+```
+
+## Corelation matrix
+
+The correlation matrix between the features and the target variable (D8R1) is calculated and visualized using a heatmap. The corr() function from the pandas library is used to calculate the correlation coefficients, while the seaborn library is used to create the heatmap visualization.
+
+```{python}
+
+
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# Colums to exclude
+exclude_cols = ['REGON', 'OKRES', 'WON', 'KKR', 'NRW', 'D8R1', 'data', 'country_en']
+
+
+
+# Lista krajów
+countries = df['country_en'].dropna().unique()
+
+# Pusta ramka do zbierania korelacji
+all_corrs = pd.DataFrame()
+
+# Iteracja po krajach
+for country in countries:
+    country_df = df[df['country_en'] == country]
+    
+    # Wybierz kolumny numeryczne (bez wykluczonych)
+    numeric_cols = country_df.select_dtypes(include=[np.number]).columns
+    numeric_cols = [col for col in numeric_cols if col not in exclude_cols]
+    
+    # Oblicz korelacje z D8R1
+    corr_series = country_df[numeric_cols].corrwith(country_df['D8R1']).dropna()
+    
+    # Dodaj do zbiorczej ramki
+    all_corrs[country] = corr_series
+
+# Transponujemy, żeby na osi X były kraje, na osi Y zmienne
+all_corrs = all_corrs.T
+
+# Rysujemy heatmapę
+plt.figure(figsize=(12, 8))
+sns.heatmap(all_corrs.T, annot=True, cmap='viridis', cbar=True, linewidths=0.5)
+plt.title('Correlation of number of tourists with created features by Country', fontsize=14)
+plt.xlabel('Country')
+plt.ylabel('Variable')
+plt.tight_layout()
+
+plt.show()
+
+```
+
+The variables most strongly correlated with the dependent variable are the 2-, 6-, 9-, and 12-period moving averages.
+For some countries, a correlation is also observed between the average values at the municipality level and the corresponding standard deviation within the same municipality
+
+
+
+## Regularized Linear Regression for Feature Selection
+Feature selection was performed using regularized linear regression models to identify the most relevant predictors of tourist numbers while reducing multicollinearity among explanatory variables.
+
+Due to strong correlations between temporal variables (particularly lagged values and moving averages), regularization techniques were applied. Ridge regression was used for coefficient shrinkage and model stabilization, without performing feature selection. The regularization strength was selected using cross-validation.
+
+To identify the most important predictors, Elastic Net regularization was additionally applied. By combining L1 and L2 penalties, this approach enables both coefficient shrinkage and automatic variable selection by shrinking less relevant coefficients to zero.
+
+The analysis was conducted separately for each country using chronologically ordered training and testing datasets. Model performance was evaluated using Root Mean Squared Error (RMSE).
+
+Final variable selection was based on non-zero coefficient values, which identified the most informative predictors of tourist flows. Across all countries, autoregressive variables (lags) and moving averages were consistently the most important predictors, indicating strong temporal dependence in tourist arrivals.
+
+#Ridge Regression for Feature Selection
+```{python}
+
+
+
+from sklearn.linear_model import RidgeCV, LassoCV, ElasticNetCV
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import mean_squared_error
+
+# lista zmiennych
+features = [
+    'mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12',
+    'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6',
+    'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'lag_12',
+    'WON_mean', 'WON_sd', 'WON_cv',
+    'RO_mean', 'RO_sd', 'RO_cv'
+]
+
+target = 'D8R1'
+
+results = {}
+
+# pętla po krajach
+for country, data in df.groupby('country_en'):
+    
+    data = data.sort_values('data')  # ważne przy szeregach czasowych
+    
+    # drop NA (lagi itd.)
+    data = data.dropna(subset=features + [target])
+    
+    if len(data) < 30:
+        continue  # za mało danych
+    
+    X = data[features]
+    y = data[target]
+    
+    # split czasowy (np. 80/20)
+    split = int(len(data) * 0.8)
+    X_train, X_test = X.iloc[:split], X.iloc[split:]
+    y_train, y_test = y.iloc[:split], y.iloc[split:]
+    
+    # pipeline: skalowanie + model
+    
+    model = Pipeline([
+        ('scaler', StandardScaler()),
+        ('reg', RidgeCV(alphas=np.logspace(-3, 3, 50)))
+        # alternatywy:
+        # ('reg', LassoCV(cv=5))
+        # ('reg', ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9]))
+    ])
+    
+    model.fit(X_train, y_train)
+    
+    preds = model.predict(X_test)
+    
+    rmse = np.sqrt(mean_squared_error(y_test, preds))
+    
+    results[country] = {
+        'model': model,
+        'rmse': rmse
+    }
+
+# wyniki
+results_df = pd.DataFrame({
+    country: {'RMSE': res['rmse']}
+    for country, res in results.items()
+}).T
+
+print(results_df.sort_values('RMSE'))
+```
+
+.
+
+##Elastic Net for Feature Selection
+
+```{python}
+import os
+#selekacja zmiennych przez Elastic Net
+from sklearn.linear_model import ElasticNetCV #regression model with regularization + automatic tuning
+from sklearn.preprocessing import StandardScaler #standardizes features
+from sklearn.pipeline import Pipeline #ensures scaling + model happen in correct order
+
+selected_features_per_country = {} #Creating a container for results
+
+
+#Loop over countries
+#You split your dataset into separate subsets per country
+# Each country gets its own model and feature selection
+
+
+for country, data in df.groupby('country_en'):
+    #Sorting by time
+    data = data.sort_values('data')
+    data = data.dropna(subset=features + [target]) #Removing missing values
+    #Removes rows where: any feature is missing or target (D8R1) is missing
+
+    if len(data) < 50: #Skip countries with too little data
+        continue
+    #X → input variables (lags, rolling means, stats)
+    #y → what you want to predict (D8R1)
+    X = data[features]
+    y = data[target]
+    
+    model = Pipeline([
+        ('scaler', StandardScaler()), #transforms each feature to:mean = 0, std = 1
+        ('reg', ElasticNetCV(
+
+            #ElasticNet combines:
+
+#L1 (Lasso) → pushes some coefficients to exactly 0
+#L2 (Ridge) → shrinks coefficients smoothly
+
+#Controlled by:
+            l1_ratio=[0.1, 0.5, 0.9],
+            #0.1 → mostly Ridge
+            #0.9 → mostly Lasso
+            cv=5, #5-fold cross-validation to find best alpha and l1_ratio
+            max_iter=10000
+        ))
+    ])
+    
+    model.fit(X, y)
+    
+    coefs = model.named_steps['reg'].coef_
+    
+    selected = [f for f, c in zip(features, coefs) if abs(c) > 1e-6]
+    
+    selected_features_per_country[country] = selected
+
+# podejrzyj
+for k, v in selected_features_per_country.items():
+    print(k, ":", v)
+```
+
+
+## Save results
+```{python}
+results_df = pd.DataFrame([
+    {'country_en': country, 'feature': feature}
+    for country, features_list in selected_features_per_country.items()
+    for feature in features_list
+])
+
+results_df.to_csv('synthetic_selected_features.csv', index=False)

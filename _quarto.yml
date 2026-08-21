@@ -5,6 +5,7 @@ project:
     - index.qmd
     - chapters/chapter1.qmd
     - chapters/chapter2.qmd
+    - chapters/chapter3.qmd
     - notebooks/notebook1.qmd
 
 website:
@@ -26,6 +27,8 @@ website:
         text: Explanatory Data Analysis
       - href: chapters/chapter2.qmd
         text: Feature Engineering
+      - href: chapters/chapter3.qmd
+        text: Feature Selection
 
 
 format:

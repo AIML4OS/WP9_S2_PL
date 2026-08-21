@@ -15,5 +15,8 @@ dependencies = [
     "geopandas",
     "seaborn",
     "numpy",
-    "openpyxl"
+    "openpyxl",
+    "glob",
+    "os",
+    "sklearn"
 ]

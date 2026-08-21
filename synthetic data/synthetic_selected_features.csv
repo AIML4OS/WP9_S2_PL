@@ -1,0 +1,89 @@
+country_en,feature
+Germany,mean_last_3
+Germany,mean_last_6
+Germany,mean_last_9
+Germany,mean_last_12
+Germany,lag_1
+Germany,lag_2
+Germany,lag_3
+Germany,lag_4
+Germany,lag_5
+Germany,lag_6
+Germany,lag_7
+Germany,lag_8
+Germany,lag_9
+Germany,lag_10
+Germany,lag_11
+Germany,WON_mean
+Germany,WON_sd
+Germany,RO_mean
+Germany,RO_sd
+Italy,mean_last_3
+Italy,mean_last_6
+Italy,mean_last_9
+Italy,mean_last_12
+Italy,lag_1
+Italy,lag_2
+Italy,lag_3
+Italy,lag_4
+Italy,lag_5
+Italy,lag_6
+Italy,lag_7
+Italy,lag_8
+Italy,lag_9
+Italy,lag_10
+Italy,lag_11
+Italy,WON_mean
+Italy,RO_mean
+Ukraine,mean_last_3
+Ukraine,mean_last_6
+Ukraine,mean_last_9
+Ukraine,mean_last_12
+Ukraine,lag_1
+Ukraine,lag_2
+Ukraine,lag_3
+Ukraine,lag_4
+Ukraine,lag_5
+Ukraine,lag_6
+Ukraine,lag_7
+Ukraine,lag_8
+Ukraine,RO_mean
+United Kingdom,mean_last_3
+United Kingdom,mean_last_6
+United Kingdom,mean_last_9
+United Kingdom,mean_last_12
+United Kingdom,lag_1
+United Kingdom,lag_2
+United Kingdom,lag_3
+United Kingdom,lag_4
+United Kingdom,lag_5
+United Kingdom,lag_6
+United Kingdom,lag_7
+United Kingdom,lag_8
+United Kingdom,lag_9
+United Kingdom,lag_10
+United Kingdom,lag_11
+United Kingdom,WON_mean
+United Kingdom,WON_sd
+United Kingdom,RO_mean
+United Kingdom,RO_sd
+United States,mean_last_3
+United States,mean_last_6
+United States,mean_last_9
+United States,mean_last_12
+United States,lag_1
+United States,lag_2
+United States,lag_3
+United States,lag_4
+United States,lag_5
+United States,lag_6
+United States,lag_7
+United States,lag_8
+United States,lag_9
+United States,lag_10
+United States,lag_11
+United States,lag_12
+United States,WON_mean
+United States,WON_sd
+United States,RO_mean
+United States,RO_sd
