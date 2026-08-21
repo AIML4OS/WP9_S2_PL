@@ -97,7 +97,6 @@ Import libraries for feature engineering and create new features based on the or
 import pandas as pd
 import numpy as np
 
-
 ```
 
 ## Step 3
@@ -170,7 +169,7 @@ Dataset is too large to deal with it in a notebook, so we will save enriched dat
 
 # --- Select top 5 countries ---
 top_kkr = (
-    data.groupby("KKR")["D8R1"]
+    df.groupby("KKR")["D8R1"]
     .sum()
     .sort_values(ascending=False)
     .head(5)
@@ -195,7 +194,7 @@ print("Saving to:", os.path.abspath(output_dir))
 
 
 for kkr in top_kkr:
-    df_kkr = data[data["KKR"] == kkr].copy()
+    df_kkr = df[df["KKR"] == kkr].copy()
     
     df_kkr = add_features_to_df(df_kkr, tourist_col="D8R1")
     
