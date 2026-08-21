@@ -99,7 +99,7 @@ df['okres_date'] = pd.to_datetime(
 
 monthly = df.groupby('okres_date')['D8R1'].sum().reset_index()
 
-plt.figure(figsize=(9,4.5))
+plt.figure(figsize=(6,3))
 sns.lineplot(data=monthly, x='okres_date', y='D8R1')
 plt.title('Number of Tourists Over Time')
 plt.xlabel('Date')
