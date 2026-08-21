@@ -101,7 +101,7 @@ import numpy as np
 
 ## Step 3
 
-Download the dataset and create a dictionary of dataframes, one for each KKR (country). Then, define a function to add features such as rolling means, lags, and group statistics (mean, standard deviation, coefficient of variation) based on different grouping variables (WON, POW, GMN, RO). Finally, apply this function to each dataframe in the dictionary.
+Download the dataset and create a dictionary of dataframes, one for each KKR (country). Then, define a function to add features such as rolling means, lags, and group statistics (mean, standard deviation, coefficient of variation) based on different grouping variables (WON, RO). Finally, apply this function to each dataframe in the dictionary.
 
 ```{python}
 
@@ -154,8 +154,6 @@ def add_features_to_df(df, tourist_col="D8R1"):
         return df
 
     df = add_group_stats(df, "WON", "WON")
-    df = add_group_stats(df, "POW", "POW")
-    df = add_group_stats(df, "GMN", "GMN")
     df = add_group_stats(df, "RO", "RO")
 
     return df
