@@ -229,7 +229,7 @@ turyści.columns = ['rok', 'kod', 'turyści']
 
 # ===== Reading a map shapefile =====
 
-woj = gpd.read_file("wojewodztwa\wojewodztwa.shp")
+woj = gpd.read_file("wojewodztwa/wojewodztwa.shp")
 woj["JPT_KOD_JE"] = woj["JPT_KOD_JE"].astype(int)
 turyści["kod"] = turyści["kod"].astype(int)
 
