@@ -179,7 +179,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#structure-of-tourism-data" id="toc-structure-of-tourism-data" class="nav-link active" data-scroll-target="#structure-of-tourism-data">Structure of tourism data:</a>
+  <li><a href="#reading-a-data" id="toc-reading-a-data" class="nav-link active" data-scroll-target="#reading-a-data">Reading a data</a></li>
+  <li><a href="#libraries-used-in-the-analysis" id="toc-libraries-used-in-the-analysis" class="nav-link" data-scroll-target="#libraries-used-in-the-analysis">Libraries used in the analysis</a></li>
+  <li><a href="#structure-of-tourism-data" id="toc-structure-of-tourism-data" class="nav-link" data-scroll-target="#structure-of-tourism-data">Structure of tourism data</a>
   <ul class="collapse">
   <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
   <li><a href="#basic-information-about-the-dataset" id="toc-basic-information-about-the-dataset" class="nav-link" data-scroll-target="#basic-information-about-the-dataset">Basic Information About the Dataset</a></li>
@@ -213,16 +215,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><strong>Open the associated notebook</strong>: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&amp;version=2.3.19&amp;s3=region-79669f20&amp;init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&amp;init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&amp;git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&amp;autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a></p>
-<p>The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling. # Reading a data The synthetic data were generated using the <em>synthetizer</em> package available in R. Therefore, the <em>pyreadr</em> library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:</p>
-<div id="d683e9bc" class="cell" data-execution_count="1">
+<p>The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling.</p>
+<section id="reading-a-data" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-data">Reading a data</h2>
+<p>The synthetic data were generated using the <em>synthetizer</em> package available in R. Therefore, the <em>pyreadr</em> library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:</p>
+<div id="62cb05ad" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyreadr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pyreadr.read_r(<span class="st">'synthetic data/WP9_S2_Tourism_synt.rds'</span>).popitem()[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Libraries used in the analysis - pandas – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset. - geopandas – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps. - matplotlib.pyplot – used to create visualizations, such as bar charts, line charts, histograms, and other plots. - itables – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality. - itables.options – used to configure the behavior of itables, for example by controlling warnings about undocumented options. - seaborn – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.</p>
-<div id="2410e0a2" class="cell" data-execution_count="2">
+</section>
+<section id="libraries-used-in-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-used-in-the-analysis">Libraries used in the analysis</h2>
+<ul>
+<li><em>pandas</em> – used for data manipulation and analysis, including loading, filtering, transforming, and summarizing the dataset.</li>
+<li><em>geopandas</em> – used for working with geographical and spatial data. It allows us to connect tourism data with geographical information, such as voivodeships or other administrative regions, and create maps.</li>
+<li><em>matplotlib.pyplot</em> – used to create visualizations, such as bar charts, line charts, histograms, and other plots.</li>
+<li><em>itables</em> – used to display interactive data tables in the notebook. The show function displays DataFrames as interactive tables, while init_notebook_mode initializes the interactive table functionality.</li>
+<li><em>itables.options</em> – used to configure the behavior of itables, for example by controlling warnings about undocumented options.</li>
+<li><em>seaborn</em> – used to create statistical visualizations. It provides more advanced and visually appealing charts, such as distribution plots, boxplots, heatmaps, and categorical plots, and works together with matplotlib.</li>
+</ul>
+<div id="09729ed9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -234,8 +249,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+</section>
 <section id="structure-of-tourism-data" class="level2">
-<h2 class="anchored" data-anchor-id="structure-of-tourism-data">Structure of tourism data:</h2>
+<h2 class="anchored" data-anchor-id="structure-of-tourism-data">Structure of tourism data</h2>
 <section id="dataset-description" class="level3">
 <h3 class="anchored" data-anchor-id="dataset-description">Dataset description</h3>
 <p>The dataset contains information about <strong>tourism establishments and tourist activity in Poland</strong>. Each row represents an establishment, identified by its <strong>REGON</strong> number. The dataset includes information about the type and location of the establishment, as well as data on domestic and foreign tourists.</p>
@@ -248,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>D8R1</strong> – number of foreign tourists.</p></li>
 </ul>
 <p>Due to the large size of the dataset, further analyses will be limited to the <strong>five countries with the highest number of foreign tourists</strong>. This will allow us to reduce the size of the dataset while focusing on the most significant tourist markets.</p>
-<div id="f716368d" class="cell" data-execution_count="3">
+<div id="47d904c5" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OKRES consist year and month</span></span>
@@ -363,7 +379,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979" hidden="hidden">
+<table id="itables_76b07a6d_e351_49a8_8a72_be39bddddbc3" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -429,7 +445,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
     </tr>
   </tbody>
 </table>
-<div id="itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_76b07a6d_e351_49a8_8a72_be39bddddbc3_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup>REGON</th>
       <th style="border:1px solid #ddd;padding:8px">RO</th>
       <th style="border:1px solid #ddd;padding:8px">WON</th>
@@ -447,13 +463,13 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <tr><td style="border:1px solid #ddd;padding:8px">23da7c60</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">8.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">9b1064ee</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">02</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">0.000000</td><td style="border:1px solid #ddd;padding:8px">202003.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">1da9ce1d</td><td style="border:1px solid #ddd;padding:8px">01</td><td style="border:1px solid #ddd;padding:8px">12</td><td style="border:1px solid #ddd;padding:8px">004</td><td style="border:1px solid #ddd;padding:8px">1.000000</td><td style="border:1px solid #ddd;padding:8px">202009.0</td></tr>
-</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979")?.removeAttribute("hidden");document.getElementById("itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="6" style="border:none;padding:8px;text-align:center">(1,149,610 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_76b07a6d_e351_49a8_8a72_be39bddddbc3")?.removeAttribute("hidden");document.getElementById("itables_76b07a6d_e351_49a8_8a72_be39bddddbc3_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_2ab84a7e_f0cd_423b_90ad_0b9b11469979:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_76b07a6d_e351_49a8_8a72_be39bddddbc3:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -491,7 +507,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </section>
 <section id="basic-information-about-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="basic-information-about-the-dataset">Basic Information About the Dataset</h3>
-<div id="e1031018" class="cell" data-execution_count="4">
+<div id="dcad42c5" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -513,33 +529,16 @@ memory usage: 52.6+ MB</code></pre>
 </div>
 </div>
 <p>The dataset contains 1,149,620 observations and 6 variables. Most variables are stored as strings, while D8R1 and OKRES are numerical variables. The dataset occupies approximately 52.6 MB of memory.</p>
-<div id="c6f85db5" class="cell" data-execution_count="5">
+<div id="4b6954cc" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"OKRES"</span>] <span class="op">=</span> df[<span class="st">"OKRES"</span>].astype(<span class="bu">str</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"D8R1"</span>]].describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.float_format'</span>, <span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>) <span class="co">#displaing numbers in right format</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"OKRES"</span>] <span class="op">=</span> df[<span class="st">"OKRES"</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"D8R1"</span>]].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>               D8R1
-count  1.149620e+06
-mean   1.454897e+01
-std    6.356868e+01
-min    0.000000e+00
-25%    2.000000e+00
-50%    3.000000e+00
-75%    9.000000e+00
-max    8.605078e+03</code></pre>
-</div>
-</div>
-<p>The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.</p>
-<div id="720acdc7" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.KKR.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1" hidden="hidden">
+<table id="itables_49c78add_da4a_47a9_a3b2_0d11c7c858d0" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -605,41 +604,37 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_49c78add_da4a_47a9_a3b2_0d11c7c858d0_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
-      <th style="border:1px solid #ddd;padding:8px">count</th>
-    </tr>
-    <tr>
-      <th style="border:1px solid #ddd;padding:8px">KKR</th>
-      <th style="border:1px solid #ddd;padding:8px"></th>
+      <th style="border:1px solid #ddd;padding:8px">D8R1</th>
     </tr></thead><tbody>
-<tr><td style="border:1px solid #ddd;padding:8px">276</td><td style="border:1px solid #ddd;padding:8px">100986</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">804</td><td style="border:1px solid #ddd;padding:8px">79089</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">826</td><td style="border:1px solid #ddd;padding:8px">50404</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">203</td><td style="border:1px solid #ddd;padding:8px">47088</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">643</td><td style="border:1px solid #ddd;padding:8px">45339</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">380</td><td style="border:1px solid #ddd;padding:8px">44805</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">250</td><td style="border:1px solid #ddd;padding:8px">43233</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">528</td><td style="border:1px solid #ddd;padding:8px">38090</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">440</td><td style="border:1px solid #ddd;padding:8px">36672</td></tr>
-<tr><td style="border:1px solid #ddd;padding:8px">840</td><td style="border:1px solid #ddd;padding:8px">34986</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(201 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1")?.removeAttribute("hidden");document.getElementById("itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1_fallback")?.setAttribute("hidden", "hidden");</script>
+<tr><td style="border:1px solid #ddd;padding:8px">count</td><td style="border:1px solid #ddd;padding:8px">1149620.00</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">mean</td><td style="border:1px solid #ddd;padding:8px">14.55</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">std</td><td style="border:1px solid #ddd;padding:8px">63.57</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">min</td><td style="border:1px solid #ddd;padding:8px">0.00</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">25%</td><td style="border:1px solid #ddd;padding:8px">2.00</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">50%</td><td style="border:1px solid #ddd;padding:8px">3.00</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">75%</td><td style="border:1px solid #ddd;padding:8px">9.00</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px">max</td><td style="border:1px solid #ddd;padding:8px">8605.08</td></tr>
+</tbody></table></div><script>document.getElementById("itables_49c78add_da4a_47a9_a3b2_0d11c7c858d0")?.removeAttribute("hidden");document.getElementById("itables_49c78add_da4a_47a9_a3b2_0d11c7c858d0_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_46dd4a67_d4c1_4858_86a9_ed6a80a6c7a1:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_49c78add_da4a_47a9_a3b2_0d11c7c858d0:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
                 let dt_args = {
           "classes": ["display", "nowrap", "compact"],
-          "data_json": "[[\"276\", 100986], [\"804\", 79089], [\"826\", 50404], [\"203\", 47088], [\"643\", 45339], [\"380\", 44805], [\"250\", 43233], [\"528\", 38090], [\"440\", 36672], [\"840\", 34986], [\"752\", 30046], [\"112\", 29278], [\"724\", 29129], [\"703\", 27172], [\"056\", 25305], [\"208\", 23688], [\"040\", 23008], [\"348\", 22977], [\"578\", 22425], [\"642\", 20317], [\"376\", 19543], [\"246\", 18803], [\"372\", 17634], [\"756\", 17429], [\"428\", 17115], [\"156\", 16171], [\"233\", 15045], [\"792\", 13581], [\"620\", 12073], [\"124\", 11937], [\"392\", 11515], [\"036\", 11087], [\"300\", 9900], [\"705\", 9709], [\"410\", 9419], [\"356\", 9395], [\"100\", 8812], [\"191\", 7395], [\"076\", 6991], [\"268\", 5763], [\"688\", 5386], [\"352\", 4732], [\"484\", 4428], [\"498\", 4128], [\"442\", 3689], [\"398\", 3541], [\"470\", 3447], [\"784\", 3428], [\"032\", 3401], [\"764\", 3306], [\"344\", 3202], [\"682\", 3046], [\"554\", 2894], [\"818\", 2819], [\"702\", 2640], [\"196\", 2550], [\"158\", 2450], [\"364\", 2445], [\"710\", 2256], [\"608\", 2230], [\"586\", 2183], [\"458\", 2159], [\"152\", 2137], [\"031\", 1982], [\"051\", 1963], [\"170\", 1854], [\"704\", 1838], [\"008\", 1764], [\"860\", 1746], [\"504\", 1707], [\"070\", 1562], [\"360\", 1528], [\"807\", 1488], [\"012\", 1291], [\"004\", 1291], [\"566\", 1282], [\"422\", 1211], [\"604\", 1192], [\"788\", 1183], [\"368\", 1144], [\"400\", 1120], [\"414\", 1109], [\"050\", 1063], [\"999\", 1020], [\"188\", 967], [\"634\", 805], [\"524\", 716], [\"760\", 713], [\"499\", 663], [\"858\", 620], [\"862\", 601], [\"630\", 599], [\"496\", 593], [\"438\", 547], [\"020\", 536], [\"218\", 515], [\"417\", 512], [\"694\", 503], [\"591\", 490], [\"434\", 489], [\"404\", 458], [\"512\", 456], [\"562\", 450], [\"120\", 424], [\"024\", 409], [\"048\", 392], [\"408\", 384], [\"492\", 373], [\"144\", 343], [\"231\", 339], [\"686\", 331], [\"762\", 316], [\"716\", 306], [\"222\", 298], [\"800\", 289], [\"068\", 274], [\"095\", 263], [\"288\", 257], [\"258\", 247], [\"320\", 245], [\"748\", 210], [\"600\", 207], [\"340\", 203], [\"192\", 194], [\"646\", 193], [\"214\", 177], [\"178\", 176], [\"516\", 169], [\"446\", 157], [\"795\", 151], [\"558\", 151], [\"480\", 149], [\"275\", 149], [\"834\", 144], [\"292\", 140], [\"140\", 136], [\"887\", 133], [\"736\", 125], [\"418\", 121], [\"674\", 119], [\"212\", 119], [\"384\", 114], [\"388\", 111], [\"740\", 111], [\"894\", 111], [\"780\", 106], [\"084\", 99], [\"478\", 95], [\"854\", 94], [\"044\", 94], [\"732\", 88], [\"242\", 88], [\"104\", 82], [\"450\", 82], [\"336\", 80], [\"052\", 79], [\"270\", 76], [\"598\", 75], [\"567\", 73], [\"266\", 73], [\"466\", 71], [\"116\", 71], [\"072\", 70], [\"533\", 66], [\"180\", 65], [\"324\", 64], [\"690\", 63], [\"148\", 60], [\"204\", 60], [\"262\", 59], [\"706\", 58], [\"132\", 57], [\"060\", 56], [\"454\", 53], [\"332\", 52], [\"462\", 52], [\"540\", 51], [\"064\", 49], [\"096\", 47], [\"312\", 44], [\"108\", 42], [\"254\", 38], [\"136\", 37], [\"238\", 34], [\"508\", 28], [\"474\", 28], [\"430\", 27], [\"328\", 26], [\"426\", 23], [\"768\", 20], [\"174\", 18], [\"776\", 17], [\"654\", 16], [\"316\", 15], [\"232\", 15], [\"624\", 15], [\"832\", 15], [\"248\", 10], [\"583\", 10], [\"626\", 10], [\"226\", 9], [\"729\", 8], [\"833\", 6], [\"520\", 5], [\"308\", 3], [\"652\", 3], [\"663\", 3], [\"534\", 2], [\"659\", 1], [\"728\", 1], [\"831\", 1]]",
-          "layout": {"bottomEnd": "paging", "bottomStart": "info", "topEnd": "search", "topStart": "pageLength"},
+          "columnDefs": [{"render": "function (data, type, row, meta) { return type === 'sort' || type === 'type' ? data[1] : data[0]; }", "targets": [1]}],
+          "data_json": "[[\"count\", [\"1149620.00\", 1149620.0]], [\"mean\", [\"14.55\", 14.548973929493947]], [\"std\", [\"63.57\", 63.56867692375465]], [\"min\", [\"0.00\", 0.0]], [\"25%\", [\"2.00\", 2.0]], [\"50%\", [\"3.00\", 3.0]], [\"75%\", [\"9.00\", 9.0]], [\"max\", [\"8605.08\", 8605.077823623982]]]",
+          "keys_to_be_evaluated": [["columnDefs", 0, "render"]],
+          "layout": {"bottomEnd": null, "bottomStart": null, "topEnd": null, "topStart": null},
           "order": [],
           "style": {"caption-side": "bottom", "margin": "auto", "table-layout": "auto", "width": "auto"},
-          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>count</th>\n    </tr>\n    <tr>\n      <th>KKR</th>\n      <th></th>\n    </tr>\n  </thead></table>",
+          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>D8R1</th>\n    </tr>\n  </thead></table>",
           "text_in_header_can_be_selected": true
         };
                 new ITable(table, dt_args);
@@ -657,104 +652,105 @@ max    8.605078e+03</code></pre>
 </script>
 </div>
 </div>
-<div id="1de285fc" class="cell" data-execution_count="7">
+<p>The descriptive statistics show that the number of foreign tourists varies considerably across the observations. Most observations have a relatively small number of tourists, with a median of 3 and 50% of observations falling between 2 and 9 tourists. However, the mean is considerably higher at 14.55, which indicates that some observations have much larger values. The maximum value of 8,605 further confirms the presence of extreme observations. Overall, the distribution of the number of foreign tourists is strongly right-skewed, with most establishments reporting relatively low numbers and a small number of establishments attracting substantially more foreign tourists.</p>
+<div id="2d3b7354" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'okres_date'</span>] <span class="op">=</span> pd.to_datetime(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'OKRES'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.replace(<span class="st">'.0'</span>, <span class="st">''</span>, regex<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m'</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'okres_date'</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'OKRES'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.replace(<span class="st">'.0'</span>, <span class="st">''</span>, regex<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cb6e63ee" class="cell" data-execution_count="8">
+<div id="081c02b5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'okres_date'</span>)[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>monthly, x<span class="op">=</span><span class="st">'okres_date'</span>, y<span class="op">=</span><span class="st">'D8R1'</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of Tourists Over Time'</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Tourists'</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">'okres_date'</span>)[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>monthly, x<span class="op">=</span><span class="st">'okres_date'</span>, y<span class="op">=</span><span class="st">'D8R1'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of Foreing Tourists Over Time'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">' '</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total number'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-9-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="563" height="302"></p>
+<p><img src="chapter1_files/figure-html/cell-8-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="709" height="376"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The analyzed period covers January 1, 2018, to December 31, 2020. As shown in the chart, there is a noticeable increase in the number of foreign tourists during the summer months, with the highest values recorded in July and August in both 2018 and 2019. In March 2020, a sharp decline in tourist numbers can be observed due to the outbreak of the COVID-19 pandemic. The lockdown measures led to a near-total halt in foreign tourism. Although the numbers began to rise again in the summer months, they reached only about 25% of the values from the summer of 2019. Towards the end of the year, as COVID-19 infections surged, additional accommodation facilities were shut down, which contributed to a further significant drop in the number of foreign tourists.</p>
-<div id="30131ba8" class="cell" data-execution_count="9">
+<div id="c64b8d06" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries with the highest number of foreign tourists</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>kkr_selected <span class="op">=</span> [<span class="st">'250'</span>, <span class="st">'276'</span>, <span class="st">'376'</span>, <span class="st">'380'</span>, <span class="st">'643'</span>, <span class="st">'724'</span>, <span class="st">'752'</span>, <span class="st">'804'</span>, <span class="st">'826'</span>, <span class="st">'840'</span>]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary of selected countiries</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>kkr_to_country_en <span class="op">=</span> {</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'250'</span>: <span class="st">'France'</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'276'</span>: <span class="st">'Germany'</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'376'</span>: <span class="st">'Israel'</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'380'</span>: <span class="st">'Italy'</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'643'</span>: <span class="st">'Russia'</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'724'</span>: <span class="st">'Spain'</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'752'</span>: <span class="st">'Sweden'</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'804'</span>: <span class="st">'Ukraine'</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'826'</span>: <span class="st">'United Kingdom'</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'840'</span>: <span class="st">'United States'</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preprocesing</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'KKR'</span>] <span class="op">=</span> df[<span class="st">'KKR'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">3</span>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'KKR'</span>].isin(kkr_selected)]</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'country_en'</span>] <span class="op">=</span> df[<span class="st">'KKR'</span>].<span class="bu">map</span>(kkr_to_country_en)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'rok'</span>] <span class="op">=</span> df[<span class="st">'OKRES'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>[:<span class="dv">4</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating boxplots</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rok <span class="kw">in</span> <span class="bu">sorted</span>(df[<span class="st">'rok'</span>].unique()):</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    df_rok <span class="op">=</span> df[df[<span class="st">'rok'</span>] <span class="op">==</span> rok]</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sortowanie krajów wg mediany d8r1</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    mediany <span class="op">=</span> df_rok.groupby(<span class="st">'country_en'</span>)[<span class="st">'D8R1'</span>].median().sort_values()</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    kraj_sorted <span class="op">=</span> mediany.index.tolist()</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>))</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>df_rok,</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'country_en'</span>,</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'D8R1'</span>,</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>        order<span class="op">=</span>kraj_sorted,</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>        showfliers<span class="op">=</span><span class="va">False</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"Distribution of number of tourists by Country – Year </span><span class="sc">{</span>rok<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Country"</span>)</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"d8r1"</span>)</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries with the highest number of foreign tourists</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>kkr_selected <span class="op">=</span> [<span class="st">'250'</span>, <span class="st">'276'</span>, <span class="st">'376'</span>, <span class="st">'380'</span>, <span class="st">'643'</span>, <span class="st">'724'</span>, <span class="st">'752'</span>, <span class="st">'804'</span>, <span class="st">'826'</span>, <span class="st">'840'</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary of selected countiries</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>kkr_to_country_en <span class="op">=</span> {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'250'</span>: <span class="st">'France'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'276'</span>: <span class="st">'Germany'</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'376'</span>: <span class="st">'Israel'</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'380'</span>: <span class="st">'Italy'</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'643'</span>: <span class="st">'Russia'</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'724'</span>: <span class="st">'Spain'</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'752'</span>: <span class="st">'Sweden'</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'804'</span>: <span class="st">'Ukraine'</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'826'</span>: <span class="st">'United Kingdom'</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'840'</span>: <span class="st">'United States'</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preprocesing</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'KKR'</span>] <span class="op">=</span> df[<span class="st">'KKR'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">3</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'KKR'</span>].isin(kkr_selected)]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'country_en'</span>] <span class="op">=</span> df[<span class="st">'KKR'</span>].<span class="bu">map</span>(kkr_to_country_en)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'rok'</span>] <span class="op">=</span> df[<span class="st">'OKRES'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>[:<span class="dv">4</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating boxplots</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rok <span class="kw">in</span> <span class="bu">sorted</span>(df[<span class="st">'rok'</span>].unique()):</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    df_rok <span class="op">=</span> df[df[<span class="st">'rok'</span>] <span class="op">==</span> rok]</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sortowanie krajów wg mediany d8r1</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    mediany <span class="op">=</span> df_rok.groupby(<span class="st">'country_en'</span>)[<span class="st">'D8R1'</span>].median().sort_values()</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    kraj_sorted <span class="op">=</span> mediany.index.tolist()</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>df_rok,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'country_en'</span>,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'D8R1'</span>,</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        order<span class="op">=</span>kraj_sorted,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        showfliers<span class="op">=</span><span class="va">False</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"Distribution of number of tourists by Country –  </span><span class="sc">{</span>rok<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">" "</span>)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Number of foreign tourists"</span>)</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="566" height="278"></p>
+<p><img src="chapter1_files/figure-html/cell-9-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="758" height="374"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-10-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="566" height="278"></p>
+<p><img src="chapter1_files/figure-html/cell-9-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="758" height="374"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-10-output-3.png" class="quarto-figure quarto-figure-center figure-img" width="566" height="278"></p>
+<p><img src="chapter1_files/figure-html/cell-9-output-3.png" class="quarto-figure quarto-figure-center figure-img" width="758" height="374"></p>
 </figure>
 </div>
 </div>
@@ -762,145 +758,78 @@ max    8.605078e+03</code></pre>
 <p>The analysis shows clear differences in the number of foreign tourists across countries and years. Germany stands out as the most important source market, with the highest total number of tourists in 2018 and a substantial decrease in 2019 and 2020. Ukraine also represents an important tourist market, with relatively high numbers of observations and a comparatively stable total number of tourists between 2018 and 2019.</p>
 <p>A noticeable decline can be observed in 2020 for all analysed countries. This is particularly visible for Germany, France, Italy, Spain, the United Kingdom and the United States. The decrease is also reflected in the lower mean and median values for most countries, indicating a substantial reduction in tourist activity.</p>
 <p>The distributions are strongly right-skewed. For most countries, the median number of tourists per observation is between 2 and 6, while the mean is considerably higher. This indicates that most establishments recorded relatively small numbers of foreign tourists, while a smaller number of establishments received substantially more tourists</p>
-<div id="8cd4e64a" class="cell" data-execution_count="10">
+<div id="46f1d121" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby([<span class="st">'okres_date'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>monthly,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'okres_date'</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'D8R1'</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'country_en'</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of Tourists Over Time by Country'</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Tourists'</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby([<span class="st">'okres_date'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>monthly,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'okres_date'</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'D8R1'</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'country_en'</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of Tourists Over Time by Country'</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">' '</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Tourists'</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-11-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="563" height="302"></p>
+<p><img src="chapter1_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="709" height="376"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The majority of foreign tourists visiting Poland come from Germany, Russia, Ukraine, the United Kingdom, and the United States.German tourists are the dominant group, and once again, a clear seasonality can be observed, with peaks during the summer months.The number of tourists from Ukraine and the UK is comparable, reaching around 50,000 visitors.In spring 2020, a sharp decline is visible due to the COVID-19 pandemic.In the summer of 2020, the overwhelming majority of foreign tourists were from Germany, with approximately 150,000 visits.</p>
-<div id="dfaf8c4f" class="cell" data-execution_count="11">
+<div id="a007f7b0" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describtive statistics  of nummber of foreign tourits by country and year </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>stats_df <span class="op">=</span> df.groupby([<span class="st">'rok'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].agg(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="st">'count'</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span><span class="op">=</span><span class="st">'sum'</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span><span class="st">'mean'</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    median<span class="op">=</span><span class="st">'median'</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    std<span class="op">=</span><span class="st">'std'</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span><span class="op">=</span><span class="st">'min'</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span><span class="op">=</span><span class="st">'max'</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stats_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describtive statistics  of nummber of foreign tourits by country and year </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>stats_df <span class="op">=</span> df.groupby([<span class="st">'rok'</span>, <span class="st">'country_en'</span>])[<span class="st">'D8R1'</span>].agg(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="st">'count'</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span><span class="op">=</span><span class="st">'sum'</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span><span class="st">'mean'</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    median<span class="op">=</span><span class="st">'median'</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    std<span class="op">=</span><span class="st">'std'</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span><span class="op">=</span><span class="st">'min'</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span><span class="op">=</span><span class="st">'max'</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>).reset_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>     rok      country_en  count           sum       mean  median         std  \
-0   2018          France  17281  2.542722e+05  14.713976     4.0   45.544643   
-1   2018         Germany  37338  1.427977e+06  38.244613     6.0  154.117551   
-2   2018          Israel   8947  2.161964e+05  24.164118     4.0   85.289497   
-3   2018           Italy  18007  2.837205e+05  15.756123     4.0   45.601236   
-4   2018          Russia  18724  2.824642e+05  15.085674     4.0   50.706982   
-5   2018           Spain  12118  2.004566e+05  16.542052     4.0   51.799571   
-6   2018          Sweden  12294  1.899332e+05  15.449259     4.0   43.799956   
-7   2018         Ukraine  27993  4.438287e+05  15.854990     4.0   48.275107   
-8   2018  United Kingdom  18673  4.241057e+05  22.712242     4.0   66.661453   
-9   2018   United States  14092  2.856600e+05  20.271075     4.0   82.403326   
-10  2019          France  17260  2.549758e+05  14.772644     4.0   54.016969   
-11  2019         Germany  38746  8.870421e+05  22.893773     4.0  118.658539   
-12  2019          Israel   8835  1.828317e+05  20.694025     4.0   77.285772   
-13  2019           Italy  17875  2.714132e+05  15.183956     4.0   55.877794   
-14  2019          Russia  19391  2.905036e+05  14.981365     4.0   58.905869   
-15  2019           Spain  11871  1.988403e+05  16.750085     4.0   81.331472   
-16  2019          Sweden  12505  1.841865e+05  14.729025     3.0   48.701266   
-17  2019         Ukraine  31651  4.433857e+05  14.008586     4.0   60.379486   
-18  2019  United Kingdom  20776  6.098343e+05  29.352827     5.0   78.469240   
-19  2019   United States  15098  3.755686e+05  24.875390     4.0  103.944621   
-20  2020          France   8692  1.032400e+05  11.877585     3.0   96.571520   
-21  2020         Germany  24902  2.867257e+05  11.514162     3.0   58.669643   
-22  2020          Israel   1761  1.976008e+04  11.220943     3.0   40.158060   
-23  2020           Italy   8923  1.162316e+05  13.026064     3.0   92.793289   
-24  2020          Russia   7224  7.471088e+04  10.342037     3.0   44.443345   
-25  2020           Spain   5140  3.320427e+04   6.459975     2.0   12.533092   
-26  2020          Sweden   5247  3.916700e+04   7.464646     2.0   19.955360   
-27  2020         Ukraine  19445  2.049270e+05  10.538804     4.0   31.698667   
-28  2020  United Kingdom  10955  1.841577e+05  16.810380     3.0   51.779810   
-29  2020   United States   5796  6.820325e+04  11.767296     2.0   42.851878   
-
-    min          max  
-0   0.0  1463.641157  
-1   0.0  7778.855948  
-2   0.0  1691.118663  
-3   0.0  1544.000000  
-4   0.0  1866.985568  
-5   0.0  1636.247721  
-6   0.0  1236.906066  
-7   0.0  3125.175872  
-8   0.0  1597.000000  
-9   0.0  2843.821436  
-10  0.0  3430.595797  
-11  0.0  7687.514621  
-12  0.0  1882.624918  
-13  0.0  2212.634717  
-14  0.0  2214.054696  
-15  0.0  5352.533223  
-16  0.0  1398.901775  
-17  0.0  3448.718475  
-18  0.0  1681.208087  
-19  0.0  3161.190834  
-20  0.0  7862.955841  
-21  0.0  4723.677181  
-22  0.0   855.080427  
-23  0.0  7077.528510  
-24  0.0  2840.958383  
-25  0.0   261.000000  
-26  0.0   344.000000  
-27  0.0  1289.313224  
-28  0.0  2009.679710  
-29  0.0  1025.862074  </code></pre>
 </div>
-</div>
-<div id="b639d89b" class="cell" data-execution_count="12">
+<div id="c5a137ce" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>teryt_woj <span class="op">=</span> {</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span>: <span class="st">"dolnośląskie"</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span>: <span class="st">"kujawsko-pomorskie"</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"6"</span>: <span class="st">"lubelskie"</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"8"</span>: <span class="st">"lubuskie"</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"10"</span>: <span class="st">"łódzkie"</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"12"</span>: <span class="st">"małopolskie"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"14"</span>: <span class="st">"mazowieckie"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"16"</span>: <span class="st">"opolskie"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"18"</span>: <span class="st">"podkarpackie"</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"20"</span>: <span class="st">"podlaskie"</span>,</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"22"</span>: <span class="st">"pomorskie"</span>,</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"24"</span>: <span class="st">"śląskie"</span>,</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"26"</span>: <span class="st">"świętokrzyskie"</span>,</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"28"</span>: <span class="st">"warmińsko-mazurskie"</span>,</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"30"</span>: <span class="st">"wielkopolskie"</span>,</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"32"</span>: <span class="st">"zachodniopomorskie"</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'województwo'</span>] <span class="op">=</span> df[<span class="st">'WON'</span>].astype(<span class="bu">str</span>).<span class="bu">map</span>(teryt_woj)</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>df.województwo.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>teryt_woj <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span>: <span class="st">"dolnośląskie"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span>: <span class="st">"kujawsko-pomorskie"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"6"</span>: <span class="st">"lubelskie"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"8"</span>: <span class="st">"lubuskie"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"10"</span>: <span class="st">"łódzkie"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"12"</span>: <span class="st">"małopolskie"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"14"</span>: <span class="st">"mazowieckie"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"16"</span>: <span class="st">"opolskie"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"18"</span>: <span class="st">"podkarpackie"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"20"</span>: <span class="st">"podlaskie"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"22"</span>: <span class="st">"pomorskie"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"24"</span>: <span class="st">"śląskie"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"26"</span>: <span class="st">"świętokrzyskie"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"28"</span>: <span class="st">"warmińsko-mazurskie"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"30"</span>: <span class="st">"wielkopolskie"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"32"</span>: <span class="st">"zachodniopomorskie"</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'województwo'</span>] <span class="op">=</span> df[<span class="st">'WON'</span>].astype(<span class="bu">str</span>).<span class="bu">map</span>(teryt_woj)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>df.województwo.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_5598d763_1204_4a57_a564_92a27a66f4fa" hidden="hidden">
+<table id="itables_db21b968_83a7_4435_833a_6cd7f23b6a62" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -966,7 +895,7 @@ max    8.605078e+03</code></pre>
     </tr>
   </tbody>
 </table>
-<div id="itables_5598d763_1204_4a57_a564_92a27a66f4fa_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_db21b968_83a7_4435_833a_6cd7f23b6a62_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup></th>
       <th style="border:1px solid #ddd;padding:8px">count</th>
     </tr>
@@ -984,13 +913,13 @@ max    8.605078e+03</code></pre>
 <tr><td style="border:1px solid #ddd;padding:8px">podkarpackie</td><td style="border:1px solid #ddd;padding:8px">18734</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">warmińsko-mazurskie</td><td style="border:1px solid #ddd;padding:8px">13474</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">podlaskie</td><td style="border:1px solid #ddd;padding:8px">11640</td></tr>
-</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_5598d763_1204_4a57_a564_92a27a66f4fa")?.removeAttribute("hidden");document.getElementById("itables_5598d763_1204_4a57_a564_92a27a66f4fa_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="2" style="border:none;padding:8px;text-align:center">(2 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_db21b968_83a7_4435_833a_6cd7f23b6a62")?.removeAttribute("hidden");document.getElementById("itables_db21b968_83a7_4435_833a_6cd7f23b6a62_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_5598d763_1204_4a57_a564_92a27a66f4fa:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_db21b968_83a7_4435_833a_6cd7f23b6a62:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -1019,110 +948,110 @@ max    8.605078e+03</code></pre>
 </div>
 </div>
 <p>The regional analysis also shows considerable differences between Polish voivodeships. Małopolskie and Mazowieckie have the largest numbers of observations in the analysed data, followed by Pomorskie, Śląskie and Wielkopolskie. This suggests that foreign tourist activity is particularly concentrated in regions with major tourist destinations and large urban centres.</p>
-<div id="adfe3329" class="cell" data-execution_count="13">
+<div id="9d48bdae" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Grouping data =====</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>turyści<span class="op">=</span>df.groupby([<span class="st">'rok'</span>,<span class="st">'WON'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># New names</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>turyści.columns <span class="op">=</span> [<span class="st">'rok'</span>, <span class="st">'kod'</span>, <span class="st">'turyści'</span>]</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Reading a map shapefile =====</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>woj <span class="op">=</span> gpd.read_file(<span class="st">"wojewodztwa/wojewodztwa.shp"</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>woj[<span class="st">"JPT_KOD_JE"</span>] <span class="op">=</span> woj[<span class="st">"JPT_KOD_JE"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>turyści[<span class="st">"kod"</span>] <span class="op">=</span> turyści[<span class="st">"kod"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>mapa <span class="op">=</span> woj.merge(turyści, left_on<span class="op">=</span><span class="st">"JPT_KOD_JE"</span>, right_on<span class="op">=</span><span class="st">"kod"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Drawing maps =====</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>vmin <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>vmax <span class="op">=</span> mapa[<span class="st">'turyści'</span>].<span class="bu">max</span>()</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Unique years</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>lata <span class="op">=</span> <span class="bu">sorted</span>(mapa[<span class="st">'rok'</span>].dropna().unique())</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 3 maps one below another</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    nrows<span class="op">=</span><span class="bu">len</span>(lata),</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    ncols<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">7</span> <span class="op">*</span> <span class="bu">len</span>(lata))</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Make axes iterable when there is only one year</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(lata) <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> [axes]</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, rok <span class="kw">in</span> <span class="bu">zip</span>(axes, lata):</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    dane <span class="op">=</span> mapa[mapa[<span class="st">'rok'</span>] <span class="op">==</span> rok]</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    dane.plot(</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        column<span class="op">=</span><span class="st">'turyści'</span>,</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span><span class="st">'Blues'</span>,</span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">'grey'</span>,</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>        vmin<span class="op">=</span>vmin,</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>        vmax<span class="op">=</span>vmax,</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax</span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add labels</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, row <span class="kw">in</span> dane.iterrows():</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> row[<span class="st">'geometry'</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> pd.notnull(row[<span class="st">'turyści'</span>]):</span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>            x, y <span class="op">=</span> row[<span class="st">'geometry'</span>].centroid.coords[<span class="dv">0</span>]</span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>            ax.text(</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>                x,</span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>                y,</span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(row[<span class="st">'turyści'</span>])<span class="sc">:,}</span><span class="ss">"</span>.replace(<span class="st">","</span>, <span class="st">" "</span>),</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">'center'</span>,</span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>                fontsize<span class="op">=</span><span class="dv">8</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    ax.set_title(</span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Number of tourists by voivodeship – </span><span class="sc">{</span>rok<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">14</span>,</span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>        fontweight<span class="op">=</span><span class="st">'bold'</span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Common color scale</span></span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(</span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">'Blues'</span>,</span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    norm<span class="op">=</span>plt.Normalize(vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax)</span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>sm._A <span class="op">=</span> []</span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(</span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>    sm,</span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>    fraction<span class="op">=</span><span class="fl">0.02</span>,</span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>    pad<span class="op">=</span><span class="fl">0.02</span></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Number of tourists"</span>)</span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>cbar.ax.ticklabel_format(style<span class="op">=</span><span class="st">'plain'</span>)</span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Grouping data =====</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>turyści<span class="op">=</span>df.groupby([<span class="st">'rok'</span>,<span class="st">'WON'</span>])[<span class="st">'D8R1'</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># New names</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>turyści.columns <span class="op">=</span> [<span class="st">'rok'</span>, <span class="st">'kod'</span>, <span class="st">'turyści'</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Reading a map shapefile =====</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>woj <span class="op">=</span> gpd.read_file(<span class="st">"wojewodztwa/wojewodztwa.shp"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>woj[<span class="st">"JPT_KOD_JE"</span>] <span class="op">=</span> woj[<span class="st">"JPT_KOD_JE"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>turyści[<span class="st">"kod"</span>] <span class="op">=</span> turyści[<span class="st">"kod"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>mapa <span class="op">=</span> woj.merge(turyści, left_on<span class="op">=</span><span class="st">"JPT_KOD_JE"</span>, right_on<span class="op">=</span><span class="st">"kod"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== Drawing maps =====</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>vmin <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>vmax <span class="op">=</span> mapa[<span class="st">'turyści'</span>].<span class="bu">max</span>()</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Unique years</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>lata <span class="op">=</span> <span class="bu">sorted</span>(mapa[<span class="st">'rok'</span>].dropna().unique())</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 3 maps one below another</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    nrows<span class="op">=</span><span class="bu">len</span>(lata),</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    ncols<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">7</span> <span class="op">*</span> <span class="bu">len</span>(lata))</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Make axes iterable when there is only one year</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(lata) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> [axes]</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, rok <span class="kw">in</span> <span class="bu">zip</span>(axes, lata):</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    dane <span class="op">=</span> mapa[mapa[<span class="st">'rok'</span>] <span class="op">==</span> rok]</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    dane.plot(</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        column<span class="op">=</span><span class="st">'turyści'</span>,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span><span class="st">'Blues'</span>,</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">'grey'</span>,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        vmin<span class="op">=</span>vmin,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        vmax<span class="op">=</span>vmax,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add labels</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, row <span class="kw">in</span> dane.iterrows():</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> row[<span class="st">'geometry'</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> pd.notnull(row[<span class="st">'turyści'</span>]):</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>            x, y <span class="op">=</span> row[<span class="st">'geometry'</span>].centroid.coords[<span class="dv">0</span>]</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>            ax.text(</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>                x,</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>                y,</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(row[<span class="st">'turyści'</span>])<span class="sc">:,}</span><span class="ss">"</span>.replace(<span class="st">","</span>, <span class="st">" "</span>),</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>                fontsize<span class="op">=</span><span class="dv">8</span></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    ax.set_title(</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Number of tourists by voivodeship – </span><span class="sc">{</span>rok<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        fontweight<span class="op">=</span><span class="st">'bold'</span></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Common color scale</span></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">'Blues'</span>,</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    norm<span class="op">=</span>plt.Normalize(vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax)</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>sm._A <span class="op">=</span> []</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>    sm,</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>    fraction<span class="op">=</span><span class="fl">0.02</span>,</span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>    pad<span class="op">=</span><span class="fl">0.02</span></span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Number of tourists"</span>)</span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>cbar.ax.ticklabel_format(style<span class="op">=</span><span class="st">'plain'</span>)</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2546/2040714278.py:90: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+<pre><code>/tmp/ipykernel_2612/2040714278.py:90: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter1_files/figure-html/cell-14-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="712" height="2006"></p>
+<p><img src="chapter1_files/figure-html/cell-13-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="712" height="2006"></p>
 </figure>
 </div>
 </div>
