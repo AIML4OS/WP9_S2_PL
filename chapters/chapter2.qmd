@@ -76,30 +76,21 @@ Ultimately, feature engineering enables the model to better understand what driv
 
 # Performed steps
 
-## Step 1
+## Import libraries and reading dataset
 
 Import necessary libraries and load the dataset.
 
 ```{python}
 import pyreadr
+import pandas as pd
+import numpy as np
 df = pyreadr.read_r('synthetic data/WP9_S2_Tourism_synt.rds').popitem()[1]
 
 
 ```
 
-## Step 2
+## Creating new features based on the original dataset
 
-Import libraries for feature engineering and create new features based on the original dataset.
-
-```{python}
-
-
-import pandas as pd
-import numpy as np
-
-```
-
-## Step 3
 
 Download the dataset and create a dictionary of dataframes, one for each KKR (country). Then, define a function to add features such as rolling means, lags, and group statistics (mean, standard deviation, coefficient of variation) based on different grouping variables (WON, RO). Finally, apply this function to each dataframe in the dictionary.
 
@@ -159,9 +150,15 @@ def add_features_to_df(df, tourist_col="D8R1"):
     return df
 ```
 
-## Step 3
 
-Dataset is too large to deal with it in a notebook, so we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project. Thats the reason why we choose only 10 couttries weith the highest number of tourists in the original dataset.. Dataset for each coutry will separate file with name "tourist_kkr\_{KKR}.csv" in the "enriched_data" folder.
+
+
+
+Dataset is too large to deal with it in a notebook, so we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project. 
+
+Thats the reason why we choose only 5 countries with the highest number of tourists in the original dataset.
+
+ Dataset for each coutry will separate file with name "tourist_kkr\_{KKR}.csv" in the "synthetic data" folder.
 
 ```{python}
 
@@ -177,7 +174,7 @@ top_kkr = (
 
 And at final we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project.
 
-# Save each country separately 
+## Save each country separately 
 
 ```{python}
 import os
