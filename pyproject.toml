@@ -14,5 +14,6 @@ dependencies = [
     "itables",
     "geopandas",
     "seaborn",
-    "numpy"
+    "numpy",
+    "openpyxl"
 ]
