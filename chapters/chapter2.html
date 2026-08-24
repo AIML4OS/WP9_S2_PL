@@ -179,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Feature Selection</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation of gaps</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -296,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-libraries-and-reading-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="import-libraries-and-reading-dataset">Import libraries and reading dataset</h2>
 <p>Import necessary libraries and load the dataset.</p>
-<div id="89d5e514" class="cell" data-execution_count="1">
+<div id="0a44cf06" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyreadr</span>
@@ -309,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="creating-new-features-based-on-the-original-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="creating-new-features-based-on-the-original-dataset">Creating new features based on the original dataset</h2>
 <p>Download the dataset and create a dictionary of dataframes, one for each KKR (country). Then, define a function to add features such as rolling means, lags, and group statistics (mean, standard deviation, coefficient of variation) based on different grouping variables (WON, RO). Finally, apply this function to each dataframe in the dictionary.</p>
-<div id="dfb07d85" class="cell" data-execution_count="2">
+<div id="73c31469" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -368,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dataset is too large to deal with it in a notebook, so we will save enriched dataframes to separate CSV files for each KKR (country) and use them in the next steps of the project.</p>
 <p>Thats the reason why we choose only 5 countries with the highest number of tourists in the original dataset.</p>
 <p>Dataset for each coutry will separate file with name “tourist_kkr_{KKR}.csv” in the “synthetic data” folder.</p>
-<div id="10c72f15" class="cell" data-execution_count="3">
+<div id="445887f7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Select top 5 countries ---</span></span>
@@ -385,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="save-each-country-separately" class="level2">
 <h2 class="anchored" data-anchor-id="save-each-country-separately">Save each country separately</h2>
-<div id="f058175a" class="cell" data-execution_count="4">
+<div id="c935fb9f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
