@@ -59,14 +59,14 @@ The `os.makedirs()` function creates the output directory if it does not already
 
 ```{python}
 
-folder_path = r"synthetic data\synthetic_countries_features"
+folder_path = "synthetic data/synthetic_countries_features"
 
 selected_features_path = (
-    r"\synthetic data\synthetic_selected_features.csv"
+    "/synthetic data/synthetic_selected_features.csv"
 )
 
 output_folder = (
-    r"synthetic data\synthetic_missing_data"
+    "synthetic data/synthetic_missing_data"
 )
 
 os.makedirs(output_folder, exist_ok=True)
