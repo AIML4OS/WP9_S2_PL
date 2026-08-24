@@ -1,0 +1,2242 @@
+---
+title: "Testing models for each country"
+
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+**Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
+
+The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling.
+
+## Reading a data
+
+The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from pathlib import Path
+from sklearn.impute import KNNImputer
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+from matplotlib.ticker import FuncFormatter
+
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.linear_model import Ridge
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+import xgboost as xgb
+
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.base import clone
+import warnings
+
+warnings.filterwarnings('ignore')
+
+
+```
+
+
+```{python}
+from pathlib import Path
+
+
+# ============================================================
+# ŚCIEŻKA DO DANYCH
+# ============================================================
+
+MISSING_DATA_DIR = (
+    Path.cwd().parent
+    / "synthetic data"
+    / "synthetic_missing_data"
+)
+
+print("Folder z danymi:")
+print(MISSING_DATA_DIR)
+
+
+# ============================================================
+# WCZYTANIE 5 PLIKÓW XLSX
+# ============================================================
+
+data_files = sorted(
+    MISSING_DATA_DIR.glob("*.xlsx")
+)
+
+print("\nPliki znajdujące się w folderze:")
+
+for file in data_files:
+    print(file.name)
+
+
+if len(data_files) != 5:
+    raise FileNotFoundError(
+        f"Znaleziono {len(data_files)} plików XLSX, "
+        f"a oczekiwano 5."
+    )
+
+
+# ============================================================
+# WCZYTANIE DANYCH
+# ============================================================
+
+country_dfs = {}
+
+for file in data_files:
+
+    df_temp = pd.read_excel(
+        file
+    )
+
+    country_dfs[file.stem] = df_temp
+
+    print("\n" + "=" * 60)
+    print(file.name)
+    print("=" * 60)
+
+    print(
+        "Rozmiar:",
+        df_temp.shape
+    )
+
+    print(
+        "Kolumny:",
+        df_temp.columns.tolist()
+    )
+
+    print(
+        "Braki:",
+        {
+            col: int(df_temp[col].isna().sum())
+            for col in [
+                "miss_10",
+                "miss_20",
+                "miss_30"
+            ]
+            if col in df_temp.columns
+        }
+    )
+
+```
+```{python}
+
+# ============================================================
+# CREATE YEAR AND MONTH FROM OKRES
+# ============================================================
+
+for country_name, df_temp in country_dfs.items():
+
+    df_temp["YEAR"] = (
+        df_temp["OKRES"]
+        .astype(str)
+        .str[:4]
+        .astype(int)
+    )
+
+    df_temp["MONTH"] = (
+        df_temp["OKRES"]
+        .astype(str)
+        .str[4:6]
+        .astype(int)
+    )
+
+    country_dfs[country_name] = df_temp
+
+
+print("Dodano YEAR i MONTH.")
+
+print(
+    country_dfs["Germany"][
+        ["OKRES", "YEAR", "MONTH"]
+    ].head()
+)
+
+```
+
+
+
+
+
+```{python}
+# ============================================================
+# IMPORT BIBLIOTEK
+# ============================================================
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from pathlib import Path
+
+from sklearn.impute import KNNImputer
+
+from sklearn.metrics import (
+    mean_squared_error,
+    mean_absolute_error
+)
+
+from matplotlib.ticker import FuncFormatter
+
+from sklearn.ensemble import (
+    RandomForestRegressor,
+    GradientBoostingRegressor
+)
+
+from sklearn.linear_model import Ridge
+
+from sklearn.tree import DecisionTreeRegressor
+
+from sklearn.neighbors import KNeighborsRegressor
+
+import xgboost as xgb
+
+from sklearn.base import clone
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+
+# ============================================================
+# ŚCIEŻKA DO DANYCH
+# ============================================================
+
+MISSING_DATA_DIR = (
+    Path.cwd().parent
+    / "synthetic data"
+    / "synthetic_missing_data"
+)
+
+print("Folder z danymi:")
+print(MISSING_DATA_DIR)
+
+
+# ============================================================
+# WCZYTANIE 5 PLIKÓW XLSX
+# ============================================================
+
+data_files = sorted(
+    MISSING_DATA_DIR.glob("*.xlsx")
+)
+
+print("\nPliki znajdujące się w folderze:")
+
+for file in data_files:
+    print(file.name)
+
+
+# ============================================================
+# SPRAWDZENIE LICZBY PLIKÓW
+# ============================================================
+
+if len(data_files) != 5:
+    raise FileNotFoundError(
+        f"Znaleziono {len(data_files)} plików XLSX, "
+        f"a oczekiwano 5."
+    )
+
+
+# ============================================================
+# WCZYTANIE DANYCH
+# ============================================================
+
+country_dfs = {}
+
+for file in data_files:
+
+    df_temp = pd.read_excel(file)
+
+    # nazwa kraju = nazwa pliku bez .xlsx
+    country_name = file.stem
+
+    country_dfs[country_name] = df_temp
+
+    print("\n" + "=" * 70)
+    print(f"KRAJ: {country_name}")
+    print("=" * 70)
+
+    print(
+        "Rozmiar:",
+        df_temp.shape
+    )
+
+    print(
+        "Kolumny:",
+        df_temp.columns.tolist()
+    )
+
+    print(
+        "Braki:",
+        {
+            col: int(df_temp[col].isna().sum())
+            for col in [
+                "miss_10",
+                "miss_20",
+                "miss_30"
+            ]
+            if col in df_temp.columns
+        }
+    )
+
+
+# ============================================================
+# CREATE YEAR AND MONTH FROM OKRES
+# ============================================================
+
+for country_name, df_temp in country_dfs.items():
+
+    # upewniamy się, że OKRES jest liczbowy
+    df_temp["OKRES"] = pd.to_numeric(
+        df_temp["OKRES"],
+        errors="coerce"
+    )
+
+    # rok
+    df_temp["YEAR"] = (
+        df_temp["OKRES"]
+        .astype("Int64")
+        .astype(str)
+        .str[:4]
+        .astype(int)
+    )
+
+    # miesiąc
+    df_temp["MONTH"] = (
+        df_temp["OKRES"]
+        .astype("Int64")
+        .astype(str)
+        .str[4:6]
+        .astype(int)
+    )
+
+    country_dfs[country_name] = df_temp
+
+
+print("\nDodano YEAR i MONTH.")
+
+
+# ============================================================
+# PODGLĄD
+# ============================================================
+
+for country_name, df_temp in country_dfs.items():
+
+    print("\n" + "=" * 70)
+    print(f"{country_name} - OKRES / YEAR / MONTH")
+    print("=" * 70)
+
+    display(
+        df_temp[
+            [
+                "OKRES",
+                "YEAR",
+                "MONTH"
+            ]
+        ].head()
+    )
+
+
+# ============================================================
+# SPRAWDZENIE LAT
+# ============================================================
+
+print("\n" + "=" * 70)
+print("LATA W POSZCZEGÓLNYCH PLIKACH")
+print("=" * 70)
+
+for country_name, df_temp in country_dfs.items():
+
+    print(
+        f"{country_name}:",
+        sorted(
+            df_temp["YEAR"].dropna().unique()
+        )
+    )
+
+
+# ============================================================
+# SPRAWDZENIE KKR
+# ============================================================
+# KKR NIE JEST JEDNOSTKĄ EKSPERYMENTU.
+# Eksperyment wykonujemy dla 5 PLIKÓW/KRAJÓW.
+# KKR pozostawiamy w danych.
+# ============================================================
+
+print("\n" + "=" * 70)
+print("KKR W PLIKACH")
+print("=" * 70)
+
+for country_name, df_temp in country_dfs.items():
+
+    print(
+        f"{country_name}:",
+        df_temp["KKR"].dropna().unique()
+    )
+
+
+# ============================================================
+# CECHY DO MODELU
+# ============================================================
+
+FEATURES = [
+    "mean_last_3",
+    "mean_last_6",
+    "mean_last_9",
+    "mean_last_12",
+
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_4",
+    "lag_5",
+    "lag_6",
+    "lag_7",
+    "lag_8",
+    "lag_9",
+    "lag_10",
+    "lag_11",
+
+    "WON_mean",
+    "WON_sd",
+    "RO_mean",
+    "RO_sd"
+]
+
+
+# ============================================================
+# TARGET
+# ============================================================
+
+TARGET = "D8R1"
+
+
+# ============================================================
+# ZMIENNE Z BRAKAMI
+# ============================================================
+
+MISS_COLS = [
+    "miss_10",
+    "miss_20",
+    "miss_30"
+]
+
+
+# ============================================================
+# SPRAWDZENIE CECH
+# ============================================================
+
+print("\n" + "=" * 70)
+print("SPRAWDZENIE CECH")
+print("=" * 70)
+
+for country_name, df_temp in country_dfs.items():
+
+    missing_features = [
+        col
+        for col in FEATURES
+        if col not in df_temp.columns
+    ]
+
+    if missing_features:
+
+        print(
+            f"{country_name} - BRAKUJĄCE CECHY:",
+            missing_features
+        )
+
+    else:
+
+        print(
+            f"{country_name} - wszystkie cechy dostępne"
+        )
+
+
+# ============================================================
+# SPRAWDZENIE LAGÓW DLA 2019-2020
+# ============================================================
+
+LAG_COLS = [
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_4",
+    "lag_5",
+    "lag_6",
+    "lag_7",
+    "lag_8",
+    "lag_9",
+    "lag_10",
+    "lag_11"
+]
+
+
+print("\n" + "=" * 70)
+print("BRAKI W LAGACH - TYLKO 2019-2020")
+print("=" * 70)
+
+for country_name, df_temp in country_dfs.items():
+
+    df_2019_2020 = df_temp[
+        df_temp["YEAR"].isin([2019, 2020])
+    ].copy()
+
+    print(
+        f"\n{country_name}"
+    )
+
+    print(
+        df_2019_2020[
+            LAG_COLS
+        ].isna().sum()
+    )
+
+
+# ============================================================
+# PODSUMOWANIE DANYCH 2019-2020
+# ============================================================
+
+print("\n" + "=" * 70)
+print("LICZBA OBSERWACJI 2019-2020")
+print("=" * 70)
+
+for country_name, df_temp in country_dfs.items():
+
+    df_2019_2020 = df_temp[
+        df_temp["YEAR"].isin([2019, 2020])
+    ].copy()
+
+    print(
+        f"{country_name}: "
+        f"{len(df_2019_2020):,} obserwacji"
+    )
+```
+
+
+```{python}
+
+# ============================================================
+# 1. IMPORT BIBLIOTEK
+# ============================================================
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import xgboost as xgb
+
+from pathlib import Path
+
+from sklearn.ensemble import (
+    RandomForestRegressor,
+    GradientBoostingRegressor
+)
+
+from sklearn.tree import DecisionTreeRegressor
+
+from sklearn.neighbors import KNeighborsRegressor
+
+from sklearn.metrics import (
+    mean_squared_error,
+    mean_absolute_error
+)
+
+from sklearn.base import clone
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+
+```
+
+
+
+```{python}
+
+# ============================================================
+# 2. USTAWIENIA
+# ============================================================
+
+SEED = 42
+
+TARGET = "D8R1"
+
+MISS_COLS = [
+    "miss_10",
+    "miss_20",
+    "miss_30"
+]
+
+# Maksymalny zestaw cech.
+# Każdy kraj może mieć tylko część z nich
+# po wcześniejszej regularyzacji.
+
+FEATURES = [
+    "mean_last_3",
+    "mean_last_6",
+    "mean_last_9",
+    "mean_last_12",
+
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_4",
+    "lag_5",
+    "lag_6",
+    "lag_7",
+    "lag_8",
+    "lag_9",
+    "lag_10",
+    "lag_11",
+
+    "WON_mean",
+    "WON_sd",
+
+    "RO_mean",
+    "RO_sd"
+]
+
+
+```
+
+
+```{python}
+
+# ============================================================
+# 3. MODELE
+# ============================================================
+
+MODELS = {
+
+    "RF": RandomForestRegressor(
+        n_estimators=100,
+        max_depth=10,
+        min_samples_leaf=5,
+        n_jobs=-1,
+        random_state=SEED
+    ),
+
+    "GBR": GradientBoostingRegressor(
+        n_estimators=100,
+        max_depth=5,
+        learning_rate=0.1,
+        random_state=SEED
+    ),
+
+    "DT": DecisionTreeRegressor(
+        max_depth=10,
+        min_samples_leaf=5,
+        random_state=SEED
+    ),
+
+    "KNN": KNeighborsRegressor(
+        n_neighbors=5,
+        weights="distance",
+        n_jobs=-1
+    ),
+
+    "XGB": xgb.XGBRegressor(
+        n_estimators=100,
+        max_depth=6,
+        learning_rate=0.1,
+        random_state=SEED,
+        n_jobs=-1,
+        verbosity=0
+    )
+}
+
+```
+
+```{python}
+# ============================================================
+# 4. ŚCIEŻKA DO DANYCH
+# ============================================================
+
+MISSING_DATA_DIR = (
+    Path.cwd().parent
+    / "synthetic data"
+    / "synthetic_missing_data"
+)
+
+print("Folder z danymi:")
+print(MISSING_DATA_DIR)
+# ============================================================
+# 5. ZNALEZIENIE 5 PLIKÓW
+# ============================================================
+
+data_files = sorted(
+    MISSING_DATA_DIR.glob("*.xlsx")
+)
+
+print("\nPliki:")
+
+for file in data_files:
+    print("-", file.name)
+
+if len(data_files) != 5:
+
+    raise FileNotFoundError(
+        f"Znaleziono {len(data_files)} plików, "
+        f"a oczekiwano 5."
+    )
+    # ============================================================
+# 6. WCZYTANIE 5 PLIKÓW
+# ============================================================
+
+country_dfs = {}
+
+for file in data_files:
+
+    country_name = file.stem
+
+    df_temp = pd.read_excel(file)
+
+    country_dfs[country_name] = df_temp
+
+    print("\n" + "=" * 80)
+    print(country_name)
+    print("=" * 80)
+
+    print(
+        "Rozmiar:",
+        df_temp.shape
+    )
+
+    print(
+        "KKR:",
+        df_temp["KKR"].unique()
+    )
+
+    print(
+        "Liczba braków:"
+    )
+
+    print(
+        df_temp[
+            MISS_COLS
+        ].isna().sum()
+    )
+```
+
+```{python}
+# ============================================================
+# 7. UTWORZENIE YEAR I MONTH
+# ============================================================
+
+for country_name, df_temp in country_dfs.items():
+
+    df_temp["OKRES"] = pd.to_numeric(
+        df_temp["OKRES"],
+        errors="coerce"
+    )
+
+    df_temp["YEAR"] = (
+        df_temp["OKRES"] // 100
+    ).astype("Int64")
+
+    df_temp["MONTH"] = (
+        df_temp["OKRES"] % 100
+    ).astype("Int64")
+
+    country_dfs[country_name] = df_temp
+    
+
+    # ============================================================
+# 8. OGRANICZENIE DO 2019 I 2020
+# ============================================================
+
+country_dfs_2019_2020 = {}
+
+for country_name, df_temp in country_dfs.items():
+
+    df_2019_2020 = df_temp[
+        df_temp["YEAR"].isin([2019, 2020])
+    ].copy()
+
+    country_dfs_2019_2020[country_name] = df_2019_2020
+
+    print("\n" + "=" * 80)
+    print(country_name)
+    print("=" * 80)
+
+    print(
+        "Liczba obserwacji 2019-2020:",
+        len(df_2019_2020)
+    )
+
+    print(
+        "Lata:",
+        sorted(
+            df_2019_2020["YEAR"].dropna().unique()
+        )
+    )
+
+```
+
+
+```{python}
+
+# ============================================================
+# 9. SPRAWDZENIE LAGÓW
+# ============================================================
+
+LAG_COLS = [
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_4",
+    "lag_5",
+    "lag_6",
+    "lag_7",
+    "lag_8",
+    "lag_9",
+    "lag_10",
+    "lag_11"
+]
+
+print("\n" + "=" * 80)
+print("LAGI - SPRAWDZENIE 2019-2020")
+print("=" * 80)
+
+for country_name, df_temp in country_dfs_2019_2020.items():
+
+    lag_existing = [
+        col
+        for col in LAG_COLS
+        if col in df_temp.columns
+    ]
+
+    lag_missing = [
+        col
+        for col in LAG_COLS
+        if col not in df_temp.columns
+    ]
+
+    print("\n" + "-" * 80)
+    print(country_name)
+
+    print(
+        "Istniejące lagi:",
+        lag_existing
+    )
+
+    print(
+        "Nieistniejące lagi:",
+        lag_missing
+    )
+
+    if lag_existing:
+
+        print("\nLiczba NaN:")
+
+        print(
+            df_temp[
+                lag_existing
+            ].isna().sum()
+        )
+
+```
+
+```{python}
+# ============================================================
+# 10. CECHY DOSTĘPNE DLA KAŻDEGO KRAJU
+# ============================================================
+
+country_features = {}
+
+print("\n" + "=" * 80)
+print("CECHY PO REGULARYZACJI")
+print("=" * 80)
+
+for country_name, df_temp in country_dfs_2019_2020.items():
+
+    features_country = [
+        col
+        for col in FEATURES
+        if col in df_temp.columns
+    ]
+
+    country_features[country_name] = features_country
+
+    print("\n" + "-" * 80)
+    print(country_name)
+
+    print(
+        "Liczba cech:",
+        len(features_country)
+    )
+
+    print(
+        features_country
+    )
+    # ============================================================
+# 11. SPRAWDZENIE BRAKÓW W CECHACH
+# ============================================================
+
+print("\n" + "=" * 80)
+print("BRAKI W CECHACH - 2019-2020")
+print("=" * 80)
+
+for country_name, df_temp in country_dfs_2019_2020.items():
+
+    features_country = country_features[
+        country_name
+    ]
+
+    print("\n" + "-" * 80)
+    print(country_name)
+
+    print(
+        df_temp[
+            features_country
+        ].isna().sum()
+    )
+
+```
+
+
+```{python}
+
+# ============================================================
+# 12. EKSPERYMENT ML + PREDYKCJE MIESIĘCZNE
+# ============================================================
+#
+# 5 KRAJÓW
+# × 3 POZIOMY BRAKÓW
+# × 5 MODELI
+#
+# TYLKO 2019-2020
+#
+# miss_10 / miss_20 / miss_30
+#       ↓
+#       MASKA TESTOWA
+#
+# NaN w miss_X  -> TEST
+# pozostałe     -> TRAIN
+#
+# TARGET = D8R1
+#
+# Dodatkowo zapisujemy każdą predykcję,
+# aby później policzyć SUMY MIESIĘCZNE.
+# ============================================================
+
+
+results = []
+
+monthly_predictions = []
+
+
+# ============================================================
+# PĘTLA PO KRAJACH
+# ============================================================
+
+for country_name, df_temp in country_dfs_2019_2020.items():
+
+    print("\n")
+    print("#" * 100)
+    print(f"KRAJ: {country_name}")
+    print("#" * 100)
+
+    # --------------------------------------------------------
+    # CECHY DLA DANEGO KRAJU
+    # --------------------------------------------------------
+
+    features_country = country_features[
+        country_name
+    ]
+
+    print(
+        f"Liczba cech: {len(features_country)}"
+    )
+
+    print(
+        "Cechy:",
+        features_country
+    )
+
+    # --------------------------------------------------------
+    # USUWAMY WIERSZE BEZ D8R1
+    # --------------------------------------------------------
+
+    df_temp = df_temp[
+        df_temp[TARGET].notna()
+    ].copy()
+
+    # ========================================================
+    # PĘTLA PO MISS
+    # ========================================================
+
+    for miss_col in MISS_COLS:
+
+        print("\n")
+        print("-" * 100)
+        print(f"{country_name} | {miss_col}")
+        print("-" * 100)
+
+        # ----------------------------------------------------
+        # MASKA TESTOWA
+        # ----------------------------------------------------
+
+        test_mask = df_temp[
+            miss_col
+        ].isna()
+
+        train_mask = ~test_mask
+
+        print(
+            "TEST wg maski:",
+            int(test_mask.sum())
+        )
+
+        print(
+            "TRAIN wg maski:",
+            int(train_mask.sum())
+        )
+
+        # ----------------------------------------------------
+        # TRAIN / TEST
+        # ----------------------------------------------------
+
+        train = df_temp.loc[
+            train_mask
+        ].copy()
+
+        test = df_temp.loc[
+            test_mask
+        ].copy()
+
+        # ----------------------------------------------------
+        # USUWAMY WIERSZE Z BRAKAMI W CECHACH
+        #
+        # Nie imputujemy.
+        # ----------------------------------------------------
+
+        train_complete = train.dropna(
+            subset=features_country
+        ).copy()
+
+        test_complete = test.dropna(
+            subset=features_country
+        ).copy()
+
+        print(
+            "TRAIN po sprawdzeniu cech:",
+            len(train_complete)
+        )
+
+        print(
+            "TEST po sprawdzeniu cech:",
+            len(test_complete)
+        )
+
+        if len(train_complete) == 0:
+
+            print(
+                "!!! BRAK TRAIN - POMIJAM !!!"
+            )
+
+            continue
+
+        if len(test_complete) == 0:
+
+            print(
+                "!!! BRAK TEST - POMIJAM !!!"
+            )
+
+            continue
+
+        # ----------------------------------------------------
+        # X / y
+        # ----------------------------------------------------
+
+        X_train = train_complete[
+            features_country
+        ]
+
+        y_train = train_complete[
+            TARGET
+        ]
+
+        X_test = test_complete[
+            features_country
+        ]
+
+        y_test = test_complete[
+            TARGET
+        ]
+
+        # ====================================================
+        # MODELE
+        # ====================================================
+
+        for model_name, model_template in MODELS.items():
+
+            print(
+                f"\n  Model: {model_name}",
+                end=" | "
+            )
+
+            try:
+
+                # ------------------------------------------------
+                # CLONE MODELU
+                # ------------------------------------------------
+
+                model = clone(
+                    model_template
+                )
+
+                # ------------------------------------------------
+                # TRAIN
+                # ------------------------------------------------
+
+                model.fit(
+                    X_train,
+                    y_train
+                )
+
+                # ------------------------------------------------
+                # PREDYKCJA
+                # ------------------------------------------------
+
+                y_pred = model.predict(
+                    X_test
+                )
+
+                # ------------------------------------------------
+                # METRYKI
+                # ------------------------------------------------
+
+                rmse = np.sqrt(
+                    mean_squared_error(
+                        y_test,
+                        y_pred
+                    )
+                )
+
+                mae = mean_absolute_error(
+                    y_test,
+                    y_pred
+                )
+
+                d8r1_sum_real = (
+                    y_test.sum()
+                )
+
+                d8r1_sum_pred = (
+                    y_pred.sum()
+                )
+
+                if d8r1_sum_real != 0:
+
+                    bias_pct = (
+                        (
+                            d8r1_sum_pred
+                            -
+                            d8r1_sum_real
+                        )
+                        /
+                        d8r1_sum_real
+                    ) * 100
+
+                else:
+
+                    bias_pct = np.nan
+
+                # ------------------------------------------------
+                # MAPE
+                # ------------------------------------------------
+
+                non_zero_mask = (
+                    y_test != 0
+                )
+
+                if non_zero_mask.sum() > 0:
+
+                    y_test_nz = y_test[
+                        non_zero_mask
+                    ]
+
+                    y_pred_nz = y_pred[
+                        non_zero_mask.values
+                    ]
+
+                    mape = (
+                        np.mean(
+                            np.abs(
+                                (
+                                    y_test_nz.values
+                                    -
+                                    y_pred_nz
+                                )
+                                /
+                                y_test_nz.values
+                            )
+                        )
+                        * 100
+                    )
+
+                else:
+
+                    mape = np.nan
+
+                # =================================================
+                # WYNIK OGÓLNY
+                # =================================================
+
+                results.append({
+
+                    "country": country_name,
+
+                    "KKR": (
+                        df_temp["KKR"]
+                        .dropna()
+                        .iloc[0]
+                    ),
+
+                    "missingness": miss_col,
+
+                    "model": model_name,
+
+                    "n_features": len(
+                        features_country
+                    ),
+
+                    "features": ", ".join(
+                        features_country
+                    ),
+
+                    "n_train": len(
+                        X_train
+                    ),
+
+                    "n_test": len(
+                        X_test
+                    ),
+
+                    "D8R1_sum_real": (
+                        d8r1_sum_real
+                    ),
+
+                    "D8R1_sum_pred": (
+                        d8r1_sum_pred
+                    ),
+
+                    "RMSE": rmse,
+
+                    "MAE": mae,
+
+                    "MAPE": mape,
+
+                    "Bias_pct": bias_pct
+
+                })
+
+                # =================================================
+                # PREDYKCJE MIESIĘCZNE
+                # =================================================
+                #
+                # Zachowujemy każdą obserwację testową.
+                # Dzięki temu później sumujemy D8R1 oraz
+                # predykcje według YEAR + MONTH.
+                # =================================================
+
+                pred_df = test_complete[
+                    [
+                        "YEAR",
+                        "MONTH"
+                    ]
+                ].copy()
+
+                pred_df["country"] = (
+                    country_name
+                )
+
+                pred_df["KKR"] = (
+                    test_complete["KKR"]
+                    .values
+                )
+
+                pred_df["missingness"] = (
+                    miss_col
+                )
+
+                pred_df["model"] = (
+                    model_name
+                )
+
+                pred_df["D8R1_true"] = (
+                    y_test.values
+                )
+
+                pred_df["D8R1_pred"] = (
+                    y_pred
+                )
+
+                monthly_predictions.append(
+                    pred_df
+                )
+
+                # ------------------------------------------------
+                # WYŚWIETLENIE
+                # ------------------------------------------------
+
+                print(
+                    f"RMSE = {rmse:.4f} | "
+                    f"MAE = {mae:.4f} | "
+                    f"MAPE = {mape:.2f}% | "
+                    f"Bias = {bias_pct:.2f}%"
+                )
+
+            except Exception as e:
+
+                print(
+                    f"BŁĄD: {e}"
+                )
+
+
+# ============================================================
+# 13. TABELA WYNIKÓW MODELI
+# ============================================================
+
+results_df = pd.DataFrame(
+    results
+)
+
+
+print("\n")
+print("=" * 100)
+print("KONIEC EKSPERYMENTU")
+print("=" * 100)
+
+print(
+    "Liczba wykonanych eksperymentów:",
+    len(results_df)
+)
+
+
+if len(results_df) > 0:
+
+    results_df = (
+        results_df
+        .sort_values(
+            [
+                "country",
+                "missingness",
+                "RMSE"
+            ]
+        )
+        .reset_index(drop=True)
+    )
+
+    display(
+        results_df
+    )
+
+
+# ============================================================
+# 14. NAJLEPSZE MODELE
+# ============================================================
+
+if len(results_df) > 0:
+
+    best_models = (
+        results_df
+        .sort_values(
+            [
+                "country",
+                "missingness",
+                "RMSE"
+            ]
+        )
+        .groupby(
+            [
+                "country",
+                "missingness"
+            ],
+            as_index=False
+        )
+        .first()
+    )
+
+    print("\n")
+    print("=" * 100)
+    print("NAJLEPSZY MODEL - NAJNIŻSZY RMSE")
+    print("=" * 100)
+
+    display(
+        best_models[
+            [
+                "country",
+                "KKR",
+                "missingness",
+                "model",
+                "n_features",
+                "n_train",
+                "n_test",
+                "D8R1_sum_real",
+                "D8R1_sum_pred",
+                "RMSE",
+                "MAE",
+                "MAPE",
+                "Bias_pct"
+            ]
+        ]
+    )
+
+
+# ============================================================
+# 15. POŁĄCZENIE WSZYSTKICH PREDYKCJI
+# ============================================================
+
+monthly_predictions_df = pd.concat(
+    monthly_predictions,
+    ignore_index=True
+)
+
+
+print("\n")
+print("=" * 100)
+print("PREDYKCJE MIESIĘCZNE")
+print("=" * 100)
+
+print(
+    "Liczba obserwacji:",
+    len(monthly_predictions_df)
+)
+
+display(
+    monthly_predictions_df.head()
+)
+
+
+# ============================================================
+# 16. SUMY MIESIĘCZNE
+# ============================================================
+#
+# Dla każdego:
+#
+# KRAJ
+# MISS
+# MODEL
+# YEAR
+# MONTH
+#
+# liczymy:
+#
+# prawdziwe D8R1
+# suma predykcji
+#
+# ============================================================
+
+monthly_results = (
+    monthly_predictions_df
+    .groupby(
+        [
+            "country",
+            "KKR",
+            "missingness",
+            "model",
+            "YEAR",
+            "MONTH"
+        ],
+        as_index=False
+    )
+    .agg(
+        D8R1_true=(
+            "D8R1_true",
+            "sum"
+        ),
+        D8R1_pred=(
+            "D8R1_pred",
+            "sum"
+        ),
+        n_test=(
+            "D8R1_true",
+            "size"
+        )
+    )
+)
+
+
+# ============================================================
+# 17. ODCHYLENIE MIESIĘCZNE
+# ============================================================
+
+monthly_results["difference"] = (
+    monthly_results["D8R1_pred"]
+    -
+    monthly_results["D8R1_true"]
+)
+
+
+monthly_results["Bias_pct"] = np.where(
+
+    monthly_results["D8R1_true"] != 0,
+
+    (
+        monthly_results["difference"]
+        /
+        monthly_results["D8R1_true"]
+    ) * 100,
+
+    np.nan
+)
+
+
+# ============================================================
+# 18. DATA MIESIĄCA
+# ============================================================
+
+monthly_results["date"] = pd.to_datetime(
+    monthly_results[
+        "YEAR"
+    ].astype(str)
+    + "-"
+    + monthly_results[
+        "MONTH"
+    ].astype(str)
+    + "-01"
+)
+
+
+monthly_results = (
+    monthly_results
+    .sort_values(
+        [
+            "country",
+            "missingness",
+            "date",
+            "model"
+        ]
+    )
+    .reset_index(drop=True)
+)
+
+
+# ============================================================
+# PODGLĄD
+# ============================================================
+
+print("\n")
+print("=" * 100)
+print("SUMY MIESIĘCZNE")
+print("=" * 100)
+
+display(
+    monthly_results.head(30)
+)
+
+
+# ============================================================
+# 19. TABELA PIVOT
+# ============================================================
+#
+# Jeden wiersz = kraj + miss + miesiąc
+#
+# Kolumny:
+#
+# D8R1_true
+# RF
+# GBR
+# DT
+# KNN
+# XGB
+#
+# ============================================================
+
+monthly_pivot = (
+    monthly_results
+    .pivot_table(
+        index=[
+            "country",
+            "KKR",
+            "missingness",
+            "YEAR",
+            "MONTH",
+            "date"
+        ],
+        columns="model",
+        values="D8R1_pred",
+        aggfunc="sum"
+    )
+    .reset_index()
+)
+
+
+# ------------------------------------------------------------
+# DODANIE PRAWDZIWEJ SUMY
+# ------------------------------------------------------------
+
+true_monthly = (
+    monthly_results[
+        [
+            "country",
+            "KKR",
+            "missingness",
+            "YEAR",
+            "MONTH",
+            "date",
+            "D8R1_true"
+        ]
+    ]
+    .drop_duplicates()
+)
+
+
+monthly_pivot = true_monthly.merge(
+    monthly_pivot,
+    on=[
+        "country",
+        "KKR",
+        "missingness",
+        "YEAR",
+        "MONTH",
+        "date"
+    ],
+    how="left"
+)
+
+
+# ============================================================
+# 20. KOLEJNOŚĆ KOLUMN
+# ============================================================
+
+model_columns = [
+    "RF",
+    "GBR",
+    "DT",
+    "KNN",
+    "XGB"
+]
+
+
+existing_model_columns = [
+    col
+    for col in model_columns
+    if col in monthly_pivot.columns
+]
+
+
+monthly_pivot = monthly_pivot[
+    [
+        "country",
+        "KKR",
+        "missingness",
+        "YEAR",
+        "MONTH",
+        "date",
+        "D8R1_true"
+    ]
+    +
+    existing_model_columns
+]
+
+
+print("\n")
+print("=" * 100)
+print("TABELA PIVOT - SUMY MIESIĘCZNE")
+print("=" * 100)
+
+display(
+    monthly_pivot.head(30)
+)
+
+
+# ============================================================
+# 21. ZAPIS DO EXCEL
+# ============================================================
+
+output_file = (
+    "D8R1_ML_2019_2020_KRAJE_MISS_RESULTS.xlsx"
+)
+
+
+with pd.ExcelWriter(
+    output_file,
+    engine="openpyxl"
+) as writer:
+
+    # ----------------------------------------
+    # WYNIKI MODELI
+    # ----------------------------------------
+
+    results_df.to_excel(
+        writer,
+        sheet_name="Wyniki",
+        index=False
+    )
+
+    # ----------------------------------------
+    # NAJLEPSZE MODELE
+    # ----------------------------------------
+
+    best_models.to_excel(
+        writer,
+        sheet_name="Best_models",
+        index=False
+    )
+
+    # ----------------------------------------
+    # WSZYSTKIE PREDYKCJE
+    # ----------------------------------------
+
+    monthly_predictions_df.to_excel(
+        writer,
+        sheet_name="Predictions",
+        index=False
+    )
+
+    # ----------------------------------------
+    # SUMY MIESIĘCZNE
+    # ----------------------------------------
+
+    monthly_results.to_excel(
+        writer,
+        sheet_name="Monthly_results",
+        index=False
+    )
+
+    # ----------------------------------------
+    # PIVOT
+    # ----------------------------------------
+
+    monthly_pivot.to_excel(
+        writer,
+        sheet_name="Monthly_pivot",
+        index=False
+    )
+
+
+print("\n")
+print("=" * 100)
+print("ZAPISANO EXCEL")
+print("=" * 100)
+
+print(
+    output_file
+)
+
+```
+
+```{python}
+# ============================================================
+# 22. WYKRESY MIESIĘCZNYCH SUM D8R1
+# ============================================================
+#
+# KORZYSTAMY Z GOTOWEGO:
+#
+# monthly_results
+# monthly_pivot
+#
+# NIE URUCHAMIAMY PONOWNIE MODELI
+# NIE ROBIMY PONOWNIE IMPUTACJI
+#
+# ============================================================
+
+
+from pathlib import Path
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+
+# ============================================================
+# KATALOG NA WYKRESY
+# ============================================================
+
+PLOT_DIR = Path(
+    "D8R1_monthly_plots"
+)
+
+PLOT_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+
+# ============================================================
+# KOLORY MODELI
+# ============================================================
+
+MODEL_COLORS = {
+
+    "RF": "tab:blue",
+
+    "GBR": "tab:orange",
+
+    "DT": "tab:green",
+
+    "KNN": "tab:red",
+
+    "XGB": "tab:purple"
+}
+
+
+# ============================================================
+# KOLEJNOŚĆ MODELI
+# ============================================================
+
+MODEL_ORDER = [
+    "RF",
+    "GBR",
+    "DT",
+    "KNN",
+    "XGB"
+]
+
+
+# ============================================================
+# SPRAWDZENIE DANYCH
+# ============================================================
+
+if "monthly_results" not in globals():
+
+    raise ValueError(
+        "Nie znaleziono 'monthly_results'. "
+        "Najpierw uruchom kod wykonujący eksperyment ML."
+    )
+
+
+if len(monthly_results) == 0:
+
+    raise ValueError(
+        "'monthly_results' jest pusty."
+    )
+
+
+# ============================================================
+# KOPIA DANYCH
+# ============================================================
+
+plot_df = monthly_results.copy()
+
+
+# ============================================================
+# DATA
+# ============================================================
+
+if "date" not in plot_df.columns:
+
+    plot_df["date"] = pd.to_datetime(
+
+        plot_df["YEAR"].astype(str)
+        + "-"
+        + plot_df["MONTH"].astype(str)
+        + "-01"
+    )
+
+else:
+
+    plot_df["date"] = pd.to_datetime(
+        plot_df["date"]
+    )
+
+
+# ============================================================
+# SORTOWANIE
+# ============================================================
+
+plot_df = plot_df.sort_values(
+    [
+        "country",
+        "missingness",
+        "date",
+        "model"
+    ]
+)
+
+
+# ============================================================
+# INFORMACJA
+# ============================================================
+
+print("=" * 100)
+
+print(
+    "TWORZENIE WYKRESÓW MIESIĘCZNYCH"
+)
+
+print("=" * 100)
+
+print(
+    f"Katalog: {PLOT_DIR.resolve()}"
+)
+
+
+# ============================================================
+# LICZNIK
+# ============================================================
+
+plot_counter = 0
+
+
+# ============================================================
+# PĘTLA PO KRAJACH
+# ============================================================
+
+for country in sorted(
+    plot_df["country"].dropna().unique()
+):
+
+
+    # ========================================================
+    # PĘTLA PO POZIOMACH BRAKÓW
+    # ========================================================
+
+    for missingness in [
+        "miss_10",
+        "miss_20",
+        "miss_30"
+    ]:
+
+
+        # ====================================================
+        # DANE DLA KRAJU I MISS
+        # ====================================================
+
+        subset = plot_df[
+
+            (plot_df["country"] == country)
+
+            &
+
+            (
+                plot_df["missingness"]
+                == missingness
+            )
+
+        ].copy()
+
+
+        # ----------------------------------------------------
+        # JEŻELI BRAK DANYCH
+        # ----------------------------------------------------
+
+        if subset.empty:
+
+            print(
+                f"\nBrak danych: "
+                f"{country} | {missingness}"
+            )
+
+            continue
+
+
+        # ====================================================
+        # FIGURE
+        # ====================================================
+
+        plt.figure(
+            figsize=(16, 8)
+        )
+
+
+        # ====================================================
+        # PRAWDZIWA SUMA D8R1
+        # ====================================================
+        #
+        # D8R1_true jest powtarzane dla każdego modelu,
+        # dlatego bierzemy jedną obserwację na miesiąc.
+        #
+        # ====================================================
+
+        true_data = (
+
+            subset[
+                [
+                    "date",
+                    "D8R1_true"
+                ]
+            ]
+
+            .drop_duplicates(
+                subset=["date"]
+            )
+
+            .sort_values(
+                "date"
+            )
+        )
+
+
+        # ====================================================
+        # ORIGINAL D8R1
+        # ====================================================
+
+        plt.plot(
+
+            true_data["date"],
+
+            true_data["D8R1_true"],
+
+            color="black",
+
+            linewidth=3.5,
+
+            marker="o",
+
+            markersize=6,
+
+            label="Original D8R1",
+
+            zorder=10
+        )
+
+
+        # ====================================================
+        # MODELE
+        # ====================================================
+
+        for model_name in MODEL_ORDER:
+
+
+            model_data = subset[
+
+                subset["model"]
+                == model_name
+
+            ].sort_values(
+                "date"
+            )
+
+
+            if model_data.empty:
+
+                continue
+
+
+            plt.plot(
+
+                model_data["date"],
+
+                model_data["D8R1_pred"],
+
+                color=MODEL_COLORS[
+                    model_name
+                ],
+
+                linestyle="--",
+
+                linewidth=2,
+
+                marker="s",
+
+                markersize=5,
+
+                label=f"{model_name}",
+
+                alpha=0.9
+            )
+
+
+        # ====================================================
+        # TYTUŁ
+        # ====================================================
+
+        title_missing = {
+
+            "miss_10": "10% missingness",
+
+            "miss_20": "20% missingness",
+
+            "miss_30": "30% missingness"
+        }
+
+
+        plt.title(
+
+            f"{country} — D8R1\n"
+            f"{title_missing.get(missingness, missingness)}",
+
+            fontsize=17,
+
+            fontweight="bold"
+        )
+
+
+        # ====================================================
+        # OSIE
+        # ====================================================
+
+        plt.xlabel(
+
+            "Month",
+
+            fontsize=13
+        )
+
+
+        plt.ylabel(
+
+            "Monthly sum of D8R1",
+
+            fontsize=13
+        )
+
+
+        # ====================================================
+        # FORMATOWANIE Y
+        # ====================================================
+
+        ax = plt.gca()
+
+
+        ax.yaxis.set_major_formatter(
+
+            lambda x, pos:
+            f"{x:,.0f}".replace(
+                ",",
+                " "
+            )
+        )
+
+
+        # ====================================================
+        # X
+        # ====================================================
+
+        plt.xticks(
+            rotation=45,
+            fontsize=10
+        )
+
+
+        # ====================================================
+        # GRID
+        # ====================================================
+
+        plt.grid(
+
+            True,
+
+            linestyle=":",
+
+            alpha=0.6
+        )
+
+
+        # ====================================================
+        # LEGEND
+        # ====================================================
+
+        plt.legend(
+
+            fontsize=11,
+
+            loc="best"
+        )
+
+
+        # ====================================================
+        # LAYOUT
+        # ====================================================
+
+        plt.tight_layout()
+
+
+        # ====================================================
+        # BEZPIECZNA NAZWA PLIKU
+        # ====================================================
+
+        safe_country = (
+
+            str(country)
+
+            .replace(
+                " ",
+                "_"
+            )
+
+            .replace(
+                "/",
+                "_"
+            )
+
+            .replace(
+                "\\",
+                "_"
+            )
+        )
+
+
+        filename = (
+
+            f"{safe_country}_"
+            f"D8R1_"
+            f"{missingness}.png"
+        )
+
+
+        output_path = (
+
+            PLOT_DIR
+            /
+            filename
+        )
+
+
+        # ====================================================
+        # ZAPIS
+        # ====================================================
+
+        plt.savefig(
+
+            output_path,
+
+            dpi=300,
+
+            bbox_inches="tight"
+        )
+
+
+        # ====================================================
+        # POKAŻ
+        # ====================================================
+
+        plt.show()
+
+
+        plt.close()
+
+
+        # ====================================================
+        # COUNTER
+        # ====================================================
+
+        plot_counter += 1
+
+
+        print(
+
+            f"[{plot_counter}] "
+            f"{country} | "
+            f"{missingness} -> "
+            f"{output_path}"
+        )
+
+
+# ============================================================
+# KONIEC
+# ============================================================
+
+print("\n")
+print("=" * 100)
+
+print(
+    "WYKRESY GOTOWE"
+)
+
+print("=" * 100)
+
+print(
+    f"Liczba wykresów: {plot_counter}"
+)
+
+print(
+    f"Katalog: {PLOT_DIR.resolve()}"
+)
+
+```
