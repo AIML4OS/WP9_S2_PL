@@ -62,7 +62,7 @@ The `os.makedirs()` function creates the output directory if it does not already
 folder_path = "synthetic data/synthetic_countries_features"
 
 selected_features_path = (
-    "/synthetic data/synthetic_selected_features.csv"
+    "synthetic data/synthetic_selected_features.csv"
 )
 
 output_folder = (
