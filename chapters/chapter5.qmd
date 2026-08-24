@@ -1,8 +1,10 @@
 ---
 title: "Testing models for each country"
 
+format:
   html:
     code-fold: true
+
 jupyter: python3
 ---
 
