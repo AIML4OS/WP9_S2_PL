@@ -1,0 +1,684 @@
+---
+title: "Simulation of gaps"
+format: html # This qmd file will be compiled as an HTML web page
+---
+
+**Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
+
+## Simulation of Missing Data
+
+The synthetic dataset used in this analysis does not initially contain any missing values. To simulate missing data for foreign tourist counts, three additional variables are created separately for each of the five selected countries:
+
+- *miss_10* – 10% of foreign tourist count observations are randomly set as missing.
+
+- *miss_20* – 20% of foreign tourist count observations are randomly set as missing.
+
+- *miss_30* – 30% of foreign tourist count observations are randomly set as missing.
+
+Missing values are generated using the MCAR (Missing Completely At Random) mechanism, meaning that the probability of an observation being missing does not depend on its observed or unobserved values.
+
+The missingness is generated using a nested structure. This means that all observations missing in miss_10 are also missing in miss_20, and all observations missing in miss_20 are also missing in miss_30:
+
+$$       miss_10 ⊂ miss_20 ⊂ miss_30 $$
+
+This approach provides a more realistic simulation of increasing levels of missing data. In practice, as the reporting deadline approaches and more reports become available, the amount of missing information decreases. The nested structure therefore allows the models to be evaluated under progressively different levels of data availability while keeping the underlying observations comparable across scenarios.
+
+## Importing the Required Libraries
+
+The first step is to import the Python libraries required for data loading, file management, numerical operations, and data manipulation.
+
+- glob is used to identify and retrieve all Excel files from the specified directory.
+
+- os is used to work with file and folder paths and to manage output directories.
+
+- numpy (np) is used for numerical operations and random number generation required for the MCAR missing-data simulation.
+
+- pandas (pd) is used to read, combine, manipulate, filter, and save the datasets.
+
+These libraries provide the basic functionality required for the subsequent data preparation and missing-data simulation steps.
+
+```{python}
+
+import glob
+import os
+import numpy as np
+import pandas as pd
+```
+
+### Defining File Paths and the Output Directory
+
+In this step, the paths to the input and output files are defined.
+
+- **`folder_path`** specifies the directory containing the synthetic datasets with the previously created features.
+
+- **`selected_features_path`** specifies the location of the CSV file containing the country-specific features selected during the Elastic Net feature selection process.
+
+- **`output_folder`** specifies the directory where the final datasets with simulated missing values will be saved.
+
+The `os.makedirs()` function creates the output directory if it does not already exist. The parameter `exist_ok=True` ensures that no error is raised if the directory has already been created.
+
+```{python}
+
+folder_path = r"synthetic data\synthetic_countries_features"
+
+selected_features_path = (
+    r"\synthetic data\synthetic_selected_features.csv"
+)
+
+output_folder = (
+    r"synthetic data\synthetic_missing_data"
+)
+
+os.makedirs(output_folder, exist_ok=True)
+
+```
+
+### Loading and Combining the Synthetic Datasets
+
+In this step, all Excel files containing the synthetic data and previously generated features are identified and loaded from the specified directory.
+
+The code first searches the input folder for all files with the `.xlsx` extension. If no files are found, a `FileNotFoundError` is raised to prevent the analysis from continuing with an empty dataset.
+
+Each Excel file is then read into a separate pandas DataFrame. The individual datasets are subsequently combined into a single DataFrame, `df`, using `pd.concat()`.
+
+The resulting dataset is checked by displaying:
+
+- the number of Excel files found,
+
+- the overall number of observations and variables,
+
+- the complete list of columns.
+
+This step creates the **initial complete synthetic dataset**, which contains the original target variable and all previously generated explanatory features. At this stage, no missing values are introduced; the missing-data simulation is performed in a subsequent step.
+
+```{python}
+
+
+all_files = glob.glob(os.path.join(folder_path, "*.xlsx"))
+
+if len(all_files) == 0:
+    raise FileNotFoundError(
+        f"No XLSX files found in folder:\n{folder_path}"
+    )
+
+print(f"Number of found XLSX files: {len(all_files)}")
+
+df_list = [pd.read_excel(file) for file in all_files]
+
+df = pd.concat(
+    df_list,
+    ignore_index=True
+)
+
+print("\nSize of gaps:")
+print(df.shape)
+
+print("\nColumns:")
+print(df.columns.tolist())
+
+
+
+```
+
+### Mapping KKR Codes to Country Names
+
+In this step, the numerical **KKR codes** are mapped to the corresponding country names in English.
+
+A dictionary is created to establish the relationship between each KKR code and its country. The mapping is then applied to the `KKR` column to create a new variable, **`country_en`**.
+
+The new variable provides a more readable country identifier and is used in subsequent steps to:
+
+- identify and filter the selected countries,
+
+- apply country-specific missing-data simulations,
+
+- associate each country with its own set of selected features,
+
+- create separate output datasets for each country.
+
+The original `KKR` variable is retained, while `country_en` provides a human-readable representation of the country.
+
+```{python}
+kkr_to_country_en = {
+    276: 'Germany',
+    643: 'Russia',
+    380: 'Italy',
+    804: 'Ukraine',
+    826: 'United Kingdom',
+    840: 'United States'
+}
+
+df['country_en'] = df['KKR'].map(kkr_to_country_en)
+
+```
+
+### Selecting the Five Countries
+
+In this step, five countries are selected for the missing-data simulation based on their **KKR codes**:
+
+- Germany (`276`)
+
+- Italy (`380`)
+
+- Ukraine (`804`)
+
+- United Kingdom (`826`)
+
+- United States (`840`)
+
+The selected KKR codes are stored in the `selected_kkr` list. The corresponding country names are then obtained automatically from the previously defined `kkr_to_country_en` dictionary.
+
+The code also prints the selected KKR codes together with their corresponding country names. This provides a simple verification that the correct countries have been selected before proceeding with the simulation.
+
+From this point onwards, the missing-data simulation and subsequent processing are performed **separately for each of these five countries**
+
+```{python}
+
+selected_kkr = [
+    276,   # Germany
+    380,   # Italy
+    804,   # Ukraine
+    826,   # United Kingdom
+    840    # United States
+]
+
+selected_countries = [
+    kkr_to_country_en[kkr]
+    for kkr in selected_kkr
+]
+
+print("\nChosen countries of origin:")
+
+for kkr in selected_kkr:
+    print(
+        f"{kkr} → {kkr_to_country_en[kkr]}"
+    )
+
+
+```
+
+## Loading the Elastic Net Feature Selection Results
+
+In this step, the results of the **Elastic Net feature selection** performed in the previous stage of the analysis are loaded from the `selected_features.csv` file.
+
+The results are stored in the `selected_df` DataFrame. Each record identifies a feature that was selected for a specific country.
+
+The first few rows are displayed to verify that the file has been loaded correctly and that the expected structure and feature-selection results are available.
+
+These results are used in the following steps to ensure that **each country is processed using only the predictors selected specifically for that country by the Elastic Net model**.
+
+```{python}
+selected_df = pd.read_csv(
+    selected_features_path
+)
+
+print("\nWyniki selekcji Elastic Net:")
+print(selected_df.head())
+
+```
+
+### Creating a Country-Specific Feature Mapping
+
+In this step, the Elastic Net feature selection results are transformed into a dictionary that links each country to its selected features.
+
+The `selected_df` DataFrame is grouped by the `country_en` variable, and all selected features belonging to each country are collected into a list. The resulting structure is converted into a Python dictionary called `country_feature_map`.
+
+This creates a direct mapping between each country and its own set of predictors, for example:
+
+```         
+Germany → [lag_1, lag_2, mean_last_3, ...]
+Italy → [lag_1, mean_last_6, WON_mean, ...]
+Ukraine → [...]
+United Kingdom → [...]
+United States → [...]
+```
+
+This country-specific mapping is important because **the same set of predictors is not necessarily optimal for all countries**. In the subsequent steps, each country's dataset will therefore be filtered using only the features selected for that particular count
+
+```{python}
+country_feature_map = (
+    selected_df
+    .groupby('country_en')['feature']
+    .apply(list)
+    .to_dict()
+)
+
+```
+
+### Checking the Selected Features
+
+This step performs a verification of the country-specific feature selection results.
+
+For each of the five selected countries, the code retrieves the list of predictors assigned to that country from `country_feature_map`. It then displays:
+
+- the country name,
+
+- the number of selected features,
+
+- the complete list of selected features.
+
+This provides a simple validation that the Elastic Net feature selection results have been correctly loaded and mapped to the appropriate countries.
+
+It also allows the user to verify that **each country has its own set of selected predictors** before these variables are used to construct the final datasets.
+
+```{python}
+print("\nChosen features for each country:")
+
+for country in selected_countries:
+
+    features = country_feature_map.get(
+        country,
+        []
+    )
+
+    print(f"\n{country}")
+    print(f"Number of features: {len(features)}")
+    print(features)
+```
+
+### Verifying the Availability of Selected Features
+
+This step checks whether all features selected by the Elastic Net procedure are actually present in the main dataset.
+
+First, all unique selected features across the five countries are collected into a single set. The code then compares these features with the columns available in the main DataFrame, `df`.
+
+If any selected feature is missing from the dataset, a `ValueError` is raised and the names of the missing variables are displayed. This prevents the analysis from continuing with an incomplete set of predictors.
+
+If no features are missing, a confirmation message is displayed.
+
+This validation step ensures **consistency between the feature selection results and the synthetic dataset** and helps prevent errors when the country-specific datasets are created later.
+
+```{python}
+
+all_selected_features = set()
+
+for country in selected_countries:
+
+    all_selected_features.update(
+        country_feature_map.get(country, [])
+    )
+
+missing_features = [
+    feature
+    for feature in all_selected_features
+    if feature not in df.columns
+]
+
+if missing_features:
+
+    raise ValueError(
+        "This features are not existing in  df:\n"
+        + "\n".join(missing_features)
+    )
+
+print(
+    "\nControl is finished."
+    " All features are in dataset."
+)
+```
+
+### Defining the MCAR Simulation Parameters
+
+This step defines the parameters used to simulate missing data.
+
+The original target variable is **`D8R1`**, representing the number of foreign tourists. This variable remains unchanged throughout the simulation and serves as the reference value for evaluating the performance of the imputation models.
+
+Three missing-data scenarios are defined:
+
+- **`miss_10`** – 10% of observations are simulated as missing,
+
+- **`miss_20`** – 20% of observations are simulated as missing,
+
+- **`miss_30`** – 30% of observations are simulated as missing.
+
+The missing values are generated according to the **MCAR (Missing Completely At Random)** mechanism. This means that the probability of an observation being selected as missing does not depend on its value or on any other observed characteristics.
+
+A fixed random seed, `42`, is used to initialise the random number generator. This ensures that the same observations are selected as missing every time the code is executed, making the simulation **reproducible**.
+
+Importantly, the missingness scenarios are generated using a **nested structure**. The observations missing in the 10% scenario are also missing in the 20% scenario, while the 20% missing observations are included in the 30% scenario.
+
+This allows the three scenarios to represent progressively increasing levels of missing information while maintaining comparability between them.
+
+```{python}
+target = 'D8R1'
+
+missing_rates = {
+    'miss_10': 0.10,
+    'miss_20': 0.20,
+    'miss_30': 0.30
+}
+
+# Stałe ziarno losowania
+rng = np.random.default_rng(42)
+```
+
+```{python}
+# ============================================================
+# 12. TWORZENIE NESTED MCAR
+# ============================================================
+# ============================================================
+# NESTED MCAR DLA KAŻDEGO KKR
+# miss_10 ⊂ miss_20 ⊂ miss_30
+# ============================================================
+
+target = 'D8R1'
+
+missing_rates = {
+   'miss_10': 0.10,
+   'miss_20': 0.20,
+   'miss_30': 0.30
+}
+
+# kopia oryginalnego targetu
+df_missing['miss_10'] = df_missing[target]
+df_missing['miss_20'] = df_missing[target]
+df_missing['miss_30'] = df_missing[target]
+
+# generator losowy
+rng = np.random.default_rng(42)
+
+# każdy KKR osobno
+for kkr in selected_kkr:
+
+   # indeksy obserwacji danego kraju
+   idx = df_missing.index[
+       df_missing['KKR'] == kkr
+   ]
+
+   n = len(idx)
+
+   if n == 0:
+       continue
+
+   # jedno losowanie kolejności obserwacji
+   shuffled_idx = rng.permutation(idx)
+
+   # liczba braków
+   n_10 = int(round(n * 0.10))
+   n_20 = int(round(n * 0.20))
+   n_30 = int(round(n * 0.30))
+
+   # NESTED:
+   # 10% znajduje się w pierwszych 10%
+   # 20% zawiera te same 10% + kolejne 10%
+   # 30% zawiera te same 20% + kolejne 10%
+
+   missing_10_idx = shuffled_idx[:n_10]
+   missing_20_idx = shuffled_idx[:n_20]
+   missing_30_idx = shuffled_idx[:n_30]
+
+   # wprowadzenie braków
+   df_missing.loc[
+       missing_10_idx,
+       'miss_10'
+   ] = np.nan
+
+   df_missing.loc[
+       missing_20_idx,
+       'miss_20'
+   ] = np.nan
+
+   df_missing.loc[
+       missing_30_idx,
+       'miss_30'
+   ] = np.nan
+
+```
+
+### Creating Nested MCAR Missing-Data Scenarios
+
+This step introduces the simulated missing values into the dataset separately for each of the five selected countries.
+
+First, three new variables — **`miss_10`**, **`miss_20`**, and **`miss_30`** — are created as copies of the original target variable, `D8R1`. The original `D8R1` values are therefore preserved and can later be used as the ground truth for evaluating the imputation results.
+
+The simulation is performed **independently for each KKR (country)**. For each country, the observations are randomly shuffled using the fixed random-number generator defined previously. The number of observations to be treated as missing is then calculated as 10%, 20%, and 30% of the total number of observations for that country.
+
+The key feature of this procedure is the **nested structure of the missingness**. A single random ordering of observations is generated for each country, and progressively larger portions of this same ordering are selected:
+
+- `miss_10` contains the first 10% of randomly selected observations,
+
+- `miss_20` contains the same 10% plus an additional 10%,
+
+- `miss_30` contains the same 20% plus an additional 10%.
+
+The selected observations are then replaced with `NaN` in the corresponding variables.
+
+This nested design ensures that the three scenarios differ only in the **amount of missing information**, while the missing observations from the less severe scenario remain part of the more severe scenarios. This makes the comparison of model performance across 10%, 20%, and 30% missingness more consistent and realistic.
+
+The original `D8R1` variable is not modified, which allows the simulated missing values to be compared with the true observed values during the later evaluation of the imputation models.
+
+```{python}
+
+print("\n\n")
+print("=" * 70)
+print("NESTED MCAR CONTROL")
+print("=" * 70)
+
+for kkr in selected_kkr:
+
+   country = kkr_to_country_en[kkr]
+
+   country_idx = (
+       df_missing['KKR'] == kkr
+   )
+
+   print(f"\n{country} (KKR={kkr})")
+
+   for miss_col in missing_rates:
+
+       n_total = country_idx.sum()
+
+       n_missing = (
+           df_missing.loc[
+               country_idx,
+               miss_col
+           ]
+           .isna()
+           .sum()
+       )
+
+       percentage = (
+           n_missing / n_total * 100
+       )
+
+       print(
+           f"{miss_col}: "
+           f"{n_missing}/{n_total} "
+           f"({percentage:.1f}%)"
+       )
+
+```
+
+### Verifying the Nested Missing-Data Structure
+
+This step verifies that the simulated missing values follow the intended **nested structure** for each selected country.
+
+For each country, the code identifies which observations are missing in `miss_10`, `miss_20`, and `miss_30`. It then checks two conditions:
+
+- whether every observation missing in `miss_10` is also missing in `miss_20`,
+
+- whether every observation missing in `miss_20` is also missing in `miss_30`.
+
+The logical conditions verify that:
+
+**`miss_10 ⊂ miss_20 ⊂ miss_30`**
+
+A result of **`True`** confirms that the nested structure has been correctly implemented.
+
+This validation is performed separately for each country, ensuring that the missing-data simulation is correctly constructed across all five selected countries before the datasets are used in further analysis.
+
+The check is **particularly important** because the nested structure guarantees that increasing missing-data scenarios are comparable: the 20% scenario extends the 10% scenario, while the 30% scenario extends the 20% scenario, rather than introducing three completely independent sets of missing observations.
+
+```{python}
+print("\n")
+print("=" * 70)
+print("Checking if: miss_10 ⊂ miss_20 ⊂ miss_30")
+print("=" * 70)
+
+for kkr in selected_kkr:
+
+   country = kkr_to_country_en[kkr]
+
+   country_idx = (
+       df_missing['KKR'] == kkr
+   )
+
+   miss10 = (
+       df_missing.loc[
+           country_idx,
+           'miss_10'
+       ]
+       .isna()
+   )
+
+   miss20 = (
+       df_missing.loc[
+           country_idx,
+           'miss_20'
+       ]
+       .isna()
+   )
+
+   miss30 = (
+       df_missing.loc[
+           country_idx,
+           'miss_30'
+       ]
+       .isna()
+   )
+
+   nested_10_20 = (
+       (~miss10) | miss20
+   ).all()
+
+   nested_20_30 = (
+       (~miss20) | miss30
+   ).all()
+
+   print(f"\n{country}")
+   print(
+       f"miss_10 ⊂ miss_20: "
+       f"{nested_10_20}"
+   )
+   print(
+       f"miss_20 ⊂ miss_30: "
+       f"{nested_20_30}"
+   )
+
+```
+
+### Creating the Five Final Country-Specific Datasets
+
+In this final data preparation step, **five country-specific datasets** are created, with one Excel file produced for each selected country.
+
+For each KKR, the code first filters the complete dataset to retain only observations belonging to that country. It then retrieves the **country-specific set of features previously selected by the Elastic Net procedure**.
+
+Each final dataset contains:
+
+- identification variables: `REGON`, `OKRES`, `KKR`, `country_en`, and `data`,
+
+- the original target variable **`D8R1`**, which remains unchanged and serves as the reference value,
+
+- the three simulated missing-data scenarios: **`miss_10`**, **`miss_20`**, and **`miss_30`**,
+
+- only the explanatory variables selected specifically for that country.
+
+Any duplicate columns are removed before the final dataset is created.
+
+The resulting datasets are stored in the `final_datasets` dictionary and saved as separate Excel files:
+
+```         
+Germany.xlsx Italy.xlsx Ukraine.xlsx United Kingdom.xlsx United States.xlsx
+```
+
+This structure provides **one complete modelling dataset per country**, containing all three nested missing-data scenarios alongside the original target and the country-specific selected predictors. It also ensures that unnecessary variables are excluded from the final repository datasets, making them ready for the subsequent imputation and machine-learning stages.
+
+```{python}
+
+output_folder = r"C:\Git\WP9_S2_PL\synthetic data\synthetic_missing_data"
+
+os.makedirs(output_folder, exist_ok=True)
+
+final_datasets = {}
+
+for kkr in selected_kkr:
+
+   country = kkr_to_country_en[kkr]
+
+   
+   country_data = df_missing[
+       df_missing['KKR'] == kkr
+   ].copy()
+
+
+   selected_features = country_feature_map.get(
+       country,
+       []
+   )
+
+   print("\n" + "=" * 60)
+   print(f"Kraj: {country}")
+   print(f"KKR: {kkr}")
+   print("Chosen features:")
+   print(selected_features)
+
+  
+   id_columns = [
+       'REGON',
+       'OKRES',
+       'KKR',
+       'country_en',
+       'data'
+   ]
+
+
+   id_columns = [
+       col
+       for col in id_columns
+       if col in country_data.columns
+   ]
+
+ 
+   columns_to_keep = (
+       id_columns
+       + [
+           'D8R1',
+           'miss_10',
+           'miss_20',
+           'miss_30'
+       ]
+       + selected_features
+   )
+
+ 
+   columns_to_keep = list(
+       dict.fromkeys(columns_to_keep)
+   )
+
+   final_df = country_data[
+       columns_to_keep
+   ].copy()
+
+
+   final_datasets[country] = final_df
+
+   
+   output_file = os.path.join(
+       output_folder,
+       f"{country}.xlsx"
+   )
+
+   final_df.to_excel(
+       output_file,
+       index=False
+   )
+
+   print(
+       f"\nSaved: {output_file}"
+   )
+
+   print(
+       f"Size: {final_df.shape}"
+   )
+
+```

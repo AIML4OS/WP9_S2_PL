@@ -6,6 +6,7 @@ project:
     - chapters/chapter1.qmd
     - chapters/chapter2.qmd
     - chapters/chapter3.qmd
+    - chapters/chapter4.qmd
     - notebooks/notebook1.qmd
 
 website:
@@ -29,6 +30,8 @@ website:
         text: Feature Engineering
       - href: chapters/chapter3.qmd
         text: Feature Selection
+      - href: chapters/chapter4.qmd
+        text: Simulation of gaps
 
 
 format:
