@@ -20,33 +20,29 @@ The synthetic data were generated using the *synthetizer* package available in R
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 from pathlib import Path
 from sklearn.impute import KNNImputer
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from matplotlib.ticker import FuncFormatter
-
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.linear_model import Ridge
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 import xgboost as xgb
 
-from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.base import clone
 import warnings
-
 warnings.filterwarnings('ignore')
+import os
+
+# ========
+
 
 
 ```
 
 
 ```{python}
-from pathlib import Path
-import os
-
-# ============================================================
+====================================================
 # ŚCIEŻKA DO DANYCH
 # ============================================================
 
@@ -176,46 +172,6 @@ print(
 
 
 ```{python}
-# ============================================================
-# IMPORT BIBLIOTEK
-# ============================================================
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-from pathlib import Path
-
-from sklearn.impute import KNNImputer
-
-from sklearn.metrics import (
-    mean_squared_error,
-    mean_absolute_error
-)
-
-from matplotlib.ticker import FuncFormatter
-
-from sklearn.ensemble import (
-    RandomForestRegressor,
-    GradientBoostingRegressor
-)
-
-from sklearn.linear_model import Ridge
-
-from sklearn.tree import DecisionTreeRegressor
-
-from sklearn.neighbors import KNeighborsRegressor
-
-import xgboost as xgb
-
-from sklearn.base import clone
-
-import warnings
-
-warnings.filterwarnings("ignore")
-
-
-
 
 # ============================================================
 # SPRAWDZENIE LAT
@@ -357,98 +313,6 @@ MODELS = {
 ```
 
 ```{python}
-# ============================================================
-# 4. ŚCIEŻKA DO DANYCH
-# ============================================================
-
-MISSING_DATA_DIR = (
-    Path.cwd().parent
-    / "synthetic data"
-    / "synthetic_missing_data"
-)
-
-print("Folder z danymi:")
-print(MISSING_DATA_DIR)
-# ============================================================
-# 5. ZNALEZIENIE 5 PLIKÓW
-# ============================================================
-
-data_files = sorted(
-    MISSING_DATA_DIR.glob("*.xlsx")
-)
-
-print("\nPliki:")
-
-for file in data_files:
-    print("-", file.name)
-
-if len(data_files) != 5:
-
-    raise FileNotFoundError(
-        f"Znaleziono {len(data_files)} plików, "
-        f"a oczekiwano 5."
-    )
-    # ============================================================
-# 6. WCZYTANIE 5 PLIKÓW
-# ============================================================
-
-country_dfs = {}
-
-for file in data_files:
-
-    country_name = file.stem
-
-    df_temp = pd.read_excel(file)
-
-    country_dfs[country_name] = df_temp
-
-    print("\n" + "=" * 80)
-    print(country_name)
-    print("=" * 80)
-
-    print(
-        "Rozmiar:",
-        df_temp.shape
-    )
-
-    print(
-        "KKR:",
-        df_temp["KKR"].unique()
-    )
-
-    print(
-        "Liczba braków:"
-    )
-
-    print(
-        df_temp[
-            MISS_COLS
-        ].isna().sum()
-    )
-```
-
-```{python}
-# ============================================================
-# 7. UTWORZENIE YEAR I MONTH
-# ============================================================
-
-for country_name, df_temp in country_dfs.items():
-
-    df_temp["OKRES"] = pd.to_numeric(
-        df_temp["OKRES"],
-        errors="coerce"
-    )
-
-    df_temp["YEAR"] = (
-        df_temp["OKRES"] // 100
-    ).astype("Int64")
-
-    df_temp["MONTH"] = (
-        df_temp["OKRES"] % 100
-    ).astype("Int64")
-
-    country_dfs[country_name] = df_temp
-    
 
     # ============================================================
 # 8. OGRANICZENIE DO 2019 I 2020
