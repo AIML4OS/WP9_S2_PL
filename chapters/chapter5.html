@@ -270,6 +270,26 @@ window.Quarto = {
   <li><a href="#key-parameters-configuration-4" id="toc-key-parameters-configuration-4" class="nav-link" data-scroll-target="#key-parameters-configuration-4">Key Parameters &amp; Configuration</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#restricting-the-data-to-20192020" id="toc-restricting-the-data-to-20192020" class="nav-link" data-scroll-target="#restricting-the-data-to-20192020">Restricting the Data to 2019–2020</a>
+  <ul class="collapse">
+  <li><a href="#data-check" id="toc-data-check" class="nav-link" data-scroll-target="#data-check">Data check</a></li>
+  </ul></li>
+  <li><a href="#identifying-available-features-per-country" id="toc-identifying-available-features-per-country" class="nav-link" data-scroll-target="#identifying-available-features-per-country">Identifying Available Features Per Country</a>
+  <ul class="collapse">
+  <li><a href="#experiment-objective" id="toc-experiment-objective" class="nav-link" data-scroll-target="#experiment-objective">Experiment Objective</a></li>
+  <li><a href="#experimental-procedure" id="toc-experimental-procedure" class="nav-link" data-scroll-target="#experimental-procedure">Experimental Procedure</a>
+  <ul class="collapse">
+  <li><a href="#train-test-split-missingness-mask" id="toc-train-test-split-missingness-mask" class="nav-link" data-scroll-target="#train-test-split-missingness-mask">Train-Test Split (Missingness Mask)</a></li>
+  <li><a href="#model-training-and-prediction" id="toc-model-training-and-prediction" class="nav-link" data-scroll-target="#model-training-and-prediction">Model Training and Prediction</a></li>
+  <li><a href="#quality-assessment-metrics" id="toc-quality-assessment-metrics" class="nav-link" data-scroll-target="#quality-assessment-metrics">Quality Assessment (Metrics)</a></li>
+  <li><a href="#monthly-aggregation-and-prediction-storage" id="toc-monthly-aggregation-and-prediction-storage" class="nav-link" data-scroll-target="#monthly-aggregation-and-prediction-storage">Monthly Aggregation and Prediction Storage</a></li>
+  <li><a href="#selection-of-the-best-models" id="toc-selection-of-the-best-models" class="nav-link" data-scroll-target="#selection-of-the-best-models">Selection of the Best Models</a></li>
+  </ul></li>
+  <li><a href="#selection-of-the-best-model" id="toc-selection-of-the-best-model" class="nav-link" data-scroll-target="#selection-of-the-best-model">Selection of the best model</a></li>
+  </ul></li>
+  <li><a href="#combining-all-individual-predictions" id="toc-combining-all-individual-predictions" class="nav-link" data-scroll-target="#combining-all-individual-predictions">Combining all individual predictions</a></li>
+  <li><a href="#aggregation-to-monthly-totals" id="toc-aggregation-to-monthly-totals" class="nav-link" data-scroll-target="#aggregation-to-monthly-totals">Aggregation to monthly totals</a></li>
+  <li><a href="#important-methodological-point" id="toc-important-methodological-point" class="nav-link" data-scroll-target="#important-methodological-point">Important methodological point</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/edit/main/chapters/chapter5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/blob/main/chapters/chapter5.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/AIML4OS-template-quarto-python/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -358,7 +378,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="ed0f8594" class="cell" data-execution_count="1">
+<div id="3e0cff80" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -390,7 +410,7 @@ window.Quarto = {
 <p>If the result is:</p>
 <pre><code>False</code></pre>
 <p>the program will not be able to load the expected files.</p>
-<div id="810f8a70" class="cell" data-execution_count="2">
+<div id="9d9c668e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Data Folder location</span></span>
@@ -419,7 +439,7 @@ True</code></pre>
 <p>The full paths are stored in:</p>
 <pre><code>data_files</code></pre>
 <p><code>sorted()</code> ensures that the files are stored in alphabetical order. After this the program prints the names of all Excel files found</p>
-<div id="83169d7d" class="cell" data-execution_count="3">
+<div id="1f3a6835" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -448,7 +468,7 @@ United Kingdom.xlsx
 United States.xlsx</code></pre>
 </div>
 </div>
-<div id="5fb5c270" class="cell" data-execution_count="4">
+<div id="adc7bcb6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -482,7 +502,7 @@ United States.xlsx</code></pre>
 <li><p>miss_30</p></li>
 </ul>
 <p>And next the program checks how many missing values exist in important columns. This is particularly important because the miss_10, miss_20, and miss_30 variables are later used to define the experimental test sets.</p>
-<div id="b7d147a0" class="cell" data-execution_count="5">
+<div id="eedd18ef" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -601,7 +621,7 @@ Missings in variables:
 <li><p>MONTH = 01</p></li>
 </ul>
 <p>Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created. After this the code identifies which years are present in every country’s dataset.</p>
-<div id="6fea8821" class="cell" data-execution_count="6">
+<div id="a52e92d1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -669,7 +689,7 @@ United States: [np.int64(2018), np.int64(2019), np.int64(2020)]</code></pre>
 <li><p>The experiment is conducted separately for the five country files.</p></li>
 <li><p>KKR is retained as information associated with the observations.</p></li>
 </ul>
-<div id="4698552a" class="cell" data-execution_count="7">
+<div id="e3a2cb24" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -718,7 +738,7 @@ United States: [840]</code></pre>
 <li>20% missingness</li>
 <li>30% missingness</li>
 </ul>
-<div id="d50696c6" class="cell" data-execution_count="8">
+<div id="d4a9f8e1" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -751,7 +771,7 @@ United States: [840]</code></pre>
 <p>Therefore, each country receives only the features that actually exist in its dataset.</p>
 <p>This is what the comment means by:</p>
 <p>Each country may have only a subset of the maximum feature set.</p>
-<div id="e07c961e" class="cell" data-execution_count="9">
+<div id="da7e1840" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Maximum Feature Set</span></span>
@@ -874,11 +894,11 @@ United States: [840]</code></pre>
 <li><p>learning_rate=0.1: The shrinkage step-size used to scale the impact of each new tree on the final prediction.</p></li>
 <li><p>verbosity=0: Suppresses internal runtime logs during execution.</p></li>
 </ul>
-<div id="bb6f7c59" class="cell" data-execution_count="10">
+<div id="dafb40b5" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. MODELE</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. MODELS</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>MODELS <span class="op">=</span> {</span>
@@ -921,146 +941,152 @@ United States: [840]</code></pre>
 <span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="1b9fe16c" class="cell" data-execution_count="11">
+</section>
+</section>
+</section>
+<section id="restricting-the-data-to-20192020" class="level1">
+<h1>Restricting the Data to 2019–2020</h1>
+<p>The primary objective of restricting the dataset to the years 2019 and 2020 is to maintain temporal consistency, as the newly engineered features heavily rely on historical values. When the dataset is scoped exclusively to this two-year window, it prevents the introduction of structural missing values or NaN entries in dependent time-series transformations, such as lag variables (e.g., historical lags or rolling averages). This ensures data integrity and eliminates the need for arbitrary imputation in critical temporal features prior to model training.</p>
+<p>The code prints Number of observations and present Year for every country.This verifies that the filtering worked correctly.</p>
+<section id="data-check" class="level2">
+<h2 class="anchored" data-anchor-id="data-check">Data check</h2>
+<div id="36e5e848" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ============================================================</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. OGRANICZENIE DO 2019 I 2020</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restricting the Data to 2019–2020</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>country_dfs_2019_2020 <span class="op">=</span> {}</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>country_dfs_2019_2020 <span class="op">=</span> {}</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs.items():</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs.items():</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    df_2019_2020 <span class="op">=</span> df_temp[</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        df_temp[<span class="st">"YEAR"</span>].isin([<span class="dv">2019</span>, <span class="dv">2020</span>])</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    ].copy()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    df_2019_2020 <span class="op">=</span> df_temp[</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        df_temp[<span class="st">"YEAR"</span>].isin([<span class="dv">2019</span>, <span class="dv">2020</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    ].copy()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    country_dfs_2019_2020[country_name] <span class="op">=</span> df_2019_2020</span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    country_dfs_2019_2020[country_name] <span class="op">=</span> df_2019_2020</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(country_name)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Liczba obserwacji 2019-2020:"</span>,</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">len</span>(df_2019_2020)</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Lata:"</span>,</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sorted</span>(</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>            df_2019_2020[<span class="st">"YEAR"</span>].dropna().unique()</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(country_name)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Number of observation 2019-2020:"</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">len</span>(df_2019_2020)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Years:"</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sorted</span>(</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>            df_2019_2020[<span class="st">"YEAR"</span>].dropna().unique()</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ================================================================================
 Germany
 ================================================================================
-Liczba obserwacji 2019-2020: 63648
-Lata: [np.int64(2019), np.int64(2020)]
+Number of observation 2019-2020: 63648
+Years: [np.int64(2019), np.int64(2020)]
 
 ================================================================================
 Italy
 ================================================================================
-Liczba obserwacji 2019-2020: 26798
-Lata: [np.int64(2019), np.int64(2020)]
+Number of observation 2019-2020: 26798
+Years: [np.int64(2019), np.int64(2020)]
 
 ================================================================================
 Ukraine
 ================================================================================
-Liczba obserwacji 2019-2020: 51096
-Lata: [np.int64(2019), np.int64(2020)]
+Number of observation 2019-2020: 51096
+Years: [np.int64(2019), np.int64(2020)]
 
 ================================================================================
 United Kingdom
 ================================================================================
-Liczba obserwacji 2019-2020: 31731
-Lata: [np.int64(2019), np.int64(2020)]
+Number of observation 2019-2020: 31731
+Years: [np.int64(2019), np.int64(2020)]
 
 ================================================================================
 United States
 ================================================================================
-Liczba obserwacji 2019-2020: 20894
-Lata: [np.int64(2019), np.int64(2020)]</code></pre>
+Number of observation 2019-2020: 20894
+Years: [np.int64(2019), np.int64(2020)]</code></pre>
 </div>
 </div>
-<div id="7c9e2af0" class="cell" data-execution_count="12">
+<p>The code defines the expected lag variables.For each country, determines which lag variables actually exist. After this counts missing values in every available lag variable.</p>
+<div id="bd862505" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. SPRAWDZENIE LAGÓW</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>LAG_COLS <span class="op">=</span> [</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_1"</span>,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_2"</span>,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_3"</span>,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_4"</span>,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_5"</span>,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_6"</span>,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_7"</span>,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_8"</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_9"</span>,</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_10"</span>,</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_11"</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"LAGI - SPRAWDZENIE 2019-2020"</span>)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking if lags has NA's</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>LAG_COLS <span class="op">=</span> [</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_1"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_2"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_3"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_4"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_5"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_6"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_7"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_8"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_9"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_10"</span>,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lag_11"</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"LAGS - Checking 2019-2020"</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
 <span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    lag_existing <span class="op">=</span> [</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        col</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> LAG_COLS</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df_temp.columns</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    lag_missing <span class="op">=</span> [</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>        col</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> LAG_COLS</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> df_temp.columns</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"-"</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(country_name)</span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Istniejące lagi:"</span>,</span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>        lag_existing</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Nieistniejące lagi:"</span>,</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>        lag_missing</span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    lag_existing <span class="op">=</span> [</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        col</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> LAG_COLS</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df_temp.columns</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    lag_missing <span class="op">=</span> [</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>        col</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> LAG_COLS</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> df_temp.columns</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"-"</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(country_name)</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Excisting lags:"</span>,</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>        lag_existing</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Missing lags:"</span>,</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>        lag_missing</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lag_existing:</span>
 <span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lag_existing:</span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Number of NaN:"</span>)</span>
 <span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Liczba NaN:"</span>)</span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>            df_temp[</span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>                lag_existing</span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>            ].isna().<span class="bu">sum</span>()</span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>            df_temp[</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>                lag_existing</span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>            ].isna().<span class="bu">sum</span>()</span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ================================================================================
-LAGI - SPRAWDZENIE 2019-2020
+LAGS - Checking 2019-2020
 ================================================================================
 
 --------------------------------------------------------------------------------
 Germany
-Istniejące lagi: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
-Nieistniejące lagi: []
+Excisting lags: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
+Missing lags: []
 
-Liczba NaN:
+Number of NaN:
 lag_1     0
 lag_2     0
 lag_3     0
@@ -1076,10 +1102,10 @@ dtype: int64
 
 --------------------------------------------------------------------------------
 Italy
-Istniejące lagi: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
-Nieistniejące lagi: []
+Excisting lags: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
+Missing lags: []
 
-Liczba NaN:
+Number of NaN:
 lag_1     0
 lag_2     0
 lag_3     0
@@ -1095,10 +1121,10 @@ dtype: int64
 
 --------------------------------------------------------------------------------
 Ukraine
-Istniejące lagi: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8']
-Nieistniejące lagi: ['lag_9', 'lag_10', 'lag_11']
+Excisting lags: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8']
+Missing lags: ['lag_9', 'lag_10', 'lag_11']
 
-Liczba NaN:
+Number of NaN:
 lag_1    0
 lag_2    0
 lag_3    0
@@ -1111,10 +1137,10 @@ dtype: int64
 
 --------------------------------------------------------------------------------
 United Kingdom
-Istniejące lagi: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
-Nieistniejące lagi: []
+Excisting lags: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
+Missing lags: []
 
-Liczba NaN:
+Number of NaN:
 lag_1     0
 lag_2     0
 lag_3     0
@@ -1130,10 +1156,10 @@ dtype: int64
 
 --------------------------------------------------------------------------------
 United States
-Istniejące lagi: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
-Nieistniejące lagi: []
+Excisting lags: ['lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11']
+Missing lags: []
 
-Liczba NaN:
+Number of NaN:
 lag_1     0
 lag_2     0
 lag_3     0
@@ -1148,17 +1174,17 @@ lag_11    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="92b5eda8" class="cell" data-execution_count="13">
+<div id="702c32cf" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. CECHY DOSTĘPNE DLA KAŻDEGO KRAJU</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># FEATURES FOR EVERY COUNTRY</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>country_features <span class="op">=</span> {}</span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CECHY PO REGULARYZACJI"</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FEATURES AFTER REGULARIZATION"</span>)</span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
@@ -1186,7 +1212,7 @@ dtype: int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ================================================================================
-CECHY PO REGULARYZACJI
+FEATURES AFTER REGULARIZATION
 ================================================================================
 
 --------------------------------------------------------------------------------
@@ -1215,14 +1241,19 @@ Liczba cech: 19
 ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']</code></pre>
 </div>
 </div>
-<div id="71a8a4fe" class="cell" data-execution_count="14">
+</section>
+</section>
+<section id="identifying-available-features-per-country" class="level1">
+<h1>Identifying Available Features Per Country</h1>
+<p>The maximum feature list is compared with the columns actually available in each country. ## Checking Missing Values in Features The program checks how many missing values exist in each predictor. This is important because the ML experiment later uses complete cases</p>
+<div id="0cf30eaa" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. SPRAWDZENIE BRAKÓW W CECHACH</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CHECK IF ARE MISSING IN FEATURES</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"BRAKI W CECHACH - 2019-2020"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MISSING IN FEATURES - 2019-2020"</span>)</span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
@@ -1243,7 +1274,7 @@ Liczba cech: 19
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ================================================================================
-BRAKI W CECHACH - 2019-2020
+MISSING IN FEATURES - 2019-2020
 ================================================================================
 
 --------------------------------------------------------------------------------
@@ -1354,423 +1385,410 @@ RO_sd           0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="2f2addcd" class="cell" data-execution_count="15">
+<section id="experiment-objective" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-objective">Experiment Objective</h2>
+<p>The experiment aims to evaluate how effectively five different regression models can reconstruct missing values of the target variable D8R1 (representing the number of foreign tourists) for the years 2019–2020. The study tests various scenarios of data missingness levels (miss_10, miss_20, and miss_30, corresponding to 10%, 20%, and 30% missing data, respectively).</p>
+</section>
+<section id="experimental-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-procedure">Experimental Procedure</h2>
+<section id="train-test-split-missingness-mask" class="level3">
+<h3 class="anchored" data-anchor-id="train-test-split-missingness-mask">Train-Test Split (Missingness Mask)</h3>
+<p>For each country and each missingness level, the algorithm creates a boolean mask:</p>
+<ul>
+<li><p>Rows containing NaN values in the miss_X column are designated as the test set (representing the hidden data that the models are tasked with imputing/predicting).</p></li>
+<li><p>The remaining complete rows form the training set used for model learning.</p></li>
+<li><p>Both sets are further cleaned by removing rows that contain missing values in the explanatory features (features_country), as feature-level imputation is deliberately avoided in this approach.</p></li>
+</ul>
+</section>
+<section id="model-training-and-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="model-training-and-prediction">Model Training and Prediction</h3>
+<p>For each experimental scenario, the code loops through all defined machine learning algorithms (Decision Tree, Random Forest, Gradient Boosting, KNN, XGBoost):</p>
+<ul>
+<li><p>The model is cloned and trained using the training data (X_train, y_train).</p></li>
+<li><p>The trained model then generates predictions (y_pred) for the test set (X_test).</p></li>
+</ul>
+</section>
+<section id="quality-assessment-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="quality-assessment-metrics">Quality Assessment (Metrics)</h3>
+<p>The predicted values are compared against the ground truth using key error and performance metrics:</p>
+<ul>
+<li><p>RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error): Measure the magnitude of errors in absolute terms.</p></li>
+<li><p>MAPE (Mean Absolute Percentage Error): Represents the percentage-based error.</p></li>
+<li><p>Bias_pct: Evaluates percentage bias (determining whether the model systematically overestimates or underestimates the total tourist volume).</p></li>
+</ul>
+</section>
+<section id="monthly-aggregation-and-prediction-storage" class="level3">
+<h3 class="anchored" data-anchor-id="monthly-aggregation-and-prediction-storage">Monthly Aggregation and Prediction Storage</h3>
+<p>The script stores every individual prediction alongside its temporal markers (YEAR, MONTH).</p>
+<p>In the final aggregation phase (monthly_results), the data is grouped by month to assess how well the models reconstruct aggregate monthly sums of tourists for each country.</p>
+</section>
+<section id="selection-of-the-best-models" class="level3">
+<h3 class="anchored" data-anchor-id="selection-of-the-best-models">Selection of the Best Models</h3>
+<p>The results table (results_df) is sorted, and section 14 (best_models) automatically extracts the best-performing model (the one achieving the lowest RMSE) for each unique combination of country and missingness level.</p>
+<div id="533a1f29" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 12. EKSPERYMENT ML + PREDYKCJE MIESIĘCZNE</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 KRAJÓW</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># × 3 POZIOMY BRAKÓW</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># × 5 MODELI</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># TYLKO 2019-2020</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># miss_10 / miss_20 / miss_30</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       ↓</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       MASKA TESTOWA</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># NaN w miss_X  -&gt; </span><span class="al">TEST</span></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># pozostałe     -&gt; TRAIN</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co"># TARGET = D8R1</span></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Dodatkowo zapisujemy każdą predykcję,</span></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="co"># aby później policzyć SUMY MIESIĘCZNE.</span></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>monthly_predictions <span class="op">=</span> []</span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="co"># PĘTLA PO KRAJACH</span></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>monthly_predictions <span class="op">=</span> []</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LOOP OVER COUNTRIES</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country_name, df_temp <span class="kw">in</span> country_dfs_2019_2020.items():</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"#"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Country: </span><span class="sc">{</span>country_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"#"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    features_country <span class="op">=</span> country_features[</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>        country_name</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Number of features: </span><span class="sc">{</span><span class="bu">len</span>(features_country)<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Features:"</span>,</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>        features_country</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    df_temp <span class="op">=</span> df_temp[</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>        df_temp[TARGET].notna()</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    ].copy()</span>
 <span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"#"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"KRAJ: </span><span class="sc">{</span>country_name<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"#"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --------------------------------------------------------</span></span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># CECHY DLA DANEGO KRAJU</span></span>
-<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --------------------------------------------------------</span></span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    features_country <span class="op">=</span> country_features[</span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>        country_name</span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> miss_col <span class="kw">in</span> MISS_COLS:</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>country_name<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>miss_col<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>        test_mask <span class="op">=</span> df_temp[</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>            miss_col</span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>        ].isna()</span>
 <span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Liczba cech: </span><span class="sc">{</span><span class="bu">len</span>(features_country)<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cechy:"</span>,</span>
-<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>        features_country</span>
-<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --------------------------------------------------------</span></span>
-<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># USUWAMY WIERSZE BEZ D8R1</span></span>
-<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --------------------------------------------------------</span></span>
-<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>    df_temp <span class="op">=</span> df_temp[</span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>        df_temp[TARGET].notna()</span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>    ].copy()</span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>        train_mask <span class="op">=</span> <span class="op">~</span>test_mask</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TEST by mask:"</span>,</span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>            <span class="bu">int</span>(test_mask.<span class="bu">sum</span>())</span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TRAIN by mask:"</span>,</span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>            <span class="bu">int</span>(train_mask.<span class="bu">sum</span>())</span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>        train <span class="op">=</span> df_temp.loc[</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>            train_mask</span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>        ].copy()</span>
 <span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ========================================================</span></span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PĘTLA PO MISS</span></span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ========================================================</span></span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>        test <span class="op">=</span> df_temp.loc[</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>            test_mask</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>        ].copy()</span>
 <span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> miss_col <span class="kw">in</span> MISS_COLS:</span>
-<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>country_name<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>miss_col<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a>        <span class="co"># MASKA TESTOWA</span></span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a>        test_mask <span class="op">=</span> df_temp[</span>
-<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a>            miss_col</span>
-<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a>        ].isna()</span>
-<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>        train_mask <span class="op">=</span> <span class="op">~</span>test_mask</span>
-<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
-<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TEST wg maski:"</span>,</span>
-<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a>            <span class="bu">int</span>(test_mask.<span class="bu">sum</span>())</span>
-<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
-<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TRAIN wg maski:"</span>,</span>
-<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a>            <span class="bu">int</span>(train_mask.<span class="bu">sum</span>())</span>
-<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>        train_complete <span class="op">=</span> train.dropna(</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>            subset<span class="op">=</span>features_country</span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>        ).copy()</span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>        test_complete <span class="op">=</span> test.dropna(</span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>            subset<span class="op">=</span>features_country</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>        ).copy()</span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TRAIN after checking features:"</span>,</span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a>            <span class="bu">len</span>(train_complete)</span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TESTafter checking features:"</span>,</span>
+<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a>            <span class="bu">len</span>(test_complete)</span>
+<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(train_complete) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>                <span class="st">"!!! MISS TRAIN  !!!"</span></span>
+<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
 <span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a>        <span class="co"># TRAIN / </span><span class="al">TEST</span></span>
-<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a>        train <span class="op">=</span> df_temp.loc[</span>
-<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a>            train_mask</span>
-<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a>        ].copy()</span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(test_complete) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>                <span class="st">"!!!MISS TEST  !!!"</span></span>
+<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
 <span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>        test <span class="op">=</span> df_temp.loc[</span>
-<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a>            test_mask</span>
-<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>        ].copy()</span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a>        <span class="co"># X / y</span></span>
+<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
 <span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>        <span class="co"># USUWAMY WIERSZE Z BRAKAMI W CECHACH</span></span>
-<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>        <span class="co">#</span></span>
-<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nie imputujemy.</span></span>
-<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>        train_complete <span class="op">=</span> train.dropna(</span>
-<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a>            subset<span class="op">=</span>features_country</span>
-<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>        ).copy()</span>
-<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a>        test_complete <span class="op">=</span> test.dropna(</span>
-<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a>            subset<span class="op">=</span>features_country</span>
-<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a>        ).copy()</span>
-<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
-<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TRAIN po sprawdzeniu cech:"</span>,</span>
-<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>            <span class="bu">len</span>(train_complete)</span>
-<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
-<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TEST po sprawdzeniu cech:"</span>,</span>
-<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a>            <span class="bu">len</span>(test_complete)</span>
-<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(train_complete) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
-<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a>                <span class="st">"!!! BRAK TRAIN - POMIJAM !!!"</span></span>
-<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(test_complete) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>        X_train <span class="op">=</span> train_complete[</span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>            features_country</span>
+<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>        y_train <span class="op">=</span> train_complete[</span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>            TARGET</span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>        X_test <span class="op">=</span> test_complete[</span>
+<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a>            features_country</span>
+<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a>        y_test <span class="op">=</span> test_complete[</span>
+<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a>            TARGET</span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ====================================================</span></span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a>        <span class="co"># MODELS</span></span>
+<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ====================================================</span></span>
+<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> model_name, model_template <span class="kw">in</span> MODELS.items():</span>
+<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="ch">\n</span><span class="ss">  Model: </span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a>                end<span class="op">=</span><span class="st">" | "</span></span>
+<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a>                model <span class="op">=</span> clone(</span>
+<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a>                    model_template</span>
+<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a>                )</span>
 <span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
-<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a>                <span class="st">"!!! BRAK TEST - POMIJAM !!!"</span></span>
-<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a>                <span class="co"># TRAIN</span></span>
+<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
 <span id="cb30-146"><a href="#cb30-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-147"><a href="#cb30-147" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a>        <span class="co"># X / y</span></span>
-<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ----------------------------------------------------</span></span>
-<span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a>        X_train <span class="op">=</span> train_complete[</span>
-<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a>            features_country</span>
-<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb30-156"><a href="#cb30-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a>        y_train <span class="op">=</span> train_complete[</span>
-<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a>            TARGET</span>
-<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a>        X_test <span class="op">=</span> test_complete[</span>
-<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a>            features_country</span>
-<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a>        y_test <span class="op">=</span> test_complete[</span>
-<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a>            TARGET</span>
-<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ====================================================</span></span>
-<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a>        <span class="co"># MODELE</span></span>
-<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ====================================================</span></span>
-<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> model_name, model_template <span class="kw">in</span> MODELS.items():</span>
-<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-175"><a href="#cb30-175" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
-<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="ch">\n</span><span class="ss">  Model: </span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a>                end<span class="op">=</span><span class="st">" | "</span></span>
-<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb30-147"><a href="#cb30-147" aria-hidden="true" tabindex="-1"></a>                model.fit(</span>
+<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a>                    X_train,</span>
+<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a>                    y_train</span>
+<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a>                <span class="co"># PREDICT</span></span>
+<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-156"><a href="#cb30-156" aria-hidden="true" tabindex="-1"></a>                y_pred <span class="op">=</span> model.predict(</span>
+<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a>                    X_test</span>
+<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a>                <span class="co"># METRICS</span></span>
+<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a>                rmse <span class="op">=</span> np.sqrt(</span>
+<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a>                    mean_squared_error(</span>
+<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a>                        y_test,</span>
+<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a>                        y_pred</span>
+<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a>                mae <span class="op">=</span> mean_absolute_error(</span>
+<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a>                    y_test,</span>
+<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a>                    y_pred</span>
+<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-175"><a href="#cb30-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a>                d8r1_sum_real <span class="op">=</span> (</span>
+<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a>                    y_test.<span class="bu">sum</span>()</span>
+<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a>                )</span>
 <span id="cb30-179"><a href="#cb30-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
-<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a>                <span class="co"># CLONE MODELU</span></span>
-<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a>                d8r1_sum_pred <span class="op">=</span> (</span>
+<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a>                    y_pred.<span class="bu">sum</span>()</span>
+<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> d8r1_sum_real <span class="op">!=</span> <span class="dv">0</span>:</span>
 <span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a>                model <span class="op">=</span> clone(</span>
-<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a>                    model_template</span>
-<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-190"><a href="#cb30-190" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-191"><a href="#cb30-191" aria-hidden="true" tabindex="-1"></a>                <span class="co"># TRAIN</span></span>
-<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-194"><a href="#cb30-194" aria-hidden="true" tabindex="-1"></a>                model.fit(</span>
-<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a>                    X_train,</span>
-<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a>                    y_train</span>
-<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a>                <span class="co"># PREDYKCJA</span></span>
-<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a>                y_pred <span class="op">=</span> model.predict(</span>
-<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a>                    X_test</span>
-<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a>                <span class="co"># METRYKI</span></span>
-<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a>                rmse <span class="op">=</span> np.sqrt(</span>
-<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a>                    mean_squared_error(</span>
-<span id="cb30-213"><a href="#cb30-213" aria-hidden="true" tabindex="-1"></a>                        y_test,</span>
-<span id="cb30-214"><a href="#cb30-214" aria-hidden="true" tabindex="-1"></a>                        y_pred</span>
-<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a>                    bias_pct <span class="op">=</span> (</span>
+<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a>                        (</span>
+<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a>                            d8r1_sum_pred</span>
+<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a>                            <span class="op">-</span></span>
+<span id="cb30-190"><a href="#cb30-190" aria-hidden="true" tabindex="-1"></a>                            d8r1_sum_real</span>
+<span id="cb30-191"><a href="#cb30-191" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a>                        <span class="op">/</span></span>
+<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_real</span>
+<span id="cb30-194"><a href="#cb30-194" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a>                    bias_pct <span class="op">=</span> np.nan</span>
+<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a>                <span class="co"># MAPE</span></span>
+<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a>                non_zero_mask <span class="op">=</span> (</span>
+<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a>                    y_test <span class="op">!=</span> <span class="dv">0</span></span>
+<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> non_zero_mask.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a>                    y_test_nz <span class="op">=</span> y_test[</span>
+<span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a>                        non_zero_mask</span>
+<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a>                    ]</span>
+<span id="cb30-213"><a href="#cb30-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-214"><a href="#cb30-214" aria-hidden="true" tabindex="-1"></a>                    y_pred_nz <span class="op">=</span> y_pred[</span>
+<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a>                        non_zero_mask.values</span>
+<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a>                    ]</span>
 <span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a>                mae <span class="op">=</span> mean_absolute_error(</span>
-<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a>                    y_test,</span>
-<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a>                    y_pred</span>
-<span id="cb30-221"><a href="#cb30-221" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-222"><a href="#cb30-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a>                d8r1_sum_real <span class="op">=</span> (</span>
-<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a>                    y_test.<span class="bu">sum</span>()</span>
-<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a>                d8r1_sum_pred <span class="op">=</span> (</span>
-<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a>                    y_pred.<span class="bu">sum</span>()</span>
-<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-230"><a href="#cb30-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> d8r1_sum_real <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a>                    mape <span class="op">=</span> (</span>
+<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a>                        np.mean(</span>
+<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a>                            np.<span class="bu">abs</span>(</span>
+<span id="cb30-221"><a href="#cb30-221" aria-hidden="true" tabindex="-1"></a>                                (</span>
+<span id="cb30-222"><a href="#cb30-222" aria-hidden="true" tabindex="-1"></a>                                    y_test_nz.values</span>
+<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a>                                    <span class="op">-</span></span>
+<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a>                                    y_pred_nz</span>
+<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a>                                )</span>
+<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a>                                <span class="op">/</span></span>
+<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a>                                y_test_nz.values</span>
+<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a>                            )</span>
+<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb30-230"><a href="#cb30-230" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a>                    )</span>
 <span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a>                    bias_pct <span class="op">=</span> (</span>
-<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a>                        (</span>
-<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a>                            d8r1_sum_pred</span>
-<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a>                            <span class="op">-</span></span>
-<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a>                            d8r1_sum_real</span>
-<span id="cb30-238"><a href="#cb30-238" aria-hidden="true" tabindex="-1"></a>                        )</span>
-<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a>                        <span class="op">/</span></span>
-<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_real</span>
-<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a>                    mape <span class="op">=</span> np.nan</span>
+<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
+<span id="cb30-238"><a href="#cb30-238" aria-hidden="true" tabindex="-1"></a>                <span class="co"># TOTAL</span></span>
+<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
+<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a>                results.append({</span>
 <span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"country"</span>: country_name,</span>
 <span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a>                    bias_pct <span class="op">=</span> np.nan</span>
-<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a>                <span class="co"># MAPE</span></span>
-<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
+<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"KKR"</span>: (</span>
+<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a>                        df_temp[<span class="st">"KKR"</span>]</span>
+<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a>                        .dropna()</span>
+<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a>                        .iloc[<span class="dv">0</span>]</span>
+<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a>                    ),</span>
 <span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a>                non_zero_mask <span class="op">=</span> (</span>
-<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a>                    y_test <span class="op">!=</span> <span class="dv">0</span></span>
-<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"missingness"</span>: miss_col,</span>
+<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"model"</span>: model_name,</span>
 <span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> non_zero_mask.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a>                    y_test_nz <span class="op">=</span> y_test[</span>
-<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a>                        non_zero_mask</span>
-<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a>                    ]</span>
-<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a>                    y_pred_nz <span class="op">=</span> y_pred[</span>
-<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a>                        non_zero_mask.values</span>
-<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a>                    ]</span>
-<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a>                    mape <span class="op">=</span> (</span>
-<span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a>                        np.mean(</span>
-<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a>                            np.<span class="bu">abs</span>(</span>
-<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a>                                (</span>
-<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>                                    y_test_nz.values</span>
-<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a>                                    <span class="op">-</span></span>
-<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a>                                    y_pred_nz</span>
-<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a>                                )</span>
-<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a>                                <span class="op">/</span></span>
-<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a>                                y_test_nz.values</span>
-<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a>                            )</span>
-<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a>                        )</span>
-<span id="cb30-277"><a href="#cb30-277" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb30-278"><a href="#cb30-278" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a>                    mape <span class="op">=</span> np.nan</span>
-<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
-<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a>                <span class="co"># WYNIK OGÓLNY</span></span>
-<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
-<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a>                results.append({</span>
-<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"country"</span>: country_name,</span>
-<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"KKR"</span>: (</span>
-<span id="cb30-293"><a href="#cb30-293" aria-hidden="true" tabindex="-1"></a>                        df_temp[<span class="st">"KKR"</span>]</span>
-<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a>                        .dropna()</span>
-<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a>                        .iloc[<span class="dv">0</span>]</span>
-<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"missingness"</span>: miss_col,</span>
-<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-300"><a href="#cb30-300" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"model"</span>: model_name,</span>
+<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_features"</span>: <span class="bu">len</span>(</span>
+<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a>                        features_country</span>
+<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"features"</span>: <span class="st">", "</span>.join(</span>
+<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a>                        features_country</span>
+<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_train"</span>: <span class="bu">len</span>(</span>
+<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a>                        X_train</span>
+<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_test"</span>: <span class="bu">len</span>(</span>
+<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a>                        X_test</span>
+<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"D8R1_sum_real"</span>: (</span>
+<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_real</span>
+<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"D8R1_sum_pred"</span>: (</span>
+<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_pred</span>
+<span id="cb30-277"><a href="#cb30-277" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-278"><a href="#cb30-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"RMSE"</span>: rmse,</span>
+<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MAE"</span>: mae,</span>
+<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MAPE"</span>: mape,</span>
+<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Bias_pct"</span>: bias_pct</span>
+<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a>                })</span>
+<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
+<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a>                <span class="co"># MONTLY PREDICTIONS</span></span>
+<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
+<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a>                <span class="co">#YEAR + MONTH.</span></span>
+<span id="cb30-293"><a href="#cb30-293" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
+<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a>                pred_df <span class="op">=</span> test_complete[</span>
+<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a>                    [</span>
+<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"YEAR"</span>,</span>
+<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"MONTH"</span></span>
+<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a>                    ]</span>
+<span id="cb30-300"><a href="#cb30-300" aria-hidden="true" tabindex="-1"></a>                ].copy()</span>
 <span id="cb30-301"><a href="#cb30-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_features"</span>: <span class="bu">len</span>(</span>
-<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a>                        features_country</span>
-<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a>                    ),</span>
+<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"country"</span>] <span class="op">=</span> (</span>
+<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a>                    country_name</span>
+<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a>                )</span>
 <span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"features"</span>: <span class="st">", "</span>.join(</span>
-<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a>                        features_country</span>
-<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-309"><a href="#cb30-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_train"</span>: <span class="bu">len</span>(</span>
-<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a>                        X_train</span>
-<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"n_test"</span>: <span class="bu">len</span>(</span>
-<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a>                        X_test</span>
-<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-317"><a href="#cb30-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"D8R1_sum_real"</span>: (</span>
-<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_real</span>
-<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"D8R1_sum_pred"</span>: (</span>
-<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a>                        d8r1_sum_pred</span>
-<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a>                    ),</span>
-<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"RMSE"</span>: rmse,</span>
-<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MAE"</span>: mae,</span>
-<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MAPE"</span>: mape,</span>
-<span id="cb30-331"><a href="#cb30-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Bias_pct"</span>: bias_pct</span>
-<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a>                })</span>
-<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
-<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a>                <span class="co"># PREDYKCJE MIESIĘCZNE</span></span>
-<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
-<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a>                <span class="co">#</span></span>
-<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Zachowujemy każdą obserwację testową.</span></span>
-<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Dzięki temu później sumujemy D8R1 oraz</span></span>
-<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a>                <span class="co"># predykcje według YEAR + MONTH.</span></span>
-<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a>                <span class="co"># =================================================</span></span>
-<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a>                pred_df <span class="op">=</span> test_complete[</span>
-<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a>                    [</span>
-<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"YEAR"</span>,</span>
-<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"MONTH"</span></span>
-<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a>                    ]</span>
-<span id="cb30-350"><a href="#cb30-350" aria-hidden="true" tabindex="-1"></a>                ].copy()</span>
-<span id="cb30-351"><a href="#cb30-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"country"</span>] <span class="op">=</span> (</span>
-<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a>                    country_name</span>
-<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"KKR"</span>] <span class="op">=</span> (</span>
-<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a>                    test_complete[<span class="st">"KKR"</span>]</span>
-<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a>                    .values</span>
-<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"missingness"</span>] <span class="op">=</span> (</span>
-<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a>                    miss_col</span>
-<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"model"</span>] <span class="op">=</span> (</span>
-<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a>                    model_name</span>
-<span id="cb30-367"><a href="#cb30-367" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-368"><a href="#cb30-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-369"><a href="#cb30-369" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"D8R1_true"</span>] <span class="op">=</span> (</span>
-<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a>                    y_test.values</span>
-<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"D8R1_pred"</span>] <span class="op">=</span> (</span>
-<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a>                    y_pred</span>
-<span id="cb30-375"><a href="#cb30-375" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-376"><a href="#cb30-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-377"><a href="#cb30-377" aria-hidden="true" tabindex="-1"></a>                monthly_predictions.append(</span>
-<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a>                    pred_df</span>
-<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a>                <span class="co"># WYŚWIETLENIE</span></span>
-<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ------------------------------------------------</span></span>
-<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(</span>
-<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"RMSE = </span><span class="sc">{</span>rmse<span class="sc">:.4f}</span><span class="ss"> | "</span></span>
-<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"MAE = </span><span class="sc">{</span>mae<span class="sc">:.4f}</span><span class="ss"> | "</span></span>
-<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"MAPE = </span><span class="sc">{</span>mape<span class="sc">:.2f}</span><span class="ss">% | "</span></span>
-<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"Bias = </span><span class="sc">{</span>bias_pct<span class="sc">:.2f}</span><span class="ss">%"</span></span>
-<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb30-393"><a href="#cb30-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-394"><a href="#cb30-394" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(</span>
-<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"BŁĄD: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"KKR"</span>] <span class="op">=</span> (</span>
+<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a>                    test_complete[<span class="st">"KKR"</span>]</span>
+<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a>                    .values</span>
+<span id="cb30-309"><a href="#cb30-309" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"missingness"</span>] <span class="op">=</span> (</span>
+<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a>                    miss_col</span>
+<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"model"</span>] <span class="op">=</span> (</span>
+<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a>                    model_name</span>
+<span id="cb30-317"><a href="#cb30-317" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"D8R1_true"</span>] <span class="op">=</span> (</span>
+<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a>                    y_test.values</span>
+<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a>                pred_df[<span class="st">"D8R1_pred"</span>] <span class="op">=</span> (</span>
+<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a>                    y_pred</span>
+<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a>                monthly_predictions.append(</span>
+<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a>                    pred_df</span>
+<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-331"><a href="#cb30-331" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(</span>
+<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"RMSE = </span><span class="sc">{</span>rmse<span class="sc">:.4f}</span><span class="ss"> | "</span></span>
+<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"MAE = </span><span class="sc">{</span>mae<span class="sc">:.4f}</span><span class="ss"> | "</span></span>
+<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"MAPE = </span><span class="sc">{</span>mape<span class="sc">:.2f}</span><span class="ss">% | "</span></span>
+<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"Bias = </span><span class="sc">{</span>bias_pct<span class="sc">:.2f}</span><span class="ss">%"</span></span>
+<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(</span>
+<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"BŁĄD: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 
 ####################################################################################################
-KRAJ: Germany
+Country: Germany
 ####################################################################################################
-Liczba cech: 19
-Cechy: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
+Number of features: 19
+Features: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
 
 
 ----------------------------------------------------------------------------------------------------
 Germany | miss_10
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 6436
-TRAIN wg maski: 57212
-TRAIN po sprawdzeniu cech: 57212
-TEST po sprawdzeniu cech: 6436
+TEST by mask: 6436
+TRAIN by mask: 57212
+TRAIN after checking features: 57212
+TESTafter checking features: 6436
 
   Model: RF | RMSE = 33.1574 | MAE = 3.2347 | MAPE = 63.50% | Bias = -1.18%
 
@@ -1786,10 +1804,10 @@ TEST po sprawdzeniu cech: 6436
 ----------------------------------------------------------------------------------------------------
 Germany | miss_20
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 12817
-TRAIN wg maski: 50831
-TRAIN po sprawdzeniu cech: 50831
-TEST po sprawdzeniu cech: 12817
+TEST by mask: 12817
+TRAIN by mask: 50831
+TRAIN after checking features: 50831
+TESTafter checking features: 12817
 
   Model: RF | RMSE = 36.1864 | MAE = 3.4082 | MAPE = 66.03% | Bias = -0.90%
 
@@ -1805,10 +1823,10 @@ TEST po sprawdzeniu cech: 12817
 ----------------------------------------------------------------------------------------------------
 Germany | miss_30
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 19230
-TRAIN wg maski: 44418
-TRAIN po sprawdzeniu cech: 44418
-TEST po sprawdzeniu cech: 19230
+TEST by mask: 19230
+TRAIN by mask: 44418
+TRAIN after checking features: 44418
+TESTafter checking features: 19230
 
   Model: RF | RMSE = 37.0602 | MAE = 3.5359 | MAPE = 65.77% | Bias = -2.60%
 
@@ -1822,19 +1840,19 @@ TEST po sprawdzeniu cech: 19230
 
 
 ####################################################################################################
-KRAJ: Italy
+Country: Italy
 ####################################################################################################
-Liczba cech: 17
-Cechy: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'RO_mean']
+Number of features: 17
+Features: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'RO_mean']
 
 
 ----------------------------------------------------------------------------------------------------
 Italy | miss_10
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 2667
-TRAIN wg maski: 24131
-TRAIN po sprawdzeniu cech: 24131
-TEST po sprawdzeniu cech: 2667
+TEST by mask: 2667
+TRAIN by mask: 24131
+TRAIN after checking features: 24131
+TESTafter checking features: 2667
 
   Model: RF | RMSE = 29.4459 | MAE = 3.3306 | MAPE = 110.81% | Bias = 3.44%
 
@@ -1850,10 +1868,10 @@ TEST po sprawdzeniu cech: 2667
 ----------------------------------------------------------------------------------------------------
 Italy | miss_20
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 5353
-TRAIN wg maski: 21445
-TRAIN po sprawdzeniu cech: 21445
-TEST po sprawdzeniu cech: 5353
+TEST by mask: 5353
+TRAIN by mask: 21445
+TRAIN after checking features: 21445
+TESTafter checking features: 5353
 
   Model: RF | RMSE = 23.0074 | MAE = 2.7471 | MAPE = 87.29% | Bias = 3.06%
 
@@ -1869,10 +1887,10 @@ TEST po sprawdzeniu cech: 5353
 ----------------------------------------------------------------------------------------------------
 Italy | miss_30
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 8028
-TRAIN wg maski: 18770
-TRAIN po sprawdzeniu cech: 18770
-TEST po sprawdzeniu cech: 8028
+TEST by mask: 8028
+TRAIN by mask: 18770
+TRAIN after checking features: 18770
+TESTafter checking features: 8028
 
   Model: RF | RMSE = 21.8526 | MAE = 2.7681 | MAPE = 79.95% | Bias = 2.21%
 
@@ -1886,19 +1904,19 @@ TEST po sprawdzeniu cech: 8028
 
 
 ####################################################################################################
-KRAJ: Ukraine
+Country: Ukraine
 ####################################################################################################
-Liczba cech: 13
-Cechy: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'RO_mean']
+Number of features: 13
+Features: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'RO_mean']
 
 
 ----------------------------------------------------------------------------------------------------
 Ukraine | miss_10
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 5184
-TRAIN wg maski: 45912
-TRAIN po sprawdzeniu cech: 45912
-TEST po sprawdzeniu cech: 5184
+TEST by mask: 5184
+TRAIN by mask: 45912
+TRAIN after checking features: 45912
+TESTafter checking features: 5184
 
   Model: RF | RMSE = 4.0072 | MAE = 1.4692 | MAPE = 45.67% | Bias = 0.39%
 
@@ -1914,10 +1932,10 @@ TEST po sprawdzeniu cech: 5184
 ----------------------------------------------------------------------------------------------------
 Ukraine | miss_20
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 10272
-TRAIN wg maski: 40824
-TRAIN po sprawdzeniu cech: 40824
-TEST po sprawdzeniu cech: 10272
+TEST by mask: 10272
+TRAIN by mask: 40824
+TRAIN after checking features: 40824
+TESTafter checking features: 10272
 
   Model: RF | RMSE = 9.5451 | MAE = 1.5718 | MAPE = 48.12% | Bias = 1.08%
 
@@ -1933,10 +1951,10 @@ TEST po sprawdzeniu cech: 10272
 ----------------------------------------------------------------------------------------------------
 Ukraine | miss_30
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 15387
-TRAIN wg maski: 35709
-TRAIN po sprawdzeniu cech: 35709
-TEST po sprawdzeniu cech: 15387
+TEST by mask: 15387
+TRAIN by mask: 35709
+TRAIN after checking features: 35709
+TESTafter checking features: 15387
 
   Model: RF | RMSE = 7.2327 | MAE = 1.5972 | MAPE = 51.20% | Bias = 0.91%
 
@@ -1950,19 +1968,19 @@ TEST po sprawdzeniu cech: 15387
 
 
 ####################################################################################################
-KRAJ: United Kingdom
+Country: United Kingdom
 ####################################################################################################
-Liczba cech: 19
-Cechy: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
+Number of features: 19
+Features: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
 
 
 ----------------------------------------------------------------------------------------------------
 United Kingdom | miss_10
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 3153
-TRAIN wg maski: 28578
-TRAIN po sprawdzeniu cech: 28578
-TEST po sprawdzeniu cech: 3153
+TEST by mask: 3153
+TRAIN by mask: 28578
+TRAIN after checking features: 28578
+TESTafter checking features: 3153
 
   Model: RF | RMSE = 11.1293 | MAE = 3.1669 | MAPE = 58.79% | Bias = -0.32%
 
@@ -1978,10 +1996,10 @@ TEST po sprawdzeniu cech: 3153
 ----------------------------------------------------------------------------------------------------
 United Kingdom | miss_20
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 6370
-TRAIN wg maski: 25361
-TRAIN po sprawdzeniu cech: 25361
-TEST po sprawdzeniu cech: 6370
+TEST by mask: 6370
+TRAIN by mask: 25361
+TRAIN after checking features: 25361
+TESTafter checking features: 6370
 
   Model: RF | RMSE = 12.1834 | MAE = 3.3321 | MAPE = 58.21% | Bias = -0.60%
 
@@ -1997,10 +2015,10 @@ TEST po sprawdzeniu cech: 6370
 ----------------------------------------------------------------------------------------------------
 United Kingdom | miss_30
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 9576
-TRAIN wg maski: 22155
-TRAIN po sprawdzeniu cech: 22155
-TEST po sprawdzeniu cech: 9576
+TEST by mask: 9576
+TRAIN by mask: 22155
+TRAIN after checking features: 22155
+TESTafter checking features: 9576
 
   Model: RF | RMSE = 11.9500 | MAE = 3.4246 | MAPE = 66.95% | Bias = -0.11%
 
@@ -2014,19 +2032,19 @@ TEST po sprawdzeniu cech: 9576
 
 
 ####################################################################################################
-KRAJ: United States
+Country: United States
 ####################################################################################################
-Liczba cech: 19
-Cechy: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
+Number of features: 19
+Features: ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']
 
 
 ----------------------------------------------------------------------------------------------------
 United States | miss_10
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 2079
-TRAIN wg maski: 18815
-TRAIN po sprawdzeniu cech: 18815
-TEST po sprawdzeniu cech: 2079
+TEST by mask: 2079
+TRAIN by mask: 18815
+TRAIN after checking features: 18815
+TESTafter checking features: 2079
 
   Model: RF | RMSE = 28.0569 | MAE = 3.7124 | MAPE = 62.61% | Bias = -5.42%
 
@@ -2042,10 +2060,10 @@ TEST po sprawdzeniu cech: 2079
 ----------------------------------------------------------------------------------------------------
 United States | miss_20
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 4201
-TRAIN wg maski: 16693
-TRAIN po sprawdzeniu cech: 16693
-TEST po sprawdzeniu cech: 4201
+TEST by mask: 4201
+TRAIN by mask: 16693
+TRAIN after checking features: 16693
+TESTafter checking features: 4201
 
   Model: RF | RMSE = 23.4644 | MAE = 3.5623 | MAPE = 66.14% | Bias = -3.89%
 
@@ -2061,10 +2079,10 @@ TEST po sprawdzeniu cech: 4201
 ----------------------------------------------------------------------------------------------------
 United States | miss_30
 ----------------------------------------------------------------------------------------------------
-TEST wg maski: 6275
-TRAIN wg maski: 14619
-TRAIN po sprawdzeniu cech: 14619
-TEST po sprawdzeniu cech: 6275
+TEST by mask: 6275
+TRAIN by mask: 14619
+TRAIN after checking features: 14619
+TESTafter checking features: 6275
 
   Model: RF | RMSE = 26.4861 | MAE = 3.8003 | MAPE = 67.51% | Bias = -2.97%
 
@@ -2077,11 +2095,11 @@ TEST po sprawdzeniu cech: 6275
   Model: XGB | RMSE = 25.5375 | MAE = 3.9004 | MAPE = 60.35% | Bias = -1.05%</code></pre>
 </div>
 </div>
-<div id="cdb652da" class="cell" data-execution_count="16">
+<div id="d04feebc" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 13. TABELA WYNIKÓW MODELI</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of results</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(</span>
@@ -2091,11 +2109,11 @@ TEST po sprawdzeniu cech: 6275
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KONIEC EKSPERYMENTU"</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"end of experiment"</span>)</span>
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liczba wykonanych eksperymentów:"</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Numbers of experiment performed:"</span>,</span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(results_df)</span>
 <span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
@@ -2122,9 +2140,9 @@ TEST po sprawdzeniu cech: 6275
 <pre><code>
 
 ====================================================================================================
-KONIEC EKSPERYMENTU
+end of experiment
 ====================================================================================================
-Liczba wykonanych eksperymentów: 75</code></pre>
+Numbers of experiment performed: 75</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2345,11 +2363,15 @@ Liczba wykonanych eksperymentów: 75</code></pre>
 </div>
 </div>
 </div>
-<div id="e1c29e7f" class="cell" data-execution_count="17">
+</section>
+</section>
+<section id="selection-of-the-best-model" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-the-best-model">Selection of the best model</h2>
+<div id="e323675a" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 14. NAJLEPSZE MODELE</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># BEST MODELS BY RMSE</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(results_df) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -2375,7 +2397,7 @@ Liczba wykonanych eksperymentów: 75</code></pre>
 <span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"NAJLEPSZY MODEL - NAJNIŻSZY RMSE"</span>)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"BEST MODEL THE LOVERST RMSE"</span>)</span>
 <span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
 <span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    display(</span>
@@ -2402,7 +2424,7 @@ Liczba wykonanych eksperymentów: 75</code></pre>
 <pre><code>
 
 ====================================================================================================
-NAJLEPSZY MODEL - NAJNIŻSZY RMSE
+BEST MODEL THE LOVERST RMSE
 ====================================================================================================</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -2675,11 +2697,15 @@ NAJLEPSZY MODEL - NAJNIŻSZY RMSE
 </div>
 </div>
 </div>
-<div id="a9c8d825" class="cell" data-execution_count="18">
+</section>
+</section>
+<section id="combining-all-individual-predictions" class="level1">
+<h1>Combining all individual predictions</h1>
+<div id="c08bde06" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 15. POŁĄCZENIE WSZYSTKICH PREDYKCJI</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># COMBINING ALL PREDICTIONS</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>monthly_predictions_df <span class="op">=</span> pd.concat(</span>
@@ -2690,11 +2716,11 @@ NAJLEPSZY MODEL - NAJNIŻSZY RMSE
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"PREDYKCJE MIESIĘCZNE"</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MONTLY PREDICTIONS"</span>)</span>
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
 <span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liczba obserwacji:"</span>,</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of observations:"</span>,</span>
 <span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(monthly_predictions_df)</span>
 <span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -2706,9 +2732,9 @@ NAJLEPSZY MODEL - NAJNIŻSZY RMSE
 <pre><code>
 
 ====================================================================================================
-PREDYKCJE MIESIĘCZNE
+MONTLY PREDICTIONS
 ====================================================================================================
-Liczba obserwacji: 585140</code></pre>
+Number of observations: 585140</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2790,59 +2816,45 @@ Liczba obserwacji: 585140</code></pre>
 </div>
 </div>
 </div>
-<div id="b9bd9105" class="cell" data-execution_count="19">
+</section>
+<section id="aggregation-to-monthly-totals" class="level1">
+<h1>Aggregation to monthly totals</h1>
+<div id="31961adf" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 16. SUMY MIESIĘCZNE</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Dla każdego:</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># KRAJ</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># MISS</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># MODEL</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># YEAR</span></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># MONTH</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># liczymy:</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># prawdziwe D8R1</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co"># suma predykcji</span></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>monthly_results <span class="op">=</span> (</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    monthly_predictions_df</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    .groupby(</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>        [</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">"country"</span>,</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KKR"</span>,</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"missingness"</span>,</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"model"</span>,</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"YEAR"</span>,</span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MONTH"</span></span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>        ],</span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>        as_index<span class="op">=</span><span class="va">False</span></span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
-<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>        D8R1_true<span class="op">=</span>(</span>
-<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_true"</span>,</span>
-<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sum"</span></span>
-<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>        D8R1_pred<span class="op">=</span>(</span>
-<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_pred"</span>,</span>
-<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sum"</span></span>
-<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>        n_test<span class="op">=</span>(</span>
-<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_true"</span>,</span>
-<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"size"</span></span>
-<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>monthly_results <span class="op">=</span> (</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    monthly_predictions_df</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    .groupby(</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"country"</span>,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KKR"</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"missingness"</span>,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"model"</span>,</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"YEAR"</span>,</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MONTH"</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>        as_index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>        D8R1_true<span class="op">=</span>(</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_true"</span>,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sum"</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>        D8R1_pred<span class="op">=</span>(</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_pred"</span>,</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sum"</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>        n_test<span class="op">=</span>(</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D8R1_true"</span>,</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"size"</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="e74c386e" class="cell" data-execution_count="20">
+<div id="335cd022" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2870,7 +2882,7 @@ Liczba obserwacji: 585140</code></pre>
 <span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="d9feae5a" class="cell" data-execution_count="21">
+<div id="5129ebe0" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2903,7 +2915,7 @@ Liczba obserwacji: 585140</code></pre>
 <span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="7051a642" class="cell" data-execution_count="22">
+<div id="bd555097" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4005,7 +4017,7 @@ TABELA PIVOT - SUMY MIESIĘCZNE
 </div>
 </div>
 </div>
-<div id="7a9093bb" class="cell" data-execution_count="23">
+<div id="68b3edaa" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4091,7 +4103,7 @@ ZAPISANO EXCEL
 D8R1_ML_2019_2020_KRAJE_MISS_RESULTS.xlsx</code></pre>
 </div>
 </div>
-<div id="dc88ac73" class="cell" data-execution_count="24">
+<div id="75cd88be" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4295,7 +4307,7 @@ D8R1_ML_2019_2020_KRAJE_MISS_RESULTS.xlsx</code></pre>
 <span id="cb46-199"><a href="#cb46-199" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ====================================================</span></span>
 <span id="cb46-200"><a href="#cb46-200" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-201"><a href="#cb46-201" aria-hidden="true" tabindex="-1"></a>        plt.figure(</span>
-<span id="cb46-202"><a href="#cb46-202" aria-hidden="true" tabindex="-1"></a>            figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">8</span>)</span>
+<span id="cb46-202"><a href="#cb46-202" aria-hidden="true" tabindex="-1"></a>            figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>)</span>
 <span id="cb46-203"><a href="#cb46-203" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb46-204"><a href="#cb46-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-205"><a href="#cb46-205" aria-hidden="true" tabindex="-1"></a></span>
@@ -4613,7 +4625,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-2.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-2.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4623,7 +4635,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-4.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-4.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4633,7 +4645,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-6.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-6.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4643,7 +4655,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-8.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-8.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4653,7 +4665,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-10.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-10.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4663,7 +4675,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-12.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-12.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4673,7 +4685,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-14.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-14.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4683,7 +4695,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-16.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-16.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4693,7 +4705,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-18.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-18.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4703,7 +4715,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-20.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-20.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4713,7 +4725,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-22.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-22.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4723,7 +4735,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-24.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-24.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4733,7 +4745,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-26.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-26.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4743,7 +4755,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-28.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-28.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4753,7 +4765,7 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chapter5_files/figure-html/cell-25-output-30.png" width="1524" height="754" class="figure-img"></p>
+<p><img src="chapter5_files/figure-html/cell-25-output-30.png" width="757" height="370" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -4768,10 +4780,22 @@ Liczba wykresów: 15
 Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 </div>
 </div>
+</section>
+<section id="important-methodological-point" class="level1">
+<h1>Important methodological point</h1>
+<p><strong>The code does not actually remove the true <code>D8R1</code> values from the DataFrame before prediction.</strong></p>
+<p>Instead, the <code>miss_10</code>, <code>miss_20</code>, and <code>miss_30</code> columns are used as <strong>masks defining which observations are treated as test observations</strong>.</p>
+<p>The true <code>D8R1</code> values remain available in <code>y_test</code>, but they are used only for <strong>evaluation</strong>, not for model training.</p>
+<p>This is effectively a controlled reconstruction experiment:</p>
+<ul>
+<li><p>mask&nbsp;identifies&nbsp;test&nbsp;observations</p></li>
+<li><p>training&nbsp;uses&nbsp;only&nbsp;non-test&nbsp;observations</p></li>
+<li><p>prediction&nbsp;is&nbsp;generated&nbsp;for&nbsp;test&nbsp;observations</p></li>
+<li><p>original&nbsp;D8R1&nbsp;is&nbsp;used&nbsp;as&nbsp;ground&nbsp;truth</p></li>
+</ul>
+<p>This distinction is important when describing the methodology in a thesis or research paper.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
