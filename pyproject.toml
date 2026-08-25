@@ -16,5 +16,6 @@ dependencies = [
     "seaborn",
     "numpy",
     "openpyxl",
-    "scikit-learn"
+    "scikit-learn",
+    "xgboost"
 ]
