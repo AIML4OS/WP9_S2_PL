@@ -239,17 +239,35 @@ window.Quarto = {
   </ul></li>
   <li><a href="#loading-the-excel-files" id="toc-loading-the-excel-files" class="nav-link" data-scroll-target="#loading-the-excel-files">Loading the Excel Files</a></li>
   <li><a href="#creating-new-variables" id="toc-creating-new-variables" class="nav-link" data-scroll-target="#creating-new-variables">Creating new Variables</a></li>
-  <li><a href="#veryfying-country-of-origin" id="toc-veryfying-country-of-origin" class="nav-link" data-scroll-target="#veryfying-country-of-origin">Veryfying country of origin</a>
-  <ul class="collapse">
+  <li><a href="#veryfying-country-of-origin" id="toc-veryfying-country-of-origin" class="nav-link" data-scroll-target="#veryfying-country-of-origin">Veryfying country of origin</a></li>
   <li><a href="#experiment-settings" id="toc-experiment-settings" class="nav-link" data-scroll-target="#experiment-settings">Experiment Settings</a></li>
   <li><a href="#defining-the-maximum-feature-set" id="toc-defining-the-maximum-feature-set" class="nav-link" data-scroll-target="#defining-the-maximum-feature-set">Defining the Maximum Feature Set</a></li>
   <li><a href="#defining-the-machine-learning-models" id="toc-defining-the-machine-learning-models" class="nav-link" data-scroll-target="#defining-the-machine-learning-models">Defining the Machine Learning Models</a>
   <ul class="collapse">
-  <li><a href="#decision-tree-dt" id="toc-decision-tree-dt" class="nav-link" data-scroll-target="#decision-tree-dt">Decision Tree (DT)</a></li>
-  <li><a href="#random-forest-rf" id="toc-random-forest-rf" class="nav-link" data-scroll-target="#random-forest-rf">Random Forest (RF)</a></li>
-  <li><a href="#gradient-boosting-regressor-gbr" id="toc-gradient-boosting-regressor-gbr" class="nav-link" data-scroll-target="#gradient-boosting-regressor-gbr">Gradient Boosting Regressor (GBR)</a></li>
-  <li><a href="#k-nearest-neighbors-regressor-knn" id="toc-k-nearest-neighbors-regressor-knn" class="nav-link" data-scroll-target="#k-nearest-neighbors-regressor-knn">K-Nearest Neighbors Regressor (KNN)</a></li>
-  <li><a href="#xgboost-extreme-gradient-boosting---xgb" id="toc-xgboost-extreme-gradient-boosting---xgb" class="nav-link" data-scroll-target="#xgboost-extreme-gradient-boosting---xgb">XGBoost (eXtreme Gradient Boosting - XGB)</a></li>
+  <li><a href="#decision-tree-dt" id="toc-decision-tree-dt" class="nav-link" data-scroll-target="#decision-tree-dt">Decision Tree (DT)</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-background" id="toc-theoretical-background" class="nav-link" data-scroll-target="#theoretical-background">Theoretical Background</a></li>
+  <li><a href="#key-parameters-configuration" id="toc-key-parameters-configuration" class="nav-link" data-scroll-target="#key-parameters-configuration">Key Parameters &amp; Configuration</a></li>
+  </ul></li>
+  <li><a href="#random-forest-rf" id="toc-random-forest-rf" class="nav-link" data-scroll-target="#random-forest-rf">Random Forest (RF)</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-background-1" id="toc-theoretical-background-1" class="nav-link" data-scroll-target="#theoretical-background-1">Theoretical Background</a></li>
+  <li><a href="#key-parameters-configuration-1" id="toc-key-parameters-configuration-1" class="nav-link" data-scroll-target="#key-parameters-configuration-1">Key Parameters &amp; Configuration</a></li>
+  </ul></li>
+  <li><a href="#gradient-boosting-regressor-gbr" id="toc-gradient-boosting-regressor-gbr" class="nav-link" data-scroll-target="#gradient-boosting-regressor-gbr">Gradient Boosting Regressor (GBR)</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-background-2" id="toc-theoretical-background-2" class="nav-link" data-scroll-target="#theoretical-background-2">Theoretical Background</a></li>
+  <li><a href="#key-parameters-configuration-2" id="toc-key-parameters-configuration-2" class="nav-link" data-scroll-target="#key-parameters-configuration-2">Key Parameters &amp; Configuration</a></li>
+  </ul></li>
+  <li><a href="#k-nearest-neighbors-regressor-knn" id="toc-k-nearest-neighbors-regressor-knn" class="nav-link" data-scroll-target="#k-nearest-neighbors-regressor-knn">K-Nearest Neighbors Regressor (KNN)</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-background-3" id="toc-theoretical-background-3" class="nav-link" data-scroll-target="#theoretical-background-3">Theoretical Background</a></li>
+  <li><a href="#key-parameters-configuration-3" id="toc-key-parameters-configuration-3" class="nav-link" data-scroll-target="#key-parameters-configuration-3">Key Parameters &amp; Configuration</a></li>
+  </ul></li>
+  <li><a href="#xgboost-extreme-gradient-boosting---xgb" id="toc-xgboost-extreme-gradient-boosting---xgb" class="nav-link" data-scroll-target="#xgboost-extreme-gradient-boosting---xgb">XGBoost (eXtreme Gradient Boosting - XGB)</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-background-4" id="toc-theoretical-background-4" class="nav-link" data-scroll-target="#theoretical-background-4">Theoretical Background</a></li>
+  <li><a href="#key-parameters-configuration-4" id="toc-key-parameters-configuration-4" class="nav-link" data-scroll-target="#key-parameters-configuration-4">Key Parameters &amp; Configuration</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -340,7 +358,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="5989cb2a" class="cell" data-execution_count="1">
+<div id="ed0f8594" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -372,7 +390,7 @@ window.Quarto = {
 <p>If the result is:</p>
 <pre><code>False</code></pre>
 <p>the program will not be able to load the expected files.</p>
-<div id="95cf60d8" class="cell" data-execution_count="2">
+<div id="810f8a70" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Data Folder location</span></span>
@@ -401,7 +419,7 @@ True</code></pre>
 <p>The full paths are stored in:</p>
 <pre><code>data_files</code></pre>
 <p><code>sorted()</code> ensures that the files are stored in alphabetical order. After this the program prints the names of all Excel files found</p>
-<div id="8911b2a0" class="cell" data-execution_count="3">
+<div id="83169d7d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -430,7 +448,7 @@ United Kingdom.xlsx
 United States.xlsx</code></pre>
 </div>
 </div>
-<div id="b4c66bd7" class="cell" data-execution_count="4">
+<div id="5fb5c270" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -464,7 +482,7 @@ United States.xlsx</code></pre>
 <li><p>miss_30</p></li>
 </ul>
 <p>And next the program checks how many missing values exist in important columns. This is particularly important because the miss_10, miss_20, and miss_30 variables are later used to define the experimental test sets.</p>
-<div id="bb2d1941" class="cell" data-execution_count="5">
+<div id="b7d147a0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -583,7 +601,7 @@ Missings in variables:
 <li><p>MONTH = 01</p></li>
 </ul>
 <p>Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created. After this the code identifies which years are present in every country’s dataset.</p>
-<div id="1d386105" class="cell" data-execution_count="6">
+<div id="6fea8821" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -651,7 +669,7 @@ United States: [np.int64(2018), np.int64(2019), np.int64(2020)]</code></pre>
 <li><p>The experiment is conducted separately for the five country files.</p></li>
 <li><p>KKR is retained as information associated with the observations.</p></li>
 </ul>
-<div id="68de764f" class="cell" data-execution_count="7">
+<div id="4698552a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -681,8 +699,9 @@ United Kingdom: [826]
 United States: [840]</code></pre>
 </div>
 </div>
-<section id="experiment-settings" class="level2">
-<h2 class="anchored" data-anchor-id="experiment-settings">Experiment Settings</h2>
+</section>
+<section id="experiment-settings" class="level1">
+<h1>Experiment Settings</h1>
 <p>The main experimental parameters are defined.</p>
 <ul>
 <li>SEED = 42 sets the random seed.</li>
@@ -699,7 +718,7 @@ United States: [840]</code></pre>
 <li>20% missingness</li>
 <li>30% missingness</li>
 </ul>
-<div id="28a1410a" class="cell" data-execution_count="8">
+<div id="d50696c6" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -718,8 +737,8 @@ United States: [840]</code></pre>
 </details>
 </div>
 </section>
-<section id="defining-the-maximum-feature-set" class="level2">
-<h2 class="anchored" data-anchor-id="defining-the-maximum-feature-set">Defining the Maximum Feature Set</h2>
+<section id="defining-the-maximum-feature-set" class="level1">
+<h1>Defining the Maximum Feature Set</h1>
 <p>This cell defines the maximum set of predictors that the experiment can use.</p>
 <p>These include:</p>
 <ul>
@@ -732,7 +751,7 @@ United States: [840]</code></pre>
 <p>Therefore, each country receives only the features that actually exist in its dataset.</p>
 <p>This is what the comment means by:</p>
 <p>Each country may have only a subset of the maximum feature set.</p>
-<div id="a475e667" class="cell" data-execution_count="9">
+<div id="e07c961e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Maximum Feature Set</span></span>
@@ -766,8 +785,8 @@ United States: [840]</code></pre>
 </details>
 </div>
 </section>
-<section id="defining-the-machine-learning-models" class="level2">
-<h2 class="anchored" data-anchor-id="defining-the-machine-learning-models">Defining the Machine Learning Models</h2>
+<section id="defining-the-machine-learning-models" class="level1">
+<h1>Defining the Machine Learning Models</h1>
 <p>The experiment compares five regression algorithms:</p>
 <ul>
 <li><p>RF- Random Forest</p></li>
@@ -776,15 +795,15 @@ United States: [840]</code></pre>
 <li><p>KNN - K-Nearest Neighbors</p></li>
 <li><p>XGB- XGBoost .</p></li>
 </ul>
-<section id="decision-tree-dt" class="level3">
-<h3 class="anchored" data-anchor-id="decision-tree-dt">Decision Tree (DT)</h3>
-<section id="theoretical-background" class="level4">
-<h4 class="anchored" data-anchor-id="theoretical-background">Theoretical Background</h4>
+<section id="decision-tree-dt" class="level2">
+<h2 class="anchored" data-anchor-id="decision-tree-dt">Decision Tree (DT)</h2>
+<section id="theoretical-background" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-background">Theoretical Background</h3>
 <p>A Decision Tree is a non-parametric supervised learning algorithm that partitions the feature space into mutually exclusive rectangular regions through a sequence of recursive binary splits. The algorithm evaluates feature thresholds to maximize variance reduction for continuous numerical targets. In the context of forecasting the number of foreign tourists, the model traverses down the tree branches based on specific feature conditions (e.g., geographical proximity, economic indicators) until it reaches a terminal node (leaf), where the predicted numerical value is calculated as the mean of the training samples residing in that leaf.</p>
 <p><strong>Documentation Link:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html">sklearn.tree.DecisionTreeRegressor</a></p>
 </section>
-<section id="key-parameters-configuration" class="level4">
-<h4 class="anchored" data-anchor-id="key-parameters-configuration">Key Parameters &amp; Configuration</h4>
+<section id="key-parameters-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-configuration">Key Parameters &amp; Configuration</h3>
 <ul>
 <li><p>max_depth=10: Restricts the maximum number of sequential splits allowed, acting as regularization to prevent overfitting.</p></li>
 <li><p>min_samples_leaf=5: Specifies the minimum number of observations required to form a terminal leaf node, ensuring the numerical prediction is statistically robust and not biased by outliers.</p></li>
@@ -792,15 +811,15 @@ United States: [840]</code></pre>
 </ul>
 </section>
 </section>
-<section id="random-forest-rf" class="level3">
-<h3 class="anchored" data-anchor-id="random-forest-rf">Random Forest (RF)</h3>
-<section id="theoretical-background-1" class="level4">
-<h4 class="anchored" data-anchor-id="theoretical-background-1">Theoretical Background</h4>
+<section id="random-forest-rf" class="level2">
+<h2 class="anchored" data-anchor-id="random-forest-rf">Random Forest (RF)</h2>
+<section id="theoretical-background-1" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-background-1">Theoretical Background</h3>
 <p>Random Forest is an ensemble learning method based on bagging combined with randomized feature selection. It constructs a multitude (<span class="math inline">\(N = \text{n\_estimators}\)</span>) of independent decision trees during training. For forecasting the numerical volume of foreign tourists, the final predicted value is derived by aggregating the numerical predictions (via arithmetic mean) across all individual decision trees, significantly reducing variance and mitigating the risk of overfitting.</p>
 <p><strong>Documentation Link:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">sklearn.ensemble.RandomForestRegressor</a></p>
 </section>
-<section id="key-parameters-configuration-1" class="level4">
-<h4 class="anchored" data-anchor-id="key-parameters-configuration-1">Key Parameters &amp; Configuration</h4>
+<section id="key-parameters-configuration-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-configuration-1">Key Parameters &amp; Configuration</h3>
 <ul>
 <li><p>n_estimators=100: Defines the total number of independent decision trees constructed within the ensemble.</p></li>
 <li><p>max_depth=10 &amp; min_samples_leaf=5: Control the structural complexity and regularization constraints of each constituent tree.</p></li>
@@ -808,15 +827,15 @@ United States: [840]</code></pre>
 </ul>
 </section>
 </section>
-<section id="gradient-boosting-regressor-gbr" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-boosting-regressor-gbr">Gradient Boosting Regressor (GBR)</h3>
-<section id="theoretical-background-2" class="level4">
-<h4 class="anchored" data-anchor-id="theoretical-background-2">Theoretical Background</h4>
+<section id="gradient-boosting-regressor-gbr" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-boosting-regressor-gbr">Gradient Boosting Regressor (GBR)</h2>
+<section id="theoretical-background-2" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-background-2">Theoretical Background</h3>
 <p>Gradient Boosting is an additive ensemble technique that builds models sequentially. Instead of bagging, it employs boosting, where each new weak learner is trained to predict the residual errors (the differences between actual and predicted numerical tourist numbers) made by the preceding ensemble. By optimizing a differentiable loss function iteratively, the model progressively minimizes numerical prediction error across successive optimization steps.</p>
 <p><strong>Documentation Link:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html">sklearn.ensemble.GradientBoostingRegressor</a></p>
 </section>
-<section id="key-parameters-configuration-2" class="level4">
-<h4 class="anchored" data-anchor-id="key-parameters-configuration-2">Key Parameters &amp; Configuration</h4>
+<section id="key-parameters-configuration-2" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-configuration-2">Key Parameters &amp; Configuration</h3>
 <ul>
 <li><p>n_estimators=100: Specifies the total number of sequential boosting iterations.</p></li>
 <li><p>max_depth=5: Controls the depth of each sequential tree.</p></li>
@@ -824,15 +843,15 @@ United States: [840]</code></pre>
 </ul>
 </section>
 </section>
-<section id="k-nearest-neighbors-regressor-knn" class="level3">
-<h3 class="anchored" data-anchor-id="k-nearest-neighbors-regressor-knn">K-Nearest Neighbors Regressor (KNN)</h3>
-<section id="theoretical-background-3" class="level4">
-<h4 class="anchored" data-anchor-id="theoretical-background-3">Theoretical Background</h4>
+<section id="k-nearest-neighbors-regressor-knn" class="level2">
+<h2 class="anchored" data-anchor-id="k-nearest-neighbors-regressor-knn">K-Nearest Neighbors Regressor (KNN)</h2>
+<section id="theoretical-background-3" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-background-3">Theoretical Background</h3>
 <p>K-Nearest Neighbors is a non-parametric, instance-based learning algorithm. To forecast the exact number of tourists from a specific country, the algorithm calculates the distance (e.g., Euclidean distance) between the target instance and all points in the feature space, identifies the <span class="math inline">\(K\)</span> closest training samples, and computes a distance-weighted average of their numerical target values.</p>
 <p><strong>Documentation Link:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">sklearn.neighbors.KNeighborsRegressor</a></p>
 </section>
-<section id="key-parameters-configuration-3" class="level4">
-<h4 class="anchored" data-anchor-id="key-parameters-configuration-3">Key Parameters &amp; Configuration</h4>
+<section id="key-parameters-configuration-3" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-configuration-3">Key Parameters &amp; Configuration</h3>
 <ul>
 <li><p>n_neighbors=5: Defines the neighborhood size (<span class="math inline">\(K\)</span>) used to gather similar historical observations.</p></li>
 <li><p>weights=“distance”: Ensures that closer geographic or economic neighbors exert a stronger numerical influence on the final forecasted count.</p></li>
@@ -840,22 +859,22 @@ United States: [840]</code></pre>
 </ul>
 </section>
 </section>
-<section id="xgboost-extreme-gradient-boosting---xgb" class="level3">
-<h3 class="anchored" data-anchor-id="xgboost-extreme-gradient-boosting---xgb">XGBoost (eXtreme Gradient Boosting - XGB)</h3>
-<section id="theoretical-background-4" class="level4">
-<h4 class="anchored" data-anchor-id="theoretical-background-4">Theoretical Background</h4>
+<section id="xgboost-extreme-gradient-boosting---xgb" class="level2">
+<h2 class="anchored" data-anchor-id="xgboost-extreme-gradient-boosting---xgb">XGBoost (eXtreme Gradient Boosting - XGB)</h2>
+<section id="theoretical-background-4" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-background-4">Theoretical Background</h3>
 <p>XGBoost is an advanced, highly optimized implementation of gradient-boosted decision trees designed for regression tasks. It formally integrates regularized objective functions and second-order Taylor expansion approximations of the loss function, allowing for high-precision numerical forecasting of foreign tourist counts while controlling model complexity and preventing overfitting.</p>
 <p><strong>Documentation Link:</strong> <a href="https://www.google.com/search?q=https://xgboost.readthedocs.io/en/stable/python/python_api.html%23xgboost.XGBRegressor">xgboost.XGBRegressor</a></p>
 </section>
-<section id="key-parameters-configuration-4" class="level4">
-<h4 class="anchored" data-anchor-id="key-parameters-configuration-4">Key Parameters &amp; Configuration</h4>
+<section id="key-parameters-configuration-4" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-configuration-4">Key Parameters &amp; Configuration</h3>
 <ul>
 <li><p>n_estimators=100: Specifies the total number of sequential gradient-boosted trees built.</p></li>
 <li><p>max_depth=6: Determines the maximum allowable depth for each individual boosted tree.</p></li>
 <li><p>learning_rate=0.1: The shrinkage step-size used to scale the impact of each new tree on the final prediction.</p></li>
 <li><p>verbosity=0: Suppresses internal runtime logs during execution.</p></li>
 </ul>
-<div id="013770b6" class="cell" data-execution_count="10">
+<div id="bb6f7c59" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -902,7 +921,7 @@ United States: [840]</code></pre>
 <span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="f7c6d1d6" class="cell" data-execution_count="11">
+<div id="1b9fe16c" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ============================================================</span></span>
@@ -968,7 +987,7 @@ Liczba obserwacji 2019-2020: 20894
 Lata: [np.int64(2019), np.int64(2020)]</code></pre>
 </div>
 </div>
-<div id="7f566f60" class="cell" data-execution_count="12">
+<div id="7c9e2af0" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -1129,7 +1148,7 @@ lag_11    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="d82710b7" class="cell" data-execution_count="13">
+<div id="92b5eda8" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -1196,7 +1215,7 @@ Liczba cech: 19
 ['mean_last_3', 'mean_last_6', 'mean_last_9', 'mean_last_12', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5', 'lag_6', 'lag_7', 'lag_8', 'lag_9', 'lag_10', 'lag_11', 'WON_mean', 'WON_sd', 'RO_mean', 'RO_sd']</code></pre>
 </div>
 </div>
-<div id="fe91fc25" class="cell" data-execution_count="14">
+<div id="71a8a4fe" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. SPRAWDZENIE BRAKÓW W CECHACH</span></span>
@@ -1335,7 +1354,7 @@ RO_sd           0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="5f9d2ee0" class="cell" data-execution_count="15">
+<div id="2f2addcd" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2058,7 +2077,7 @@ TEST po sprawdzeniu cech: 6275
   Model: XGB | RMSE = 25.5375 | MAE = 3.9004 | MAPE = 60.35% | Bias = -1.05%</code></pre>
 </div>
 </div>
-<div id="5110616f" class="cell" data-execution_count="16">
+<div id="cdb652da" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2326,7 +2345,7 @@ Liczba wykonanych eksperymentów: 75</code></pre>
 </div>
 </div>
 </div>
-<div id="93d7f77d" class="cell" data-execution_count="17">
+<div id="e1c29e7f" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2656,7 +2675,7 @@ NAJLEPSZY MODEL - NAJNIŻSZY RMSE
 </div>
 </div>
 </div>
-<div id="8352ff3b" class="cell" data-execution_count="18">
+<div id="a9c8d825" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2771,7 +2790,7 @@ Liczba obserwacji: 585140</code></pre>
 </div>
 </div>
 </div>
-<div id="236279c6" class="cell" data-execution_count="19">
+<div id="b9bd9105" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2823,7 +2842,7 @@ Liczba obserwacji: 585140</code></pre>
 <span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="1161772a" class="cell" data-execution_count="20">
+<div id="e74c386e" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2851,7 +2870,7 @@ Liczba obserwacji: 585140</code></pre>
 <span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="f087c0dd" class="cell" data-execution_count="21">
+<div id="d9feae5a" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2884,7 +2903,7 @@ Liczba obserwacji: 585140</code></pre>
 <span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="bcfd8830" class="cell" data-execution_count="22">
+<div id="7051a642" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -3986,7 +4005,7 @@ TABELA PIVOT - SUMY MIESIĘCZNE
 </div>
 </div>
 </div>
-<div id="f2574ead" class="cell" data-execution_count="23">
+<div id="7a9093bb" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4072,7 +4091,7 @@ ZAPISANO EXCEL
 D8R1_ML_2019_2020_KRAJE_MISS_RESULTS.xlsx</code></pre>
 </div>
 </div>
-<div id="a2fd3777" class="cell" data-execution_count="24">
+<div id="dc88ac73" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4751,7 +4770,6 @@ Katalog: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 </div>
 
 
-</section>
 </section>
 </section>
 </section>
