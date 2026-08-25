@@ -132,6 +132,7 @@ for file in data_files:
             print(
                 f"  {col}: "
                 f"{df_temp[col].isna().sum()}"
+            )
 
 ```
 ```{python}
