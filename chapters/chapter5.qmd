@@ -46,49 +46,44 @@ warnings.filterwarnings('ignore')
 from pathlib import Path
 
 # ============================================================
-# ŚCIEŻKA DO PROJEKTU
+# ŚCIEŻKA DO DANYCH
 # ============================================================
 
-from pathlib import Path
+MISSING_DATA_DIR = "synthetic data/synthetic_missing_data"
 
-PROJECT_DIR = Path("../").resolve()
-
-MISSING_DATA_DIR = (
-    PROJECT_DIR
-    / "synthetic data"
-    / "synthetic_missing_data"
-)
-
-print("PROJECT_DIR:")
-print(PROJECT_DIR)
-
-print("\nMISSING_DATA_DIR:")
+print("Folder z danymi:")
 print(MISSING_DATA_DIR)
 
-print("\nIstnieje:", MISSING_DATA_DIR.exists())
+print("\nCzy folder istnieje?")
+print(os.path.exists(MISSING_DATA_DIR))
 
-if MISSING_DATA_DIR.exists():
-    print("\nPliki:")
-    for f in sorted(MISSING_DATA_DIR.glob("*.xlsx")):
-        print(" -", f.name)
 # ============================================================
 # WCZYTANIE 5 PLIKÓW XLSX
 # ============================================================
 
 data_files = sorted(
-    MISSING_DATA_DIR.glob("*.xlsx")
+    [
+        os.path.join(MISSING_DATA_DIR, file)
+        for file in os.listdir(MISSING_DATA_DIR)
+        if file.lower().endswith(".xlsx")
+    ]
 )
 
 print("\nPliki znajdujące się w folderze:")
 
 for file in data_files:
-    print(file.name)
+    print(os.path.basename(file))
+
+
+# ============================================================
+# SPRAWDZENIE LICZBY PLIKÓW
+# ============================================================
 
 if len(data_files) != 5:
     raise FileNotFoundError(
         f"Znaleziono {len(data_files)} plików XLSX, "
         f"a oczekiwano 5.\n"
-        f"Szukano w:\n{MISSING_DATA_DIR}"
+        f"Folder: {MISSING_DATA_DIR}"
     )
 
 # ============================================================
@@ -99,14 +94,16 @@ country_dfs = {}
 
 for file in data_files:
 
-    df_temp = pd.read_excel(
-        file
-    )
+    df_temp = pd.read_excel(file)
 
-    country_dfs[file.stem] = df_temp
+    country_name = os.path.splitext(
+        os.path.basename(file)
+    )[0]
+
+    country_dfs[country_name] = df_temp
 
     print("\n" + "=" * 60)
-    print(file.name)
+    print(country_name)
     print("=" * 60)
 
     print(
@@ -120,17 +117,21 @@ for file in data_files:
     )
 
     print(
-        "Braki:",
-        {
-            col: int(df_temp[col].isna().sum())
-            for col in [
-                "miss_10",
-                "miss_20",
-                "miss_30"
-            ]
-            if col in df_temp.columns
-        }
+        "Braki:"
     )
+
+    for col in [
+        "D8R1",
+        "miss_10",
+        "miss_20",
+        "miss_30"
+    ]:
+
+        if col in df_temp.columns:
+
+            print(
+                f"  {col}: "
+                f"{df_temp[col].isna().sum()}"
 
 ```
 ```{python}
