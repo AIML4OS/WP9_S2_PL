@@ -12,9 +12,8 @@ jupyter: python3
 
 ## Importing Libraries
 
-What happens here?
 
-This cell imports all Python libraries required for the experiment.
+First step is to import  all Python libraries required for the experiment.
 
 | Library              | Purpose                               |
 |----------------------|---------------------------------------|
@@ -89,17 +88,7 @@ print("\nDoes folder exist?")
 print(os.path.exists(MISSING_DATA_DIR))
 ```
 
-Python looks inside the specified folder and finds all files ending in:
-
-```         
-.xlsx
-```
-
-For example:
-
-```         
-Germany.xlsx France.xlsx Italy.xlsx Spain.xlsx Poland.xlsx
-```
+Python looks inside the specified folder and finds all files ending in .xlsx
 
 The full paths are stored in:
 
@@ -150,17 +139,17 @@ For every country, the program prints:
 
 This is important because later parts of the experiment depend on specific columns such as:
 
-- D8R1
+- D8R1 - the final number of foreign tourist,
 
-- KKR
+- KKR- code of the country of origin
 
-- OKRES
+- OKRES - combination of year and month
 
-- miss_10
+- miss_10 - data with 10% of gaps
 
-- miss_20
+- miss_20 - data with 20% of gaps
 
-- miss_30
+- miss_30 - data with 30% of gaps
 
 And next the program checks how many missing values exist in important columns. This is particularly important because the miss_10, miss_20, and miss_30 variables are later used to define the experimental test sets.
 

@@ -17,9 +17,9 @@ The synthetic dataset used in this analysis does not initially contain any missi
 
 Missing values are generated using the MCAR (Missing Completely At Random) mechanism, meaning that the probability of an observation being missing does not depend on its observed or unobserved values.
 
-The missingness is generated using a nested structure. This means that all observations missing in miss_10 are also missing in miss_20, and all observations missing in miss_20 are also missing in miss_30:
+The missingness is generated using a **nested structure.** This means that all observations missing in *miss_10* are also missing in *miss_20*, and all observations missing in *miss_20* are also missing in *miss_30*:
 
-$$       miss_10 ⊂ miss_20 ⊂ miss_30 $$
+$$       miss\_10 ⊂ miss\_20 ⊂ miss\_30 $$
 
 This approach provides a more realistic simulation of increasing levels of missing data. In practice, as the reporting deadline approaches and more reports become available, the amount of missing information decreases. The nested structure therefore allows the models to be evaluated under progressively different levels of data availability while keeping the underlying observations comparable across scenarios.
 
@@ -212,7 +212,7 @@ selected_df = pd.read_csv(
     selected_features_path
 )
 
-print("\nWyniki selekcji Elastic Net:")
+print("\nResults of Elastic Net:")
 print(selected_df.head())
 
 ```
@@ -589,7 +589,7 @@ This structure provides **one complete modelling dataset per country**, containi
 
 ```{python}
 
-output_folder = r"C:\Git\WP9_S2_PL\synthetic data\synthetic_missing_data"
+output_folder = "synthetic data\synthetic_missing_data"
 
 os.makedirs(output_folder, exist_ok=True)
 
@@ -611,7 +611,7 @@ for kkr in selected_kkr:
    )
 
    print("\n" + "=" * 60)
-   print(f"Kraj: {country}")
+   print(f"Country: {country}")
    print(f"KKR: {kkr}")
    print("Chosen features:")
    print(selected_features)
