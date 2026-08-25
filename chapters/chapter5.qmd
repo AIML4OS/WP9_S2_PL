@@ -45,21 +45,32 @@ warnings.filterwarnings('ignore')
 ```{python}
 from pathlib import Path
 
+# ============================================================
+# ŚCIEŻKA DO PROJEKTU
+# ============================================================
 
-# ============================================================
-# ŚCIEŻKA DO DANYCH
-# ============================================================
+from pathlib import Path
+
+PROJECT_DIR = Path("../").resolve()
 
 MISSING_DATA_DIR = (
-    Path.cwd().parent
+    PROJECT_DIR
     / "synthetic data"
     / "synthetic_missing_data"
 )
 
-print("Folder z danymi:")
+print("PROJECT_DIR:")
+print(PROJECT_DIR)
+
+print("\nMISSING_DATA_DIR:")
 print(MISSING_DATA_DIR)
 
+print("\nIstnieje:", MISSING_DATA_DIR.exists())
 
+if MISSING_DATA_DIR.exists():
+    print("\nPliki:")
+    for f in sorted(MISSING_DATA_DIR.glob("*.xlsx")):
+        print(" -", f.name)
 # ============================================================
 # WCZYTANIE 5 PLIKÓW XLSX
 # ============================================================
@@ -73,13 +84,12 @@ print("\nPliki znajdujące się w folderze:")
 for file in data_files:
     print(file.name)
 
-
 if len(data_files) != 5:
     raise FileNotFoundError(
         f"Znaleziono {len(data_files)} plików XLSX, "
-        f"a oczekiwano 5."
+        f"a oczekiwano 5.\n"
+        f"Szukano w:\n{MISSING_DATA_DIR}"
     )
-
 
 # ============================================================
 # WCZYTANIE DANYCH
