@@ -1525,23 +1525,7 @@ print(
 ```
 
 ```{python}
-# ============================================================
-# 22. WYKRESY MIESIĘCZNYCH SUM D8R1
-# ============================================================
-#
-# KORZYSTAMY Z GOTOWEGO:
-#
-# monthly_results
-# monthly_pivot
-#
-# NIE URUCHAMIAMY PONOWNIE MODELI
-# NIE ROBIMY PONOWNIE IMPUTACJI
-#
-# ============================================================
 
-# ============================================================
-# KATALOG NA WYKRESY
-# ============================================================
 
 PLOT_DIR = Path(
     "D8R1_monthly_plots"
@@ -1554,7 +1538,7 @@ PLOT_DIR.mkdir(
 
 
 # ============================================================
-# KOLORY MODELI
+# COLORS OF MODEL
 # ============================================================
 
 MODEL_COLORS = {
@@ -1572,7 +1556,7 @@ MODEL_COLORS = {
 
 
 # ============================================================
-# KOLEJNOŚĆ MODELI
+# ORDER OD MODELS
 # ============================================================
 
 MODEL_ORDER = [
@@ -1584,27 +1568,24 @@ MODEL_ORDER = [
 ]
 
 
-# ============================================================
-# SPRAWDZENIE DANYCH
-# ============================================================
 
 if "monthly_results" not in globals():
 
     raise ValueError(
-        "Nie znaleziono 'monthly_results'. "
-        "Najpierw uruchom kod wykonujący eksperyment ML."
+        " 'monthly_results'. not found "
+        "Please run code with with ML Experiments at first .."
     )
 
 
 if len(monthly_results) == 0:
 
     raise ValueError(
-        "'monthly_results' jest pusty."
+        "'monthly_results' is empty."
     )
 
 
 # ============================================================
-# KOPIA DANYCH
+# COPY OF DATA
 # ============================================================
 
 plot_df = monthly_results.copy()
@@ -1631,9 +1612,6 @@ else:
     )
 
 
-# ============================================================
-# SORTOWANIE
-# ============================================================
 
 plot_df = plot_df.sort_values(
     [
@@ -1645,42 +1623,17 @@ plot_df = plot_df.sort_values(
 )
 
 
-# ============================================================
-# INFORMACJA
-# ============================================================
-
-print("=" * 100)
-
-print(
-    "TWORZENIE WYKRESÓW MIESIĘCZNYCH"
-)
-
-print("=" * 100)
-
-print(
-    f"Katalog: {PLOT_DIR.resolve()}"
-)
-
-
-# ============================================================
-# LICZNIK
-# ============================================================
 
 plot_counter = 0
 
 
-# ============================================================
-# PĘTLA PO KRAJACH
-# ============================================================
 
 for country in sorted(
     plot_df["country"].dropna().unique()
 ):
 
 
-    # ========================================================
-    # PĘTLA PO POZIOMACH BRAKÓW
-    # ========================================================
+
 
     for missingness in [
         "miss_10",
@@ -1689,9 +1642,6 @@ for country in sorted(
     ]:
 
 
-        # ====================================================
-        # DANE DLA KRAJU I MISS
-        # ====================================================
 
         subset = plot_df[
 
@@ -1707,14 +1657,11 @@ for country in sorted(
         ].copy()
 
 
-        # ----------------------------------------------------
-        # JEŻELI BRAK DANYCH
-        # ----------------------------------------------------
 
         if subset.empty:
 
             print(
-                f"\nBrak danych: "
+                f"\n There is no data to display: "
                 f"{country} | {missingness}"
             )
 
@@ -1729,15 +1676,6 @@ for country in sorted(
             figsize=(8, 4)
         )
 
-
-        # ====================================================
-        # PRAWDZIWA SUMA D8R1
-        # ====================================================
-        #
-        # D8R1_true jest powtarzane dla każdego modelu,
-        # dlatego bierzemy jedną obserwację na miesiąc.
-        #
-        # ====================================================
 
         true_data = (
 
@@ -1783,7 +1721,7 @@ for country in sorted(
 
 
         # ====================================================
-        # MODELE
+        # MODELS
         # ====================================================
 
         for model_name in MODEL_ORDER:
@@ -1844,7 +1782,7 @@ for country in sorted(
 
         plt.title(
 
-            f"{country} — D8R1\n"
+            f"{country} \n"
             f"{title_missing.get(missingness, missingness)}",
 
             fontsize=17,
@@ -1854,7 +1792,7 @@ for country in sorted(
 
 
         # ====================================================
-        # OSIE
+        # AXIS
         # ====================================================
 
         plt.xlabel(
@@ -1867,14 +1805,14 @@ for country in sorted(
 
         plt.ylabel(
 
-            "Monthly sum of D8R1",
+            "Number of foreign tourists",
 
             fontsize=13
         )
 
 
         # ====================================================
-        # FORMATOWANIE Y
+        # FORMAT Y
         # ====================================================
 
         ax = plt.gca()
@@ -1933,10 +1871,7 @@ for country in sorted(
         plt.tight_layout()
 
 
-        # ====================================================
-        # BEZPIECZNA NAZWA PLIKU
-        # ====================================================
-
+     
         safe_country = (
 
             str(country)
@@ -1974,10 +1909,7 @@ for country in sorted(
         )
 
 
-        # ====================================================
-        # ZAPIS
-        # ====================================================
-
+      
         plt.savefig(
 
             output_path,
@@ -1988,10 +1920,7 @@ for country in sorted(
         )
 
 
-        # ====================================================
-        # POKAŻ
-        # ====================================================
-
+       
         plt.show()
 
 
@@ -2014,25 +1943,13 @@ for country in sorted(
         )
 
 
-# ============================================================
-# KONIEC
-# ============================================================
-
-print("\n")
-print("=" * 100)
 
 print(
-    "WYKRESY GOTOWE"
-)
-
-print("=" * 100)
-
-print(
-    f"Liczba wykresów: {plot_counter}"
+    f"Number of plols: {plot_counter}"
 )
 
 print(
-    f"Katalog: {PLOT_DIR.resolve()}"
+    f"Folder: {PLOT_DIR.resolve()}"
 )
 
 ```
