@@ -399,7 +399,7 @@ FEATURES = [
 
 The experiment compares five regression algorithms:
 
--  RF- Random Forest
+- RF- Random Forest
 
 - GBR- Gradient Boosting
 
@@ -407,7 +407,7 @@ The experiment compares five regression algorithms:
 
 - KNN - K-Nearest Neighbors
 
--  XGB- XGBoost .
+- XGB- XGBoost .
 
 ## Decision Tree (DT)
 
@@ -457,7 +457,7 @@ Gradient Boosting is an additive ensemble technique that builds models sequentia
 
 - learning_rate=0.1: Acts as a shrinkage factor scaling the contribution of each tree to the numerical forecast.
 
-##  K-Nearest Neighbors Regressor (KNN)
+## K-Nearest Neighbors Regressor (KNN)
 
 ### Theoretical Background
 
@@ -473,7 +473,7 @@ K-Nearest Neighbors is a non-parametric, instance-based learning algorithm. To f
 
 - n_jobs=-1: Parallelizes distance-matrix calculations across all CPU cores.
 
-##  XGBoost (eXtreme Gradient Boosting - XGB)
+## XGBoost (eXtreme Gradient Boosting - XGB)
 
 ### Theoretical Background
 
@@ -494,7 +494,7 @@ XGBoost is an advanced, highly optimized implementation of gradient-boosted deci
 ```{python}
 
 # ============================================================
-# 3. MODELE
+# 3. MODELS
 # ============================================================
 
 MODELS = {
@@ -538,11 +538,16 @@ MODELS = {
 
 ```
 
-```{python}
+# Restricting the Data to 2019–2020
 
-    # ============================================================
-# 8. OGRANICZENIE DO 2019 I 2020
-# ============================================================
+The primary objective of restricting the dataset to the years 2019 and 2020 is to maintain temporal consistency, as the newly engineered features heavily rely on historical values. When the dataset is scoped exclusively to this two-year window, it prevents the introduction of structural missing values or NaN entries in dependent time-series transformations, such as lag variables (e.g., historical lags or rolling averages). This ensures data integrity and eliminates the need for arbitrary imputation in critical temporal features prior to model training.
+
+The code prints Number of observations and present Year for every country.This verifies that the filtering worked correctly.
+
+## Data check
+
+```{python}
+# Restricting the Data to 2019–2020
 
 country_dfs_2019_2020 = {}
 
@@ -559,12 +564,12 @@ for country_name, df_temp in country_dfs.items():
     print("=" * 80)
 
     print(
-        "Liczba obserwacji 2019-2020:",
+        "Number of observation 2019-2020:",
         len(df_2019_2020)
     )
 
     print(
-        "Lata:",
+        "Years:",
         sorted(
             df_2019_2020["YEAR"].dropna().unique()
         )
@@ -572,11 +577,10 @@ for country_name, df_temp in country_dfs.items():
 
 ```
 
-```{python}
+The code defines the expected lag variables.For each country, determines which lag variables actually exist. After this counts missing values in every available lag variable.
 
-# ============================================================
-# 9. SPRAWDZENIE LAGÓW
-# ============================================================
+```{python}
+# Checking if lags has NA's
 
 LAG_COLS = [
     "lag_1",
@@ -593,7 +597,7 @@ LAG_COLS = [
 ]
 
 print("\n" + "=" * 80)
-print("LAGI - SPRAWDZENIE 2019-2020")
+print("LAGS - Checking 2019-2020")
 print("=" * 80)
 
 for country_name, df_temp in country_dfs_2019_2020.items():
@@ -614,18 +618,18 @@ for country_name, df_temp in country_dfs_2019_2020.items():
     print(country_name)
 
     print(
-        "Istniejące lagi:",
+        "Excisting lags:",
         lag_existing
     )
 
     print(
-        "Nieistniejące lagi:",
+        "Missing lags:",
         lag_missing
     )
 
     if lag_existing:
 
-        print("\nLiczba NaN:")
+        print("\nNumber of NaN:")
 
         print(
             df_temp[
@@ -637,13 +641,13 @@ for country_name, df_temp in country_dfs_2019_2020.items():
 
 ```{python}
 # ============================================================
-# 10. CECHY DOSTĘPNE DLA KAŻDEGO KRAJU
+# FEATURES FOR EVERY COUNTRY
 # ============================================================
 
 country_features = {}
 
 print("\n" + "=" * 80)
-print("CECHY PO REGULARYZACJI")
+print("FEATURES AFTER REGULARIZATION")
 print("=" * 80)
 
 for country_name, df_temp in country_dfs_2019_2020.items():
@@ -669,12 +673,16 @@ for country_name, df_temp in country_dfs_2019_2020.items():
     )
 ```
 
+# Identifying Available Features Per Country
+
+The maximum feature list is compared with the columns actually available in each country. \## Checking Missing Values in Features The program checks how many missing values exist in each predictor. This is important because the ML experiment later uses complete cases
+
 ```{python}
-# 11. SPRAWDZENIE BRAKÓW W CECHACH
+# CHECK IF ARE MISSING IN FEATURES
 # ============================================================
 
 print("\n" + "=" * 80)
-print("BRAKI W CECHACH - 2019-2020")
+print("MISSING IN FEATURES - 2019-2020")
 print("=" * 80)
 
 for country_name, df_temp in country_dfs_2019_2020.items():
@@ -694,30 +702,51 @@ for country_name, df_temp in country_dfs_2019_2020.items():
 
 ```
 
-```{python}
+## Experiment Objective 
 
-# ============================================================
-# 12. EKSPERYMENT ML + PREDYKCJE MIESIĘCZNE
-# ============================================================
-#
-# 5 KRAJÓW
-# × 3 POZIOMY BRAKÓW
-# × 5 MODELI
-#
-# TYLKO 2019-2020
-#
-# miss_10 / miss_20 / miss_30
-#       ↓
-#       MASKA TESTOWA
-#
-# NaN w miss_X  -> TEST
-# pozostałe     -> TRAIN
-#
-# TARGET = D8R1
-#
-# Dodatkowo zapisujemy każdą predykcję,
-# aby później policzyć SUMY MIESIĘCZNE.
-# ============================================================
+The experiment aims to evaluate how effectively five different regression models can reconstruct missing values of the target variable D8R1 (representing the number of foreign tourists) for the years 2019–2020. The study tests various scenarios of data missingness levels (miss_10, miss_20, and miss_30, corresponding to 10%, 20%, and 30% missing data, respectively).
+
+## Experimental Procedure 
+
+###  Train-Test Split (Missingness Mask) 
+
+For each country and each missingness level, the algorithm creates a boolean mask:
+
+- Rows containing NaN values in the miss_X column are designated as the test set (representing the hidden data that the models are tasked with imputing/predicting).
+
+- The remaining complete rows form the training set used for model learning.
+
+- Both sets are further cleaned by removing rows that contain missing values in the explanatory features (features_country), as feature-level imputation is deliberately avoided in this approach.
+
+### Model Training and Prediction
+
+For each experimental scenario, the code loops through all defined machine learning algorithms (Decision Tree, Random Forest, Gradient Boosting, KNN, XGBoost):
+
+- The model is cloned and trained using the training data (X_train, y_train).
+
+- The trained model then generates predictions (y_pred) for the test set (X_test).
+
+### Quality Assessment (Metrics) 
+
+The predicted values are compared against the ground truth using key error and performance metrics:
+
+- RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error): Measure the magnitude of errors in absolute terms.
+
+- MAPE (Mean Absolute Percentage Error): Represents the percentage-based error.
+
+- Bias_pct: Evaluates percentage bias (determining whether the model systematically overestimates or underestimates the total tourist volume).
+
+### Monthly Aggregation and Prediction Storage
+
+The script stores every individual prediction alongside its temporal markers (YEAR, MONTH).
+
+In the final aggregation phase (monthly_results), the data is grouped by month to assess how well the models reconstruct aggregate monthly sums of tourists for each country.
+
+### Selection of the Best Models
+
+The results table (results_df) is sorted, and section 14 (best_models) automatically extracts the best-performing model (the one achieving the lowest RMSE) for each unique combination of country and missingness level.
+
+```{python}
 
 
 results = []
@@ -726,45 +755,36 @@ monthly_predictions = []
 
 
 # ============================================================
-# PĘTLA PO KRAJACH
+# LOOP OVER COUNTRIES
 # ============================================================
 
 for country_name, df_temp in country_dfs_2019_2020.items():
 
     print("\n")
     print("#" * 100)
-    print(f"KRAJ: {country_name}")
+    print(f"Country: {country_name}")
     print("#" * 100)
 
-    # --------------------------------------------------------
-    # CECHY DLA DANEGO KRAJU
-    # --------------------------------------------------------
-
+  
     features_country = country_features[
         country_name
     ]
 
     print(
-        f"Liczba cech: {len(features_country)}"
+        f"Number of features: {len(features_country)}"
     )
 
     print(
-        "Cechy:",
+        "Features:",
         features_country
     )
 
-    # --------------------------------------------------------
-    # USUWAMY WIERSZE BEZ D8R1
-    # --------------------------------------------------------
-
+    
     df_temp = df_temp[
         df_temp[TARGET].notna()
     ].copy()
 
-    # ========================================================
-    # PĘTLA PO MISS
-    # ========================================================
-
+   
     for miss_col in MISS_COLS:
 
         print("\n")
@@ -772,10 +792,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
         print(f"{country_name} | {miss_col}")
         print("-" * 100)
 
-        # ----------------------------------------------------
-        # MASKA TESTOWA
-        # ----------------------------------------------------
-
+       
         test_mask = df_temp[
             miss_col
         ].isna()
@@ -783,19 +800,16 @@ for country_name, df_temp in country_dfs_2019_2020.items():
         train_mask = ~test_mask
 
         print(
-            "TEST wg maski:",
+            "TEST by mask:",
             int(test_mask.sum())
         )
 
         print(
-            "TRAIN wg maski:",
+            "TRAIN by mask:",
             int(train_mask.sum())
         )
 
-        # ----------------------------------------------------
-        # TRAIN / TEST
-        # ----------------------------------------------------
-
+       
         train = df_temp.loc[
             train_mask
         ].copy()
@@ -804,12 +818,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
             test_mask
         ].copy()
 
-        # ----------------------------------------------------
-        # USUWAMY WIERSZE Z BRAKAMI W CECHACH
-        #
-        # Nie imputujemy.
-        # ----------------------------------------------------
-
+       
         train_complete = train.dropna(
             subset=features_country
         ).copy()
@@ -819,19 +828,19 @@ for country_name, df_temp in country_dfs_2019_2020.items():
         ).copy()
 
         print(
-            "TRAIN po sprawdzeniu cech:",
+            "TRAIN after checking features:",
             len(train_complete)
         )
 
         print(
-            "TEST po sprawdzeniu cech:",
+            "TESTafter checking features:",
             len(test_complete)
         )
 
         if len(train_complete) == 0:
 
             print(
-                "!!! BRAK TRAIN - POMIJAM !!!"
+                "!!! MISS TRAIN  !!!"
             )
 
             continue
@@ -839,7 +848,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
         if len(test_complete) == 0:
 
             print(
-                "!!! BRAK TEST - POMIJAM !!!"
+                "!!!MISS TEST  !!!"
             )
 
             continue
@@ -865,7 +874,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
         ]
 
         # ====================================================
-        # MODELE
+        # MODELS
         # ====================================================
 
         for model_name, model_template in MODELS.items():
@@ -877,10 +886,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
 
             try:
 
-                # ------------------------------------------------
-                # CLONE MODELU
-                # ------------------------------------------------
-
+              
                 model = clone(
                     model_template
                 )
@@ -895,7 +901,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                 )
 
                 # ------------------------------------------------
-                # PREDYKCJA
+                # PREDICT
                 # ------------------------------------------------
 
                 y_pred = model.predict(
@@ -903,7 +909,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                 )
 
                 # ------------------------------------------------
-                # METRYKI
+                # METRICS
                 # ------------------------------------------------
 
                 rmse = np.sqrt(
@@ -980,7 +986,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                     mape = np.nan
 
                 # =================================================
-                # WYNIK OGÓLNY
+                # TOTAL
                 # =================================================
 
                 results.append({
@@ -1032,12 +1038,9 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                 })
 
                 # =================================================
-                # PREDYKCJE MIESIĘCZNE
+                # MONTLY PREDICTIONS
                 # =================================================
-                #
-                # Zachowujemy każdą obserwację testową.
-                # Dzięki temu później sumujemy D8R1 oraz
-                # predykcje według YEAR + MONTH.
+                #YEAR + MONTH.
                 # =================================================
 
                 pred_df = test_complete[
@@ -1076,10 +1079,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                     pred_df
                 )
 
-                # ------------------------------------------------
-                # WYŚWIETLENIE
-                # ------------------------------------------------
-
+                
                 print(
                     f"RMSE = {rmse:.4f} | "
                     f"MAE = {mae:.4f} | "
@@ -1097,7 +1097,7 @@ for country_name, df_temp in country_dfs_2019_2020.items():
 
 ```{python}
 # ============================================================
-# 13. TABELA WYNIKÓW MODELI
+# Table of results
 # ============================================================
 
 results_df = pd.DataFrame(
@@ -1107,11 +1107,11 @@ results_df = pd.DataFrame(
 
 print("\n")
 print("=" * 100)
-print("KONIEC EKSPERYMENTU")
+print("end of experiment")
 print("=" * 100)
 
 print(
-    "Liczba wykonanych eksperymentów:",
+    "Numbers of experiment performed:",
     len(results_df)
 )
 
@@ -1136,9 +1136,11 @@ if len(results_df) > 0:
 
 ```
 
+## Selection of the best model
+
 ```{python}
 # ============================================================
-# 14. NAJLEPSZE MODELE
+# BEST MODELS BY RMSE
 # ============================================================
 
 if len(results_df) > 0:
@@ -1164,7 +1166,7 @@ if len(results_df) > 0:
 
     print("\n")
     print("=" * 100)
-    print("NAJLEPSZY MODEL - NAJNIŻSZY RMSE")
+    print("BEST MODEL THE LOVERST RMSE")
     print("=" * 100)
 
     display(
@@ -1189,9 +1191,11 @@ if len(results_df) > 0:
 
 ```
 
+# Combining all individual predictions
+
 ```{python}
 # ============================================================
-# 15. POŁĄCZENIE WSZYSTKICH PREDYKCJI
+# COMBINING ALL PREDICTIONS
 # ============================================================
 
 monthly_predictions_df = pd.concat(
@@ -1202,11 +1206,11 @@ monthly_predictions_df = pd.concat(
 
 print("\n")
 print("=" * 100)
-print("PREDYKCJE MIESIĘCZNE")
+print("MONTLY PREDICTIONS")
 print("=" * 100)
 
 print(
-    "Liczba obserwacji:",
+    "Number of observations:",
     len(monthly_predictions_df)
 )
 
@@ -1216,24 +1220,10 @@ display(
 
 ```
 
+# Aggregation to monthly totals
+
 ```{python}
-# ============================================================
-# 16. SUMY MIESIĘCZNE
-# ============================================================
-#
-# Dla każdego:
-#
-# KRAJ
-# MISS
-# MODEL
-# YEAR
-# MONTH
-#
-# liczymy:
-#
-# prawdziwe D8R1
-# suma predykcji
-#
+
 # ============================================================
 
 monthly_results = (
@@ -1736,7 +1726,7 @@ for country in sorted(
         # ====================================================
 
         plt.figure(
-            figsize=(16, 8)
+            figsize=(8, 4)
         )
 
 
@@ -2046,3 +2036,23 @@ print(
 )
 
 ```
+
+# Important methodological point
+
+**The code does not actually remove the true `D8R1` values from the DataFrame before prediction.**
+
+Instead, the `miss_10`, `miss_20`, and `miss_30` columns are used as **masks defining which observations are treated as test observations**.
+
+The true `D8R1` values remain available in `y_test`, but they are used only for **evaluation**, not for model training.
+
+This is effectively a controlled reconstruction experiment:
+
+-  mask identifies test observations
+
+-  training uses only non-test observations
+
+-  prediction is generated for test observations
+
+- original D8R1 is used as ground truth
+
+This distinction is important when describing the methodology in a thesis or research paper.
