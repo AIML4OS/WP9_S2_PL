@@ -304,7 +304,7 @@ for country_name, df_temp in country_dfs.items():
 
 ```
 
-## Experiment Settings
+# Experiment Settings
 
 The main experimental parameters are defined.
 
@@ -342,7 +342,7 @@ MISS_COLS = [
 
 ```
 
-## Defining the Maximum Feature Set
+# Defining the Maximum Feature Set
 
 This cell defines the maximum set of predictors that the experiment can use.
 
@@ -395,7 +395,7 @@ FEATURES = [
 
 ```
 
-## Defining the Machine Learning Models
+# Defining the Machine Learning Models
 
 The experiment compares five regression algorithms:
 
@@ -409,15 +409,15 @@ The experiment compares five regression algorithms:
 
 -  XGB- XGBoost .
 
-### Decision Tree (DT)
+## Decision Tree (DT)
 
-#### Theoretical Background
+### Theoretical Background
 
 A Decision Tree is a non-parametric supervised learning algorithm that partitions the feature space into mutually exclusive rectangular regions through a sequence of recursive binary splits. The algorithm evaluates feature thresholds to maximize variance reduction for continuous numerical targets. In the context of forecasting the number of foreign tourists, the model traverses down the tree branches based on specific feature conditions (e.g., geographical proximity, economic indicators) until it reaches a terminal node (leaf), where the predicted numerical value is calculated as the mean of the training samples residing in that leaf.
 
 **Documentation Link:** [sklearn.tree.DecisionTreeRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html)
 
-#### Key Parameters & Configuration
+### Key Parameters & Configuration
 
 - max_depth=10: Restricts the maximum number of sequential splits allowed, acting as regularization to prevent overfitting.
 
@@ -425,15 +425,15 @@ A Decision Tree is a non-parametric supervised learning algorithm that partition
 
 - random_state=SEED: Fixes the pseudo-random number generator seed to ensure reproducibility.
 
-### Random Forest (RF)
+## Random Forest (RF)
 
-#### Theoretical Background
+### Theoretical Background
 
 Random Forest is an ensemble learning method based on bagging combined with randomized feature selection. It constructs a multitude ($N = \text{n\_estimators}$) of independent decision trees during training. For forecasting the numerical volume of foreign tourists, the final predicted value is derived by aggregating the numerical predictions (via arithmetic mean) across all individual decision trees, significantly reducing variance and mitigating the risk of overfitting.
 
 **Documentation Link:** [sklearn.ensemble.RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
 
-#### Key Parameters & Configuration
+### Key Parameters & Configuration
 
 - n_estimators=100: Defines the total number of independent decision trees constructed within the ensemble.
 
@@ -441,15 +441,15 @@ Random Forest is an ensemble learning method based on bagging combined with rand
 
 - n_jobs=-1: Utilizes all available CPU cores for parallel processing.
 
-### Gradient Boosting Regressor (GBR)
+## Gradient Boosting Regressor (GBR)
 
-#### Theoretical Background
+### Theoretical Background
 
 Gradient Boosting is an additive ensemble technique that builds models sequentially. Instead of bagging, it employs boosting, where each new weak learner is trained to predict the residual errors (the differences between actual and predicted numerical tourist numbers) made by the preceding ensemble. By optimizing a differentiable loss function iteratively, the model progressively minimizes numerical prediction error across successive optimization steps.
 
 **Documentation Link:** [sklearn.ensemble.GradientBoostingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)
 
-#### Key Parameters & Configuration
+### Key Parameters & Configuration
 
 - n_estimators=100: Specifies the total number of sequential boosting iterations.
 
@@ -457,15 +457,15 @@ Gradient Boosting is an additive ensemble technique that builds models sequentia
 
 - learning_rate=0.1: Acts as a shrinkage factor scaling the contribution of each tree to the numerical forecast.
 
-###  K-Nearest Neighbors Regressor (KNN)
+##  K-Nearest Neighbors Regressor (KNN)
 
-#### Theoretical Background
+### Theoretical Background
 
 K-Nearest Neighbors is a non-parametric, instance-based learning algorithm. To forecast the exact number of tourists from a specific country, the algorithm calculates the distance (e.g., Euclidean distance) between the target instance and all points in the feature space, identifies the $K$ closest training samples, and computes a distance-weighted average of their numerical target values.
 
 **Documentation Link:** [sklearn.neighbors.KNeighborsRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html)
 
-#### Key Parameters & Configuration
+### Key Parameters & Configuration
 
 - n_neighbors=5: Defines the neighborhood size ($K$) used to gather similar historical observations.
 
@@ -473,15 +473,15 @@ K-Nearest Neighbors is a non-parametric, instance-based learning algorithm. To f
 
 - n_jobs=-1: Parallelizes distance-matrix calculations across all CPU cores.
 
-###  XGBoost (eXtreme Gradient Boosting - XGB)
+##  XGBoost (eXtreme Gradient Boosting - XGB)
 
-#### Theoretical Background
+### Theoretical Background
 
 XGBoost is an advanced, highly optimized implementation of gradient-boosted decision trees designed for regression tasks. It formally integrates regularized objective functions and second-order Taylor expansion approximations of the loss function, allowing for high-precision numerical forecasting of foreign tourist counts while controlling model complexity and preventing overfitting.
 
 **Documentation Link:** [xgboost.XGBRegressor](https://www.google.com/search?q=https://xgboost.readthedocs.io/en/stable/python/python_api.html%23xgboost.XGBRegressor)
 
-#### Key Parameters & Configuration
+### Key Parameters & Configuration
 
 - n_estimators=100: Specifies the total number of sequential gradient-boosted trees built.
 
