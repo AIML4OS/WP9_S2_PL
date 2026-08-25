@@ -44,6 +44,7 @@ warnings.filterwarnings('ignore')
 
 ```{python}
 from pathlib import Path
+import os
 
 # ============================================================
 # ŚCIEŻKA DO DANYCH
