@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/chapter5.html" rel="next">
 <link href="../chapters/chapter3.html" rel="prev">
 <link href="../resources/profile/main3.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -213,6 +214,12 @@ window.Quarto = {
  <span class="menu-text">Simulation of gaps</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing models for each country</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -290,7 +297,7 @@ window.Quarto = {
 <li><p>pandas (pd) is used to read, combine, manipulate, filter, and save the datasets.</p></li>
 </ul>
 <p>These libraries provide the basic functionality required for the subsequent data preparation and missing-data simulation steps.</p>
-<div id="2ed1cc88" class="cell" data-execution_count="1">
+<div id="237bc6fd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
@@ -308,7 +315,7 @@ window.Quarto = {
 <li><p><strong><code>output_folder</code></strong> specifies the directory where the final datasets with simulated missing values will be saved.</p></li>
 </ul>
 <p>The <code>os.makedirs()</code> function creates the output directory if it does not already exist. The parameter <code>exist_ok=True</code> ensures that no error is raised if the directory has already been created.</p>
-<div id="bf7f5e74" class="cell" data-execution_count="2">
+<div id="af94d721" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>folder_path <span class="op">=</span> <span class="st">"synthetic data/synthetic_countries_features"</span></span>
@@ -337,7 +344,7 @@ window.Quarto = {
 <li><p>the complete list of columns.</p></li>
 </ul>
 <p>This step creates the <strong>initial complete synthetic dataset</strong>, which contains the original target variable and all previously generated explanatory features. At this stage, no missing values are introduced; the missing-data simulation is performed in a subsequent step.</p>
-<div id="fb61c687" class="cell" data-execution_count="3">
+<div id="55af8cc2" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>all_files <span class="op">=</span> glob.glob(os.path.join(folder_path, <span class="st">"*.xlsx"</span>))</span>
@@ -385,7 +392,7 @@ Columns:
 <li><p>create separate output datasets for each country.</p></li>
 </ul>
 <p>The original <code>KKR</code> variable is retained, while <code>country_en</code> provides a human-readable representation of the country.</p>
-<div id="364a4360" class="cell" data-execution_count="4">
+<div id="7c322519" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>kkr_to_country_en <span class="op">=</span> {</span>
@@ -414,7 +421,7 @@ Columns:
 <p>The selected KKR codes are stored in the <code>selected_kkr</code> list. The corresponding country names are then obtained automatically from the previously defined <code>kkr_to_country_en</code> dictionary.</p>
 <p>The code also prints the selected KKR codes together with their corresponding country names. This provides a simple verification that the correct countries have been selected before proceeding with the simulation.</p>
 <p>From this point onwards, the missing-data simulation and subsequent processing are performed <strong>separately for each of these five countries</strong></p>
-<div id="36db0b64" class="cell" data-execution_count="5">
+<div id="c74a2789" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>selected_kkr <span class="op">=</span> [</span>
@@ -455,7 +462,7 @@ Chosen countries of origin:
 <p>The results are stored in the <code>selected_df</code> DataFrame. Each record identifies a feature that was selected for a specific country.</p>
 <p>The first few rows are displayed to verify that the file has been loaded correctly and that the expected structure and feature-selection results are available.</p>
 <p>These results are used in the following steps to ensure that <strong>each country is processed using only the predictors selected specifically for that country by the Elastic Net model</strong>.</p>
-<div id="e29e7193" class="cell" data-execution_count="6">
+<div id="be5f368a" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>selected_df <span class="op">=</span> pd.read_csv(</span>
@@ -487,7 +494,7 @@ Ukraine → [...]
 United Kingdom → [...]
 United States → [...]</code></pre>
 <p>This country-specific mapping is important because <strong>the same set of predictors is not necessarily optimal for all countries</strong>. In the subsequent steps, each country’s dataset will therefore be filtered using only the features selected for that particular count</p>
-<div id="c1e53b20" class="cell" data-execution_count="7">
+<div id="2094a43f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>country_feature_map <span class="op">=</span> (</span>
@@ -510,7 +517,7 @@ United States → [...]</code></pre>
 </ul>
 <p>This provides a simple validation that the Elastic Net feature selection results have been correctly loaded and mapped to the appropriate countries.</p>
 <p>It also allows the user to verify that <strong>each country has its own set of selected predictors</strong> before these variables are used to construct the final datasets.</p>
-<div id="d28bb160" class="cell" data-execution_count="8">
+<div id="8297aeb1" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Chosen features for each country:"</span>)</span>
@@ -559,7 +566,7 @@ Number of features: 20
 <p>If any selected feature is missing from the dataset, a <code>ValueError</code> is raised and the names of the missing variables are displayed. This prevents the analysis from continuing with an incomplete set of predictors.</p>
 <p>If no features are missing, a confirmation message is displayed.</p>
 <p>This validation step ensures <strong>consistency between the feature selection results and the synthetic dataset</strong> and helps prevent errors when the country-specific datasets are created later.</p>
-<div id="8d1249e1" class="cell" data-execution_count="9">
+<div id="27603a2c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>all_selected_features <span class="op">=</span> <span class="bu">set</span>()</span>
@@ -608,7 +615,7 @@ Control is finished. All features are in dataset.</code></pre>
 <p>A fixed random seed, <code>42</code>, is used to initialise the random number generator. This ensures that the same observations are selected as missing every time the code is executed, making the simulation <strong>reproducible</strong>.</p>
 <p>Importantly, the missingness scenarios are generated using a <strong>nested structure</strong>. The observations missing in the 10% scenario are also missing in the 20% scenario, while the 20% missing observations are included in the 30% scenario.</p>
 <p>This allows the three scenarios to represent progressively increasing levels of missing information while maintaining comparability between them.</p>
-<div id="fd147467" class="cell" data-execution_count="10">
+<div id="3a70e139" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">'D8R1'</span></span>
@@ -623,7 +630,7 @@ Control is finished. All features are in dataset.</code></pre>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="c480f07b" class="cell" data-execution_count="11">
+<div id="40b191d6" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy of data</span></span>
@@ -706,7 +713,7 @@ Control is finished. All features are in dataset.</code></pre>
 <p>The selected observations are then replaced with <code>NaN</code> in the corresponding variables.</p>
 <p>This nested design ensures that the three scenarios differ only in the <strong>amount of missing information</strong>, while the missing observations from the less severe scenario remain part of the more severe scenarios. This makes the comparison of model performance across 10%, 20%, and 30% missingness more consistent and realistic.</p>
 <p>The original <code>D8R1</code> variable is not modified, which allows the simulated missing values to be compared with the true observed values during the later evaluation of the imputation models.</p>
-<div id="8fd6edf8" class="cell" data-execution_count="12">
+<div id="0f9c1321" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
@@ -795,7 +802,7 @@ miss_30: 10496/34986 (30.0%)</code></pre>
 <p>A result of <strong><code>True</code></strong> confirms that the nested structure has been correctly implemented.</p>
 <p>This validation is performed separately for each country, ensuring that the missing-data simulation is correctly constructed across all five selected countries before the datasets are used in further analysis.</p>
 <p>The check is <strong>particularly important</strong> because the nested structure guarantees that increasing missing-data scenarios are comparable: the 20% scenario extends the 10% scenario, while the 30% scenario extends the 20% scenario, rather than introducing three completely independent sets of missing observations.</p>
-<div id="45216774" class="cell" data-execution_count="13">
+<div id="877b8e16" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
@@ -897,7 +904,7 @@ miss_20 ⊂ miss_30: True</code></pre>
 <p>The resulting datasets are stored in the <code>final_datasets</code> dictionary and saved as separate Excel files:</p>
 <pre><code>Germany.xlsx Italy.xlsx Ukraine.xlsx United Kingdom.xlsx United States.xlsx</code></pre>
 <p>This structure provides <strong>one complete modelling dataset per country</strong>, containing all three nested missing-data scenarios alongside the original target and the country-specific selected predictors. It also ensures that unnecessary variables are excluded from the final repository datasets, making them ready for the subsequent imputation and machine-learning stages.</p>
-<div id="96ff9e14" class="cell" data-execution_count="14">
+<div id="431f7f06" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>output_folder <span class="op">=</span> <span class="vs">r"C:</span><span class="dv">\G</span><span class="vs">it</span><span class="dv">\W</span><span class="vs">P9_S2_PL</span><span class="dv">\s</span><span class="vs">ynthetic data</span><span class="dv">\s</span><span class="vs">ynthetic_missing_data"</span></span>
@@ -1447,6 +1454,9 @@ Size: (34986, 29)</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/chapter5.html" class="pagination-link" aria-label="Testing models for each country">
+        <span class="nav-page-text">Testing models for each country</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
