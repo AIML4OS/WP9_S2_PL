@@ -10,18 +10,32 @@ jupyter: python3
 
 **Open the associated notebook**: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_VS_Code-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"/></a>
 
-The goal of Exploratory Data Analysis (EDA) is to understand the main characteristics of a dataset, identify patterns and relationships, detect anomalies and missing values, and generate insights that can guide further analysis or modeling.
+## Importing Libraries
 
-## Reading a data
+What happens here?
 
-The synthetic data were generated using the *synthetizer* package available in R. Therefore, the *pyreadr* library is used to import the data into Python. The tourism dataset is stored in an .rds file and can be loaded using the following code:
+This cell imports all Python libraries required for the experiment.
+
+| Library              | Purpose                               |
+|----------------------|---------------------------------------|
+| `numpy`              | Numerical calculations                |
+| `pandas`             | Working with tabular data             |
+| `matplotlib`         | Creating plots                        |
+| `pathlib`            | Managing file paths                   |
+| `sklearn.metrics`    | Calculating model evaluation metrics  |
+| `sklearn.ensemble`   | Random Forest and Gradient Boosting   |
+| `sklearn.tree`       | Decision Tree                         |
+| `sklearn.neighbors`  | KNN regression                        |
+| `xgboost`            | XGBoost regression                    |
+| `sklearn.base.clone` | Creating independent copies of models |
+| `warnings`           | Suppressing warning messages          |
+| `os`                 | Working with folders and files        |
 
 ```{python}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
-from sklearn.impute import KNNImputer
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from matplotlib.ticker import FuncFormatter
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
@@ -34,30 +48,71 @@ import warnings
 warnings.filterwarnings('ignore')
 import os
 
-# ========
-
-
 
 ```
 
+## Loading the data
+
+The code defines the location of the input data.
+
+```         
+synthetic data/synthetic_missing_data
+```
+
+Then it checks whether this folder exists.
+
+### Possible output
+
+```         
+Folder with Data: synthetic data/synthetic_missing_data  Does folder exist? True
+```
+
+If the result is:
+
+```         
+False
+```
+
+the program will not be able to load the expected files.
 
 ```{python}
 
-# ŚCIEŻKA DO DANYCH
+# Defining the Data Folder location
 # ============================================================
 
 MISSING_DATA_DIR = "synthetic data/synthetic_missing_data"
 
-print("Folder z danymi:")
+print("Folder with Data:")
 print(MISSING_DATA_DIR)
 
-print("\nCzy folder istnieje?")
+print("\nDoes folder exist?")
 print(os.path.exists(MISSING_DATA_DIR))
+```
 
-# ============================================================
-# WCZYTANIE 5 PLIKÓW XLSX
-# ============================================================
+Python looks inside the specified folder and finds all files ending in:
 
+```         
+.xlsx
+```
+
+For example:
+
+```         
+Germany.xlsx France.xlsx Italy.xlsx Spain.xlsx Poland.xlsx
+```
+
+The full paths are stored in:
+
+```         
+data_files
+```
+
+`sorted()` ensures that the files are stored in alphabetical order. After this the program prints the names of all Excel files found
+
+```{python}
+# ============================================================
+# Finding the Excel Files
+# ============================================================
 data_files = sorted(
     [
         os.path.join(MISSING_DATA_DIR, file)
@@ -66,25 +121,52 @@ data_files = sorted(
     ]
 )
 
-print("\nPliki znajdujące się w folderze:")
+print("\nFiles in folder:")
 
 for file in data_files:
     print(os.path.basename(file))
+```
 
-
+```{python}
 # ============================================================
-# SPRAWDZENIE LICZBY PLIKÓW
+# Checking the Number of Files
 # ============================================================
 
 if len(data_files) != 5:
     raise FileNotFoundError(
-        f"Znaleziono {len(data_files)} plików XLSX, "
-        f"a oczekiwano 5.\n"
+        f"Found {len(data_files)} XLSX files, "
+        f"a expected 5.\n"
         f"Folder: {MISSING_DATA_DIR}"
     )
+```
 
+## Loading the Excel Files
+
+For every country, the program prints:
+
+- Dataset dimensions (df_temp.shape) - fox example 1,200 rows and 35 columns.
+
+- Column names (all available variables).
+
+This is important because later parts of the experiment depend on specific columns such as:
+
+- D8R1
+
+- KKR
+
+- OKRES
+
+- miss_10
+
+- miss_20
+
+- miss_30
+
+And next the program checks how many missing values exist in important columns. This is particularly important because the miss_10, miss_20, and miss_30 variables are later used to define the experimental test sets.
+
+```{python}
 # ============================================================
-# WCZYTANIE DANYCH
+# Loading excel files
 # ============================================================
 
 country_dfs = {}
@@ -104,17 +186,17 @@ for file in data_files:
     print("=" * 60)
 
     print(
-        "Rozmiar:",
+        "Shape:",
         df_temp.shape
     )
 
     print(
-        "Kolumny:",
+        "Variables:",
         df_temp.columns.tolist()
     )
 
     print(
-        "Braki:"
+        "Missings in variables:"
     )
 
     for col in [
@@ -132,6 +214,19 @@ for file in data_files:
             )
 
 ```
+
+## Creating new Variables
+
+The variable *OKRES* contains a period represented as a value such as: 201901.
+
+The code splits this into:
+
+- YEAR = 2019
+
+- MONTH = 01
+
+Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created.
+
 ```{python}
 
 # ============================================================
@@ -167,10 +262,6 @@ print(
 
 ```
 
-
-
-
-
 ```{python}
 
 # ============================================================
@@ -190,7 +281,9 @@ for country_name, df_temp in country_dfs.items():
         )
     )
 
+```
 
+```{python}
 # ============================================================
 # SPRAWDZENIE KKR
 # ============================================================
@@ -214,8 +307,6 @@ for country_name, df_temp in country_dfs.items():
 
 ```
 
-
-
 ```{python}
 
 # ============================================================
@@ -232,6 +323,9 @@ MISS_COLS = [
     "miss_30"
 ]
 
+```
+
+```{python}
 # Maksymalny zestaw cech.
 # Każdy kraj może mieć tylko część z nich
 # po wcześniejszej regularyzacji.
@@ -263,7 +357,6 @@ FEATURES = [
 
 
 ```
-
 
 ```{python}
 
@@ -345,7 +438,6 @@ for country_name, df_temp in country_dfs.items():
     )
 
 ```
-
 
 ```{python}
 
@@ -442,7 +534,9 @@ for country_name, df_temp in country_dfs_2019_2020.items():
     print(
         features_country
     )
-    # ============================================================
+```
+
+```{python}
 # 11. SPRAWDZENIE BRAKÓW W CECHACH
 # ============================================================
 
@@ -466,7 +560,6 @@ for country_name, df_temp in country_dfs_2019_2020.items():
     )
 
 ```
-
 
 ```{python}
 
@@ -867,7 +960,9 @@ for country_name, df_temp in country_dfs_2019_2020.items():
                     f"BŁĄD: {e}"
                 )
 
+```
 
+```{python}
 # ============================================================
 # 13. TABELA WYNIKÓW MODELI
 # ============================================================
@@ -906,7 +1001,9 @@ if len(results_df) > 0:
         results_df
     )
 
+```
 
+```{python}
 # ============================================================
 # 14. NAJLEPSZE MODELE
 # ============================================================
@@ -957,7 +1054,9 @@ if len(results_df) > 0:
         ]
     )
 
+```
 
+```{python}
 # ============================================================
 # 15. POŁĄCZENIE WSZYSTKICH PREDYKCJI
 # ============================================================
@@ -982,7 +1081,9 @@ display(
     monthly_predictions_df.head()
 )
 
+```
 
+```{python}
 # ============================================================
 # 16. SUMY MIESIĘCZNE
 # ============================================================
@@ -1031,7 +1132,9 @@ monthly_results = (
     )
 )
 
+```
 
+```{python}
 # ============================================================
 # 17. ODCHYLENIE MIESIĘCZNE
 # ============================================================
@@ -1056,7 +1159,9 @@ monthly_results["Bias_pct"] = np.where(
     np.nan
 )
 
+```
 
+```{python}
 # ============================================================
 # 18. DATA MIESIĄCA
 # ============================================================
@@ -1086,7 +1191,9 @@ monthly_results = (
     .reset_index(drop=True)
 )
 
+```
 
+```{python}
 # ============================================================
 # PODGLĄD
 # ============================================================
@@ -1215,7 +1322,9 @@ display(
     monthly_pivot.head(30)
 )
 
+```
 
+```{python}
 # ============================================================
 # 21. ZAPIS DO EXCEL
 # ============================================================
@@ -1306,13 +1415,6 @@ print(
 # NIE ROBIMY PONOWNIE IMPUTACJI
 #
 # ============================================================
-
-
-from pathlib import Path
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-
 
 # ============================================================
 # KATALOG NA WYKRESY
