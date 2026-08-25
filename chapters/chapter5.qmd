@@ -225,7 +225,7 @@ The code splits this into:
 
 - MONTH = 01
 
-Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created.
+Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created. After this the code identifies which years are present in every country's dataset.
 
 ```{python}
 
@@ -252,24 +252,14 @@ for country_name, df_temp in country_dfs.items():
     country_dfs[country_name] = df_temp
 
 
-print("Dodano YEAR i MONTH.")
-
-print(
-    country_dfs["Germany"][
-        ["OKRES", "YEAR", "MONTH"]
-    ].head()
-)
-
-```
-
-```{python}
+print("Added a new variables  YEAR i MONTH.")
 
 # ============================================================
-# SPRAWDZENIE LAT
+# Veryfiing if the column YEAR exist in all datasets
 # ============================================================
 
 print("\n" + "=" * 70)
-print("LATA W POSZCZEGÓLNYCH PLIKACH")
+print("Year is each datasets)
 print("=" * 70)
 
 for country_name, df_temp in country_dfs.items():
@@ -280,20 +270,27 @@ for country_name, df_temp in country_dfs.items():
             df_temp["YEAR"].dropna().unique()
         )
     )
-
 ```
+
+# Veryfying country of origin
+
+The program checks the values of the KKR variable.
+
+The important methodological point is stated in the comments:
+
+- KKR is not the experimental unit.- its the code of country of origin for foreign tourist.
+
+- The experiment is conducted separately for the five country files.
+
+- KKR is retained as information associated with the observations.
 
 ```{python}
 # ============================================================
-# SPRAWDZENIE KKR
-# ============================================================
-# KKR NIE JEST JEDNOSTKĄ EKSPERYMENTU.
-# Eksperyment wykonujemy dla 5 PLIKÓW/KRAJÓW.
-# KKR pozostawiamy w danych.
+# Checking KKR
 # ============================================================
 
 print("\n" + "=" * 70)
-print("KKR W PLIKACH")
+print("KKR in files")
 print("=" * 70)
 
 for country_name, df_temp in country_dfs.items():
@@ -307,10 +304,30 @@ for country_name, df_temp in country_dfs.items():
 
 ```
 
+## Experiment Settings
+
+The main experimental parameters are defined.
+
+- SEED = 42 sets the random seed.
+
+This improves reproducibility for models that use randomness. - TARGET = "D8R1" defines the variable that the models must predict (number of foreign tourist from each 5 countries).
+
+Therefore:
+
+- D8R1 is the dependent/target variable.
+
+- MISS_COLS
+
+These are the three missingness scenarios:
+
+- 10% missingness
+- 20% missingness
+- 30% missingness
+
 ```{python}
 
 # ============================================================
-# 2. USTAWIENIA
+# 2. SETTINGS
 # ============================================================
 
 SEED = 42
@@ -325,10 +342,30 @@ MISS_COLS = [
 
 ```
 
+## Defining the Maximum Feature Set
+
+This cell defines the maximum set of predictors that the experiment can use.
+
+These include:
+
+- Rolling means (mean_last_3, mean_last_6, mean_last_9, mean_last_11)
+- Lagged variables (lag_1, ... lag_11)
+- Additional statistical features (WON_mean,WON_sd,RO_mean,RO_sd)
+
+A very important methodological detail is that not every country necessarily has every feature.
+
+Later the code checks: if col in df_temp.columns.
+
+Therefore, each country receives only the features that actually exist in its dataset.
+
+This is what the comment means by:
+
+Each country may have only a subset of the maximum feature set.
+
 ```{python}
-# Maksymalny zestaw cech.
-# Każdy kraj może mieć tylko część z nich
-# po wcześniejszej regularyzacji.
+# Defining the Maximum Feature Set
+# not every country necessarily has every feature
+
 
 FEATURES = [
     "mean_last_3",
@@ -357,6 +394,102 @@ FEATURES = [
 
 
 ```
+
+## Defining the Machine Learning Models
+
+The experiment compares five regression algorithms:
+
+-  RF- Random Forest
+
+- GBR- Gradient Boosting
+
+- DT - Decision Tree
+
+- KNN - K-Nearest Neighbors
+
+-  XGB- XGBoost .
+
+### Decision Tree (DT)
+
+#### Theoretical Background
+
+A Decision Tree is a non-parametric supervised learning algorithm that partitions the feature space into mutually exclusive rectangular regions through a sequence of recursive binary splits. The algorithm evaluates feature thresholds to maximize variance reduction for continuous numerical targets. In the context of forecasting the number of foreign tourists, the model traverses down the tree branches based on specific feature conditions (e.g., geographical proximity, economic indicators) until it reaches a terminal node (leaf), where the predicted numerical value is calculated as the mean of the training samples residing in that leaf.
+
+**Documentation Link:** [sklearn.tree.DecisionTreeRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html)
+
+#### Key Parameters & Configuration
+
+- max_depth=10: Restricts the maximum number of sequential splits allowed, acting as regularization to prevent overfitting.
+
+- min_samples_leaf=5: Specifies the minimum number of observations required to form a terminal leaf node, ensuring the numerical prediction is statistically robust and not biased by outliers.
+
+- random_state=SEED: Fixes the pseudo-random number generator seed to ensure reproducibility.
+
+### Random Forest (RF)
+
+#### Theoretical Background
+
+Random Forest is an ensemble learning method based on bagging combined with randomized feature selection. It constructs a multitude ($N = \text{n\_estimators}$) of independent decision trees during training. For forecasting the numerical volume of foreign tourists, the final predicted value is derived by aggregating the numerical predictions (via arithmetic mean) across all individual decision trees, significantly reducing variance and mitigating the risk of overfitting.
+
+**Documentation Link:** [sklearn.ensemble.RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
+
+#### Key Parameters & Configuration
+
+- n_estimators=100: Defines the total number of independent decision trees constructed within the ensemble.
+
+- max_depth=10 & min_samples_leaf=5: Control the structural complexity and regularization constraints of each constituent tree.
+
+- n_jobs=-1: Utilizes all available CPU cores for parallel processing.
+
+### Gradient Boosting Regressor (GBR)
+
+#### Theoretical Background
+
+Gradient Boosting is an additive ensemble technique that builds models sequentially. Instead of bagging, it employs boosting, where each new weak learner is trained to predict the residual errors (the differences between actual and predicted numerical tourist numbers) made by the preceding ensemble. By optimizing a differentiable loss function iteratively, the model progressively minimizes numerical prediction error across successive optimization steps.
+
+**Documentation Link:** [sklearn.ensemble.GradientBoostingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)
+
+#### Key Parameters & Configuration
+
+- n_estimators=100: Specifies the total number of sequential boosting iterations.
+
+- max_depth=5: Controls the depth of each sequential tree.
+
+- learning_rate=0.1: Acts as a shrinkage factor scaling the contribution of each tree to the numerical forecast.
+
+###  K-Nearest Neighbors Regressor (KNN)
+
+#### Theoretical Background
+
+K-Nearest Neighbors is a non-parametric, instance-based learning algorithm. To forecast the exact number of tourists from a specific country, the algorithm calculates the distance (e.g., Euclidean distance) between the target instance and all points in the feature space, identifies the $K$ closest training samples, and computes a distance-weighted average of their numerical target values.
+
+**Documentation Link:** [sklearn.neighbors.KNeighborsRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html)
+
+#### Key Parameters & Configuration
+
+- n_neighbors=5: Defines the neighborhood size ($K$) used to gather similar historical observations.
+
+- weights="distance": Ensures that closer geographic or economic neighbors exert a stronger numerical influence on the final forecasted count.
+
+- n_jobs=-1: Parallelizes distance-matrix calculations across all CPU cores.
+
+###  XGBoost (eXtreme Gradient Boosting - XGB)
+
+#### Theoretical Background
+
+XGBoost is an advanced, highly optimized implementation of gradient-boosted decision trees designed for regression tasks. It formally integrates regularized objective functions and second-order Taylor expansion approximations of the loss function, allowing for high-precision numerical forecasting of foreign tourist counts while controlling model complexity and preventing overfitting.
+
+**Documentation Link:** [xgboost.XGBRegressor](https://www.google.com/search?q=https://xgboost.readthedocs.io/en/stable/python/python_api.html%23xgboost.XGBRegressor)
+
+#### Key Parameters & Configuration
+
+- n_estimators=100: Specifies the total number of sequential gradient-boosted trees built.
+
+- max_depth=6: Determines the maximum allowable depth for each individual boosted tree.
+
+- learning_rate=0.1: The shrinkage step-size used to scale the impact of each new tree on the final prediction.
+
+- verbosity=0: Suppresses internal runtime logs during execution.
 
 ```{python}
 
