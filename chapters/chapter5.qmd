@@ -1512,7 +1512,7 @@ print(
 )
 
 ```
-
+## Plots with total number of tourists by country od origin
 ```{python}
 
 
@@ -1942,7 +1942,7 @@ print(
 )
 
 ```
-
+## Plots with percetage  difference of total number of tourists by country od origin
 ```{python}
 # ============================================================
 # PERCENTAGE DIFFERENCE BETWEEN PREDICTED AND TRUE D8R1
