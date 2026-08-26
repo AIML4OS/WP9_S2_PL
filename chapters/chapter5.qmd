@@ -1943,6 +1943,545 @@ print(
 
 ```
 
+```{python}
+# ============================================================
+# PERCENTAGE DIFFERENCE BETWEEN PREDICTED AND TRUE D8R1
+# ============================================================
+
+# Folder for percentage-difference plots
+PERCENT_PLOT_DIR = Path(
+    "D8R1_monthly_percentage_difference_plots"
+)
+
+PERCENT_PLOT_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+
+# ============================================================
+# COLORS OF MODELS
+# ============================================================
+
+MODEL_COLORS = {
+
+    "RF": "tab:blue",
+
+    "GBR": "tab:orange",
+
+    "DT": "tab:green",
+
+    "KNN": "tab:red",
+
+    "XGB": "tab:purple"
+}
+
+
+# ============================================================
+# ORDER OF MODELS
+# ============================================================
+
+MODEL_ORDER = [
+
+    "RF",
+
+    "GBR",
+
+    "DT",
+
+    "KNN",
+
+    "XGB"
+]
+
+
+# ============================================================
+# CHECK DATA
+# ============================================================
+
+if "monthly_results" not in globals():
+
+    raise ValueError(
+        "'monthly_results' was not found. "
+        "Please run the ML experiment first."
+    )
+
+
+if len(monthly_results) == 0:
+
+    raise ValueError(
+        "'monthly_results' is empty."
+    )
+
+
+# ============================================================
+# COPY DATA
+# ============================================================
+
+plot_df = monthly_results.copy()
+
+
+# ============================================================
+# CREATE DATE VARIABLE
+# ============================================================
+
+if "date" not in plot_df.columns:
+
+    plot_df["date"] = pd.to_datetime(
+
+        plot_df["YEAR"].astype(str)
+        + "-"
+        + plot_df["MONTH"].astype(str)
+        + "-01"
+    )
+
+else:
+
+    plot_df["date"] = pd.to_datetime(
+        plot_df["date"]
+    )
+
+
+# ============================================================
+# CALCULATE PERCENTAGE DIFFERENCE
+# ============================================================
+
+plot_df["percentage_difference"] = np.where(
+
+    plot_df["D8R1_true"] != 0,
+
+    (
+        (
+            plot_df["D8R1_pred"]
+            -
+            plot_df["D8R1_true"]
+        )
+        /
+        plot_df["D8R1_true"]
+    )
+    * 100,
+
+    np.nan
+)
+
+
+# ============================================================
+# SORT DATA
+# ============================================================
+
+plot_df = plot_df.sort_values(
+
+    [
+        "country",
+        "missingness",
+        "date",
+        "model"
+    ]
+)
+
+
+# ============================================================
+# COUNTER
+# ============================================================
+
+plot_counter = 0
+
+
+# ============================================================
+# LOOP OVER COUNTRIES
+# ============================================================
+
+for country in sorted(
+
+    plot_df["country"]
+    .dropna()
+    .unique()
+
+):
+
+
+    # ========================================================
+    # LOOP OVER MISSINGNESS LEVELS
+    # ========================================================
+
+    for missingness in [
+
+        "miss_10",
+        "miss_20",
+        "miss_30"
+
+    ]:
+
+
+        # ====================================================
+        # SELECT COUNTRY + MISSINGNESS
+        # ====================================================
+
+        subset = plot_df[
+
+            (plot_df["country"] == country)
+
+            &
+
+            (
+                plot_df["missingness"]
+                == missingness
+            )
+
+        ].copy()
+
+
+        # ====================================================
+        # CHECK WHETHER DATA EXIST
+        # ====================================================
+
+        if subset.empty:
+
+            print(
+
+                f"\nNo data available: "
+                f"{country} | {missingness}"
+
+            )
+
+            continue
+
+
+        # ====================================================
+        # CREATE FIGURE
+        # ====================================================
+
+        plt.figure(
+
+            figsize=(8, 4)
+
+        )
+
+
+        # ====================================================
+        # ZERO REFERENCE LINE
+        # ====================================================
+        #
+        # 0% means that the prediction is exactly equal
+        # to the observed monthly D8R1 value.
+        # ====================================================
+
+        plt.axhline(
+
+            y=0,
+
+            color="black",
+
+            linewidth=2,
+
+            linestyle="-",
+
+            alpha=0.8,
+
+            label="0% difference"
+
+        )
+
+
+        # ====================================================
+        # PLOT MODELS
+        # ====================================================
+
+        for model_name in MODEL_ORDER:
+
+
+            model_data = subset[
+
+                subset["model"]
+                == model_name
+
+            ].sort_values(
+
+                "date"
+
+            )
+
+
+            # ------------------------------------------------
+            # SKIP MODEL IF DATA ARE NOT AVAILABLE
+            # ------------------------------------------------
+
+            if model_data.empty:
+
+                continue
+
+
+            # ------------------------------------------------
+            # LINE
+            # ------------------------------------------------
+
+            plt.plot(
+
+                model_data["date"],
+
+                model_data[
+                    "percentage_difference"
+                ],
+
+                color=MODEL_COLORS[
+                    model_name
+                ],
+
+                linestyle="--",
+
+                linewidth=2,
+
+                marker="s",
+
+                markersize=4,
+
+                label=model_name,
+
+                alpha=0.9
+
+            )
+
+
+        # ====================================================
+        # TITLE
+        # ====================================================
+
+        title_missing = {
+
+            "miss_10":
+                "10% missingness",
+
+            "miss_20":
+                "20% missingness",
+
+            "miss_30":
+                "30% missingness"
+
+        }
+
+
+        plt.title(
+
+            f"{country}\n"
+            f"{title_missing.get(missingness, missingness)}",
+
+            fontsize=15,
+
+            fontweight="bold"
+
+        )
+
+
+        # ====================================================
+        # X AXIS
+        # ====================================================
+
+        plt.xlabel(
+
+            "Month",
+
+            fontsize=11
+
+        )
+
+
+        # ====================================================
+        # Y AXIS
+        # ====================================================
+
+        plt.ylabel(
+
+            "Percentage difference (%)",
+
+            fontsize=11
+
+        )
+
+
+        # ====================================================
+        # FORMAT Y AXIS
+        # ====================================================
+
+        ax = plt.gca()
+
+
+        ax.yaxis.set_major_formatter(
+
+            FuncFormatter(
+
+                lambda x, pos:
+                f"{x:.0f}%"
+
+            )
+
+        )
+
+
+        # ====================================================
+        # X AXIS LABELS
+        # ====================================================
+
+        plt.xticks(
+
+            rotation=45,
+
+            fontsize=9
+
+        )
+
+
+        # ====================================================
+        # GRID
+        # ====================================================
+
+        plt.grid(
+
+            True,
+
+            linestyle=":",
+
+            alpha=0.6
+
+        )
+
+
+        # ====================================================
+        # LEGEND
+        # ====================================================
+
+        plt.legend(
+
+            fontsize=9,
+
+            loc="best"
+
+        )
+
+
+        # ====================================================
+        # LAYOUT
+        # ====================================================
+
+        plt.tight_layout()
+
+
+        # ====================================================
+        # SAFE COUNTRY NAME
+        # ====================================================
+
+        safe_country = (
+
+            str(country)
+
+            .replace(
+                " ",
+                "_"
+            )
+
+            .replace(
+                "/",
+                "_"
+            )
+
+            .replace(
+                "\\",
+                "_"
+            )
+
+        )
+
+
+        # ====================================================
+        # FILE NAME
+        # ====================================================
+
+        filename = (
+
+            f"{safe_country}_"
+            f"D8R1_percentage_difference_"
+            f"{missingness}.png"
+
+        )
+
+
+        output_path = (
+
+            PERCENT_PLOT_DIR
+            /
+            filename
+
+        )
+
+
+        # ====================================================
+        # SAVE FIGURE
+        # ====================================================
+
+        plt.savefig(
+
+            output_path,
+
+            dpi=300,
+
+            bbox_inches="tight"
+
+        )
+
+
+        # ====================================================
+        # DISPLAY FIGURE
+        # ====================================================
+
+        plt.show()
+
+
+        plt.close()
+
+
+        # ====================================================
+        # COUNTER
+        # ====================================================
+
+        plot_counter += 1
+
+
+        print(
+
+            f"[{plot_counter}] "
+            f"{country} | "
+            f"{missingness} -> "
+            f"{output_path}"
+
+        )
+
+
+# ============================================================
+# FINAL INFORMATION
+# ============================================================
+
+print("\n")
+print("=" * 100)
+
+print(
+    "PERCENTAGE-DIFFERENCE PLOTS CREATED"
+)
+
+print("=" * 100)
+
+print(
+
+    f"Number of plots: "
+    f"{plot_counter}"
+
+)
+
+print(
+
+    f"Folder: "
+    f"{PERCENT_PLOT_DIR.resolve()}"
+
+)
+```
 # Important methodological point
 
 **The code does not actually remove the true `D8R1` values from the DataFrame before prediction.**
