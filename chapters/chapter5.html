@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Testing models for each country – Template for training resources in Python</title>
+<title>Testing models for each country – Training Resources in Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -381,7 +381,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="9c61ae85" class="cell" data-execution_count="1">
+<div id="048c0227" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -413,7 +413,7 @@ window.Quarto = {
 <p>If the result is:</p>
 <pre><code>False</code></pre>
 <p>the program will not be able to load the expected files.</p>
-<div id="39ecd4e9" class="cell" data-execution_count="2">
+<div id="f7680dbb" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Data Folder location</span></span>
@@ -439,7 +439,7 @@ True</code></pre>
 <p>The full paths are stored in:</p>
 <pre><code>data_files</code></pre>
 <p><code>sorted()</code> ensures that the files are stored in alphabetical order. After this the program prints the names of all Excel files found</p>
-<div id="2a9471cc" class="cell" data-execution_count="3">
+<div id="57e04adb" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -468,7 +468,7 @@ United Kingdom.xlsx
 United States.xlsx</code></pre>
 </div>
 </div>
-<div id="152aef23" class="cell" data-execution_count="4">
+<div id="4b3830bb" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -502,7 +502,7 @@ United States.xlsx</code></pre>
 <li><p>miss_30 - data with 30% of gaps</p></li>
 </ul>
 <p>And next the program checks how many missing values exist in important columns. This is particularly important because the miss_10, miss_20, and miss_30 variables are later used to define the experimental test sets.</p>
-<div id="2c518165" class="cell" data-execution_count="5">
+<div id="355dd880" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -621,7 +621,7 @@ Missings in variables:
 <li><p>MONTH = 01</p></li>
 </ul>
 <p>Later the experiment needs to aggregate predictions by YEAR + MONTH, so explicit year and month variables are created. After this the code identifies which years are present in every country’s dataset.</p>
-<div id="7f027d69" class="cell" data-execution_count="6">
+<div id="a427cc76" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -689,7 +689,7 @@ United States: [np.int64(2018), np.int64(2019), np.int64(2020)]</code></pre>
 <li><p>The experiment is conducted separately for the five country files.</p></li>
 <li><p>KKR is retained as information associated with the observations.</p></li>
 </ul>
-<div id="826dae86" class="cell" data-execution_count="7">
+<div id="95d58089" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -738,7 +738,7 @@ United States: [840]</code></pre>
 <li>20% missingness</li>
 <li>30% missingness</li>
 </ul>
-<div id="7f87d6a5" class="cell" data-execution_count="8">
+<div id="46b609aa" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -771,7 +771,7 @@ United States: [840]</code></pre>
 <p>Therefore, each country receives only the features that actually exist in its dataset.</p>
 <p>This is what the comment means by:</p>
 <p>Each country may have only a subset of the maximum feature set.</p>
-<div id="0d7d1d12" class="cell" data-execution_count="9">
+<div id="a19f861c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the Maximum Feature Set</span></span>
@@ -894,7 +894,7 @@ United States: [840]</code></pre>
 <li><p>learning_rate=0.1: The shrinkage step-size used to scale the impact of each new tree on the final prediction.</p></li>
 <li><p>verbosity=0: Suppresses internal runtime logs during execution.</p></li>
 </ul>
-<div id="1e093456" class="cell" data-execution_count="10">
+<div id="a79f9892" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -950,7 +950,7 @@ United States: [840]</code></pre>
 <p>The code prints Number of observations and present Year for every country.This verifies that the filtering worked correctly.</p>
 <section id="data-check" class="level2">
 <h2 class="anchored" data-anchor-id="data-check">Data check</h2>
-<div id="ff44d713" class="cell" data-execution_count="11">
+<div id="2e162d46" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restricting the Data to 2019–2020</span></span>
@@ -1015,7 +1015,7 @@ Years: [np.int64(2019), np.int64(2020)]</code></pre>
 </div>
 </div>
 <p>The code defines the expected lag variables.For each country, determines which lag variables actually exist. After this counts missing values in every available lag variable.</p>
-<div id="fd79c2fd" class="cell" data-execution_count="12">
+<div id="c5ed84f2" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking if lags has NA's</span></span>
@@ -1174,7 +1174,7 @@ lag_11    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="7513b5b2" class="cell" data-execution_count="13">
+<div id="756ca6f7" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -1246,7 +1246,7 @@ Liczba cech: 19
 <section id="identifying-available-features-per-country" class="level1">
 <h1>Identifying Available Features Per Country</h1>
 <p>The maximum feature list is compared with the columns actually available in each country. ## Checking Missing Values in Features The program checks how many missing values exist in each predictor. This is important because the ML experiment later uses complete cases</p>
-<div id="d054e0a7" class="cell" data-execution_count="14">
+<div id="686e2a58" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CHECK IF ARE MISSING IN FEATURES</span></span>
@@ -1425,7 +1425,7 @@ dtype: int64</code></pre>
 <section id="selection-of-the-best-models" class="level3">
 <h3 class="anchored" data-anchor-id="selection-of-the-best-models">Selection of the Best Models</h3>
 <p>The results table (results_df) is sorted, and section 14 (best_models) automatically extracts the best-performing model (the one achieving the lowest RMSE) for each unique combination of country and missingness level.</p>
-<div id="8668f5f6" class="cell" data-execution_count="15">
+<div id="b0269e60" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
@@ -1898,7 +1898,7 @@ TESTafter checking features: 8028
 
   Model: DT | RMSE = 27.7546 | MAE = 3.5873 | MAPE = 92.40% | Bias = 2.80%
 
-  Model: KNN | RMSE = 17.8106 | MAE = 7.0132 | MAPE = 165.04% | Bias = -12.01%
+  Model: KNN | RMSE = 17.8106 | MAE = 7.0133 | MAPE = 165.04% | Bias = -12.01%
 
   Model: XGB | RMSE = 22.7831 | MAE = 2.6332 | MAPE = 61.82% | Bias = 1.44%
 
@@ -2095,7 +2095,7 @@ TESTafter checking features: 6275
   Model: XGB | RMSE = 25.5375 | MAE = 3.9004 | MAPE = 60.35% | Bias = -1.05%</code></pre>
 </div>
 </div>
-<div id="9f4eb2fa" class="cell" data-execution_count="16">
+<div id="b64f669b" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2367,7 +2367,7 @@ Numbers of experiment performed: 75</code></pre>
 </section>
 <section id="selection-of-the-best-model" class="level2">
 <h2 class="anchored" data-anchor-id="selection-of-the-best-model">Selection of the best model</h2>
-<div id="722b4e0d" class="cell" data-execution_count="17">
+<div id="e0ab6dfc" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2701,7 +2701,7 @@ BEST MODEL THE LOVERST RMSE
 </section>
 <section id="combining-all-individual-predictions" class="level1">
 <h1>Combining all individual predictions</h1>
-<div id="fb741a48" class="cell" data-execution_count="18">
+<div id="40f1c784" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2819,7 +2819,7 @@ Number of observations: 585140</code></pre>
 </section>
 <section id="aggregation-to-monthly-totals" class="level1">
 <h1>Aggregation to monthly totals</h1>
-<div id="88146d43" class="cell" data-execution_count="19">
+<div id="b67987d0" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2854,7 +2854,7 @@ Number of observations: 585140</code></pre>
 <span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="0a06d446" class="cell" data-execution_count="20">
+<div id="3ca65d17" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2882,7 +2882,7 @@ Number of observations: 585140</code></pre>
 <span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="aae35630" class="cell" data-execution_count="21">
+<div id="64d15ec4" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -2915,7 +2915,7 @@ Number of observations: 585140</code></pre>
 <span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="b0dd3c0b" class="cell" data-execution_count="22">
+<div id="ac1f9062" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4017,7 +4017,7 @@ TABELA PIVOT - SUMY MIESIĘCZNE
 </div>
 </div>
 </div>
-<div id="62a2a223" class="cell" data-execution_count="23">
+<div id="3e1963a7" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
@@ -4105,7 +4105,7 @@ D8R1_ML_2019_2020_KRAJE_MISS_RESULTS.xlsx</code></pre>
 </div>
 <section id="plots-with-total-number-of-tourists-by-country-od-origin" class="level2">
 <h2 class="anchored" data-anchor-id="plots-with-total-number-of-tourists-by-country-od-origin">Plots with total number of tourists by country od origin</h2>
-<div id="be265926" class="cell" data-execution_count="24">
+<div id="8aade273" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>PLOT_DIR <span class="op">=</span> Path(</span>
@@ -4689,7 +4689,7 @@ Folder: /home/runner/work/WP9_S2_PL/WP9_S2_PL/D8R1_monthly_plots</code></pre>
 </section>
 <section id="plots-with-percetage-difference-of-total-number-of-tourists-by-country-od-origin" class="level2">
 <h2 class="anchored" data-anchor-id="plots-with-percetage-difference-of-total-number-of-tourists-by-country-od-origin">Plots with percetage difference of total number of tourists by country od origin</h2>
-<div id="feebceb6" class="cell" data-execution_count="25">
+<div id="4c25c3ab" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
